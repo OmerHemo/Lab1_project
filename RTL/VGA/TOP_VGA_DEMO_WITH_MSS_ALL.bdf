@@ -2491,12 +2491,6 @@ agreement for further details.
 	(pt 560 520)
 )
 (connector
-	(text "step_VGA" (rect 624 520 671 537)(font "Intel Clear" ))
-	(pt 688 536)
-	(pt 560 536)
-	(bus)
-)
-(connector
 	(text "clk" (rect 960 1400 974 1417)(font "Intel Clear" ))
 	(pt 992 1416)
 	(pt 952 1416)
@@ -2529,18 +2523,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "step_type" (rect 840 1448 887 1465)(font "Intel Clear" ))
-	(pt 832 1464)
-	(pt 880 1464)
-	(bus)
-)
-(connector
-	(text "step_type" (rect 960 1496 1007 1513)(font "Intel Clear" ))
-	(pt 992 1512)
-	(pt 952 1512)
-	(bus)
-)
-(connector
 	(text "pixelX[10..0]" (rect 584 1448 643 1465)(font "Intel Clear" ))
 	(pt 624 1464)
 	(pt 576 1464)
@@ -2558,9 +2540,27 @@ agreement for further details.
 	(pt 1264 1448)
 )
 (connector
-	(text "step_VGA" (rect 1224 1448 1271 1465)(font "Intel Clear" ))
+	(text "step_VGA[7..0]" (rect 624 520 694 537)(font "Intel Clear" ))
+	(pt 688 536)
+	(pt 560 536)
+	(bus)
+)
+(connector
+	(text "step_VGA[7..0]" (rect 1224 1448 1294 1465)(font "Intel Clear" ))
 	(pt 1216 1464)
 	(pt 1264 1464)
+	(bus)
+)
+(connector
+	(text "step_type[2..0]" (rect 840 1448 910 1465)(font "Intel Clear" ))
+	(pt 832 1464)
+	(pt 880 1464)
+	(bus)
+)
+(connector
+	(text "step_type[2..0]" (rect 960 1496 1030 1513)(font "Intel Clear" ))
+	(pt 992 1512)
+	(pt 952 1512)
 	(bus)
 )
 (junction (pt 736 912))
