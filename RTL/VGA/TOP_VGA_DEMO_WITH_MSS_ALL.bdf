@@ -2510,17 +2510,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "numberDrawingRequest" (rect 623 456 737 473)(font "Intel Clear" ))
-	(pt 688 472)
-	(pt 560 472)
-)
-(connector
-	(text "Numbers_VGA[7..0]" (rect 615 472 708 489)(font "Intel Clear" ))
-	(pt 688 488)
-	(pt 560 488)
-	(bus)
-)
-(connector
 	(text "step_req" (rect 634 488 675 505)(font "Intel Clear" ))
 	(pt 688 504)
 	(pt 560 504)
@@ -2535,6 +2524,27 @@ agreement for further details.
 	(text "backGroundRGB[7..0]" (rect 377 520 478 537)(font "Intel Clear" ))
 	(pt 352 536)
 	(pt 688 536)
+	(bus)
+)
+(connector
+	(pt 832 1464)
+	(pt 952 1464)
+	(bus)
+)
+(connector
+	(pt 952 1464)
+	(pt 952 1504)
+	(bus)
+)
+(connector
+	(text "boxDrawingRequest" (rect 623 456 717 473)(font "Intel Clear" ))
+	(pt 688 472)
+	(pt 560 472)
+)
+(connector
+	(text "BOX_VGA[7..0]" (rect 615 472 688 489)(font "Intel Clear" ))
+	(pt 688 488)
+	(pt 560 488)
 	(bus)
 )
 (junction (pt 736 912))

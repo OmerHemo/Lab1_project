@@ -28,6 +28,8 @@ parameter  int DEBUG_X = 200;
 parameter  int DEBUG_Y = 200;
 parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
+
+parameter  int DEBUG=1;
  
 // int rightX ; //coordinates of the sides  
 // int bottomY ;
@@ -36,7 +38,7 @@ logic insideBracket;
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
 assign topLeft_step_x = ( DEBUG_X + STEP_OFFSET_x );
-assign topLeft_step_y = ( DEBUG_y + STEP_OFFSET_y );
+assign topLeft_step_y = ( DEBUG_Y + STEP_OFFSET_y );
 assign bottomRight_step_x	= (topLeft_step_x + OBJECT_WIDTH_X);
 assign bottomRight_step_y	= (topLeft_step_y + OBJECT_HEIGHT_Y);
 
@@ -48,7 +50,7 @@ begin
 		RGBout			<=	8'b0;
 		drawingRequest	<=	1'b0;
 	end
-	else if(step_type == 3'b1) begin 
+	else if(step_type == 3'b1 || DEBUG == 1'b1) begin 
 	
 //		if ( (pixelX  >= topLeftX) &&  (pixelX < rightX) 
 //			&& (pixelY  >= topLeftY) &&  (pixelY < bottomY) ) // test if it is inside the rectangle 
