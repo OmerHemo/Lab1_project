@@ -5,4 +5,4 @@
 !*/
 # And all the file types you're interested in.
 !*.sv
-!*.bsf
+!*.bdf
