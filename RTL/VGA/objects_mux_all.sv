@@ -14,7 +14,10 @@ module	objects_mux_all	(
 					
 		// add the box here 
 					input		logic	boxDrawingRequest,
-					input		logic	[7:0] boxRGB, 
+					input		logic	[7:0] boxRGB,
+		// add the box here 
+					input		logic	stepDrawingRequest,
+					input		logic	[7:0] stepRGB,	
 					
 					
 		// background 
