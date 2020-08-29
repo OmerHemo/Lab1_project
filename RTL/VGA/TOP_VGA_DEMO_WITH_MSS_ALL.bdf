@@ -2417,12 +2417,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "step_type[2..0]" (rect 840 1448 910 1465)(font "Intel Clear" ))
-	(pt 832 1464)
-	(pt 880 1464)
-	(bus)
-)
-(connector
 	(text "clk" (rect 960 1392 974 1409)(font "Intel Clear" ))
 	(pt 992 1408)
 	(pt 952 1408)
@@ -2442,36 +2436,6 @@ agreement for further details.
 	(text "pixelY[10..0]" (rect 960 1440 1019 1457)(font "Intel Clear" ))
 	(pt 992 1456)
 	(pt 952 1456)
-	(bus)
-)
-(connector
-	(pt 840 1480)
-	(pt 840 1472)
-	(bus)
-)
-(connector
-	(pt 832 1480)
-	(pt 840 1480)
-	(bus)
-)
-(connector
-	(pt 840 1472)
-	(pt 992 1472)
-	(bus)
-)
-(connector
-	(pt 848 1496)
-	(pt 848 1488)
-	(bus)
-)
-(connector
-	(pt 832 1496)
-	(pt 848 1496)
-	(bus)
-)
-(connector
-	(pt 848 1488)
-	(pt 992 1488)
 	(bus)
 )
 (connector

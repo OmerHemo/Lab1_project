@@ -24,6 +24,8 @@ parameter  int OBJECT_WIDTH_X = 60;
 parameter  int OBJECT_HEIGHT_Y = 7;
 parameter  int STEP_OFFSET_x = 2;
 parameter  int STEP_OFFSET_y = 50;
+parameter  int DEBUG_X = 200;
+parameter  int DEBUG_Y = 200;
 parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
  
@@ -33,8 +35,8 @@ logic insideBracket;
 
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
-assign topLeft_step_x = ( topLeftX + STEP_OFFSET_x );
-assign topLeft_step_y = ( topLeftY + STEP_OFFSET_y );
+assign topLeft_step_x = ( DEBUG_X + STEP_OFFSET_x );
+assign topLeft_step_y = ( DEBUG_y + STEP_OFFSET_y );
 assign bottomRight_step_x	= (topLeft_step_x + OBJECT_WIDTH_X);
 assign bottomRight_step_y	= (topLeft_step_y + OBJECT_HEIGHT_Y);
 
