@@ -24,19 +24,19 @@ parameter  int OBJECT_WIDTH_X = 60;
 parameter  int OBJECT_HEIGHT_Y = 7;
 parameter  int STEP_OFFSET_x = 2;
 parameter  int STEP_OFFSET_y = 50;
-parameter  logic [7:0] OBJECT_COLOR = 8'h5b ; 
+parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
  
-int rightX ; //coordinates of the sides  
-int bottomY ;
-logic insideBracket ; 
+// int rightX ; //coordinates of the sides  
+// int bottomY ;
+logic insideBracket; 
 
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
 assign topLeft_step_x = ( topLeftX + STEP_OFFSET_x );
 assign topLeft_step_y = ( topLeftY + STEP_OFFSET_y );
-assign bottomRight_step_x	= (topLeftX + OBJECT_WIDTH_X);
-assign bottomRight_step_y	= (topLeftY + OBJECT_HEIGHT_Y);
+assign bottomRight_step_x	= (topLeft_step_x + OBJECT_WIDTH_X);
+assign bottomRight_step_y	= (topLeft_step_y + OBJECT_HEIGHT_Y);
 
 
 //////////--------------------------------------------------------------------------------------------------------------=
@@ -46,17 +46,18 @@ begin
 		RGBout			<=	8'b0;
 		drawingRequest	<=	1'b0;
 	end
-	else begin 
+	else if(step_type == 3'b1) begin 
 	
 //		if ( (pixelX  >= topLeftX) &&  (pixelX < rightX) 
 //			&& (pixelY  >= topLeftY) &&  (pixelY < bottomY) ) // test if it is inside the rectangle 
 
 		//this is an example of using blocking sentence inside an always_ff block, 
 		//and not waiting a clock to use the result  
+		
 		insideBracket  = 	 ( (pixelX  >= topLeft_step_x) &&  (pixelX < bottomRight_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 						   && (pixelY  >= topLeft_step_y) &&  (pixelY < bottomRight_step_y) )  ; 
 		
-		if (insideBracket ) // test if it is inside the rectangle 
+		if (insideBracket) // test if it is inside the rectangle 
 		begin 
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
@@ -71,6 +72,10 @@ begin
 			offsetY	<= 0; //no offset
 		end 
 		
+	end
+	else begin
+		RGBout			<=	8'b0;
+		drawingRequest	<=	1'b0;
 	end
 end 
 endmodule 

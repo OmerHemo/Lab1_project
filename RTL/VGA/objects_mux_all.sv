@@ -15,7 +15,8 @@ module	objects_mux_all	(
 		// add the box here 
 					input		logic	boxDrawingRequest,
 					input		logic	[7:0] boxRGB,
-		// add the box here 
+					
+		// step 
 					input		logic	stepDrawingRequest,
 					input		logic	[7:0] stepRGB,	
 					
@@ -49,6 +50,9 @@ begin
 		
 		else if (boxDrawingRequest == 1'b1 )   
 			tmpRGB <= boxRGB;  //second priority
+			
+		else if (stepDrawingRequest == 1'b1 )   
+			tmpRGB <= stepRGB;  //second priority
 			
 		else
 			tmpRGB <= backGroundRGB ; // last priority 

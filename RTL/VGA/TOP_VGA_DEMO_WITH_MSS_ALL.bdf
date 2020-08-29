@@ -1500,7 +1500,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 688 392 936 600)
+	(rect 688 376 936 584)
 	(text "objects_mux_all" (rect 5 0 84 12)(font "Arial" ))
 	(text "inst11" (rect 8 192 36 209)(font "Intel Clear" ))
 	(port
@@ -1592,7 +1592,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 992 1384 1216 1560)
+	(rect 992 1376 1216 1552)
 	(text "step_1" (rect 5 0 38 12)(font "Arial" ))
 	(text "inst12" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
@@ -1700,7 +1700,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 208 160))
 	)
-	(annotation_block (parameter)(rect 968 1256 1224 1376))
+	(annotation_block (parameter)(rect 968 1248 1224 1368))
 )
 (symbol
 	(rect 624 1432 832 1544)
@@ -2346,24 +2346,8 @@ agreement for further details.
 	(pt -160 984)
 )
 (connector
-	(pt 1040 440)
-	(pt 1040 424)
-	(bus)
-)
-(connector
 	(pt 1048 440)
 	(pt 1040 440)
-	(bus)
-)
-(connector
-	(text "iRed[7..0]" (rect 940 408 984 425)(font "Intel Clear" ))
-	(pt 1040 424)
-	(pt 936 424)
-	(bus)
-)
-(connector
-	(pt 1032 456)
-	(pt 1032 440)
 	(bus)
 )
 (connector
@@ -2372,25 +2356,8 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "iGreen[7..0]" (rect 952 424 1006 441)(font "Intel Clear" ))
-	(pt 1032 440)
-	(pt 936 440)
-	(bus)
-)
-(connector
-	(pt 1024 472)
-	(pt 1024 456)
-	(bus)
-)
-(connector
 	(pt 1048 472)
 	(pt 1024 472)
-	(bus)
-)
-(connector
-	(text "iBlue[7..0]" (rect 949 440 997 457)(font "Intel Clear" ))
-	(pt 1024 456)
-	(pt 936 456)
 	(bus)
 )
 (connector
@@ -2438,91 +2405,6 @@ agreement for further details.
 	(pt 640 712)
 )
 (connector
-	(text "clk" (rect 608 408 622 425)(font "Intel Clear" ))
-	(pt 688 424)
-	(pt 560 424)
-)
-(connector
-	(text "resetN" (rect 600 424 633 436)(font "Arial" ))
-	(pt 688 440)
-	(pt 560 440)
-)
-(connector
-	(text "smiley_req" (rect 570 440 623 457)(font "Intel Clear" ))
-	(pt 688 456)
-	(pt 560 456)
-)
-(connector
-	(text "SMILEY_VGA[7..0]" (rect 580 456 667 473)(font "Intel Clear" ))
-	(pt 688 472)
-	(pt 560 472)
-	(bus)
-)
-(connector
-	(text "numberDrawingRequest" (rect 623 472 737 489)(font "Intel Clear" ))
-	(pt 688 488)
-	(pt 560 488)
-)
-(connector
-	(text "Numbers_VGA[7..0]" (rect 615 488 708 505)(font "Intel Clear" ))
-	(pt 688 504)
-	(pt 560 504)
-	(bus)
-)
-(connector
-	(text "backGroundRGB[7..0]" (rect 377 520 478 537)(font "Intel Clear" ))
-	(pt 536 536)
-	(pt 352 536)
-	(bus)
-)
-(connector
-	(pt 536 552)
-	(pt 536 536)
-	(bus)
-)
-(connector
-	(pt 536 552)
-	(pt 688 552)
-	(bus)
-)
-(connector
-	(text "step_req" (rect 634 504 675 521)(font "Intel Clear" ))
-	(pt 688 520)
-	(pt 560 520)
-)
-(connector
-	(text "clk" (rect 960 1400 974 1417)(font "Intel Clear" ))
-	(pt 992 1416)
-	(pt 952 1416)
-)
-(connector
-	(text "resetN" (rect 960 1416 990 1433)(font "Intel Clear" ))
-	(pt 992 1432)
-	(pt 952 1432)
-)
-(connector
-	(text "pixelX[10..0]" (rect 960 1432 1019 1449)(font "Intel Clear" ))
-	(pt 992 1448)
-	(pt 952 1448)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 960 1448 1019 1465)(font "Intel Clear" ))
-	(pt 992 1464)
-	(pt 952 1464)
-	(bus)
-)
-(connector
-	(pt 992 1480)
-	(pt 832 1480)
-	(bus)
-)
-(connector
-	(pt 992 1496)
-	(pt 832 1496)
-	(bus)
-)
-(connector
 	(text "pixelX[10..0]" (rect 584 1448 643 1465)(font "Intel Clear" ))
 	(pt 624 1464)
 	(pt 576 1464)
@@ -2535,32 +2417,160 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "step_req" (rect 1200 1432 1241 1449)(font "Intel Clear" ))
-	(pt 1216 1448)
-	(pt 1264 1448)
-)
-(connector
-	(text "step_VGA[7..0]" (rect 624 520 694 537)(font "Intel Clear" ))
-	(pt 688 536)
-	(pt 560 536)
-	(bus)
-)
-(connector
-	(text "step_VGA[7..0]" (rect 1224 1448 1294 1465)(font "Intel Clear" ))
-	(pt 1216 1464)
-	(pt 1264 1464)
-	(bus)
-)
-(connector
 	(text "step_type[2..0]" (rect 840 1448 910 1465)(font "Intel Clear" ))
 	(pt 832 1464)
 	(pt 880 1464)
 	(bus)
 )
 (connector
-	(text "step_type[2..0]" (rect 960 1496 1030 1513)(font "Intel Clear" ))
-	(pt 992 1512)
-	(pt 952 1512)
+	(text "clk" (rect 960 1392 974 1409)(font "Intel Clear" ))
+	(pt 992 1408)
+	(pt 952 1408)
+)
+(connector
+	(text "resetN" (rect 960 1408 990 1425)(font "Intel Clear" ))
+	(pt 992 1424)
+	(pt 952 1424)
+)
+(connector
+	(text "pixelX[10..0]" (rect 960 1424 1019 1441)(font "Intel Clear" ))
+	(pt 992 1440)
+	(pt 952 1440)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 960 1440 1019 1457)(font "Intel Clear" ))
+	(pt 992 1456)
+	(pt 952 1456)
+	(bus)
+)
+(connector
+	(pt 840 1480)
+	(pt 840 1472)
+	(bus)
+)
+(connector
+	(pt 832 1480)
+	(pt 840 1480)
+	(bus)
+)
+(connector
+	(pt 840 1472)
+	(pt 992 1472)
+	(bus)
+)
+(connector
+	(pt 848 1496)
+	(pt 848 1488)
+	(bus)
+)
+(connector
+	(pt 832 1496)
+	(pt 848 1496)
+	(bus)
+)
+(connector
+	(pt 848 1488)
+	(pt 992 1488)
+	(bus)
+)
+(connector
+	(text "step_req" (rect 1232 1416 1273 1433)(font "Intel Clear" ))
+	(pt 1216 1440)
+	(pt 1264 1440)
+)
+(connector
+	(text "step_VGA[7..0]" (rect 1208 1440 1278 1457)(font "Intel Clear" ))
+	(pt 1216 1456)
+	(pt 1264 1456)
+	(bus)
+)
+(connector
+	(text "step_type[2..0]" (rect 960 1488 1030 1505)(font "Intel Clear" ))
+	(pt 992 1504)
+	(pt 952 1504)
+	(bus)
+)
+(connector
+	(pt 1040 440)
+	(pt 1040 408)
+	(bus)
+)
+(connector
+	(text "iRed[7..0]" (rect 940 392 984 409)(font "Intel Clear" ))
+	(pt 1040 408)
+	(pt 936 408)
+	(bus)
+)
+(connector
+	(pt 1032 456)
+	(pt 1032 424)
+	(bus)
+)
+(connector
+	(text "iGreen[7..0]" (rect 952 408 1006 425)(font "Intel Clear" ))
+	(pt 1032 424)
+	(pt 936 424)
+	(bus)
+)
+(connector
+	(pt 1024 472)
+	(pt 1024 440)
+	(bus)
+)
+(connector
+	(text "iBlue[7..0]" (rect 949 424 997 441)(font "Intel Clear" ))
+	(pt 1024 440)
+	(pt 936 440)
+	(bus)
+)
+(connector
+	(text "clk" (rect 608 392 622 409)(font "Intel Clear" ))
+	(pt 688 408)
+	(pt 560 408)
+)
+(connector
+	(text "resetN" (rect 600 408 633 420)(font "Arial" ))
+	(pt 688 424)
+	(pt 560 424)
+)
+(connector
+	(text "smiley_req" (rect 570 424 623 441)(font "Intel Clear" ))
+	(pt 688 440)
+	(pt 560 440)
+)
+(connector
+	(text "SMILEY_VGA[7..0]" (rect 580 440 667 457)(font "Intel Clear" ))
+	(pt 688 456)
+	(pt 560 456)
+	(bus)
+)
+(connector
+	(text "numberDrawingRequest" (rect 623 456 737 473)(font "Intel Clear" ))
+	(pt 688 472)
+	(pt 560 472)
+)
+(connector
+	(text "Numbers_VGA[7..0]" (rect 615 472 708 489)(font "Intel Clear" ))
+	(pt 688 488)
+	(pt 560 488)
+	(bus)
+)
+(connector
+	(text "step_req" (rect 634 488 675 505)(font "Intel Clear" ))
+	(pt 688 504)
+	(pt 560 504)
+)
+(connector
+	(text "step_VGA[7..0]" (rect 624 504 694 521)(font "Intel Clear" ))
+	(pt 688 520)
+	(pt 560 520)
+	(bus)
+)
+(connector
+	(text "backGroundRGB[7..0]" (rect 377 520 478 537)(font "Intel Clear" ))
+	(pt 352 536)
+	(pt 688 536)
 	(bus)
 )
 (junction (pt 736 912))
