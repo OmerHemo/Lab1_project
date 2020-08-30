@@ -48,6 +48,8 @@ module	step_1	(
 					input 	logic	[10:0] pixelY,
 					input 	logic signed [10:0] tileTopLeftX, //position of specific tile in the grid
 					input 	logic	signed [10:0] tileTopLeftY,  //position of specific tile in the grid
+					input		logic [2:0] step_type,
+					
 					
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
 					output 	logic	[10:0] offsetY,
@@ -83,13 +85,7 @@ begin
 		RGBout			<=	8'b0;
 		drawingRequest	<=	1'b0;
 	end
-	else begin 
-	
-//		if ( (pixelX  >= topLeftX) &&  (pixelX < rightX) 
-//			&& (pixelY  >= topLeftY) &&  (pixelY < bottomY) ) // test if it is inside the rectangle 
-
-		//this is an example of using blocking sentence inside an always_ff block, 
-		//and not waiting a clock to use the result  
+	else if(step_type==3'b001) begin 
 		insideBracket  = 	 ( (pixelX  >= Left_step_x) &&  (pixelX < Right_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 						   && (pixelY  >= Top_step_y) &&  (pixelY < Bottom_step_y) )  ; 
 		
@@ -106,8 +102,11 @@ begin
 			drawingRequest <= 1'b0 ;// transparent color 
 			offsetX	<= 0; //no offset
 			offsetY	<= 0; //no offset
-		end 
-		
+		end 	
+	end
+	else begin
+		RGBout			<=	8'b0;
+		drawingRequest	<=	1'b0;
 	end
 end 
 endmodule 

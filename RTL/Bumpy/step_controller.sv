@@ -10,13 +10,13 @@ module	step_controller	(
 					input 	logic	[10:0] pixelY,
 					
 					output	logic [2:0] step_type,
-					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
-					output 	logic	[10:0] offsetY
+					output 	logic	[10:0] tileTopLeftX, 
+					output 	logic	[10:0] tileTopLeftY
 );
 
 //__________________________________
-parameter  int Tile_WIDTH_X = 64;
-parameter  int Tile_HEIGHT_Y = 64;
+parameter  int Tile_WIDTH_X = 6; // 2^6=64
+parameter  int Tile_HEIGHT_Y = 6;// 2^6=64
 //__________________________________
 const logic [2:0] FREE=3'b000, REGULAR_STEP=3'b001;
 parameter  int NUM_OF_ROWS = 7;
@@ -24,19 +24,19 @@ parameter  int NUM_OF_COLS = 10;
 
 
 logic [0:2] [0:2] [2:0] tile_map = {
-{3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},
-{3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},
-{3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},
-{3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},
-{3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},
-{3'd1,3'd1,3'd1,3'd1,3'd1,3'd1,3'd1,3'd1},
-{3'd0,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0}, // not used
-{3'd0,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0} // not used
+{REGULAR_STEP,FREE,FREE,FREE,FREE,FREE,FREE,REGULAR_STEP},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE}, //Not Used
+{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE}  //Not Used
 };
 
 
-assign step_type = tile_map[pixelX >> 6][pixelY >> 6];
-assign offsetX = (pixelX >> 6) << 6;
-assign offsetY = (pixelY >> 6) << 6;
+assign step_type = tile_map[pixelX >> Tile_WIDTH_X][pixelY >> Tile_HEIGHT_Y];
+assign tileTopLeftX = (pixelX >> Tile_WIDTH_X) << Tile_WIDTH_X;
+assign tileTopLeftY = (pixelY >> Tile_HEIGHT_Y) << Tile_HEIGHT_Y;
 
 endmodule

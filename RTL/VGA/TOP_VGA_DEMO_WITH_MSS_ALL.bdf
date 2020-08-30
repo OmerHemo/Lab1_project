@@ -1592,91 +1592,9 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 248 1440 456 1552)
-	(text "step_controller" (rect 5 0 76 12)(font "Arial" ))
-	(text "inst16" (rect 8 96 36 113)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "pixelX[10..0]" (rect 21 27 81 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "pixelY[10..0]" (rect 21 43 83 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 208 32)
-		(output)
-		(text "step_type[2..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "step_type[2..0]" (rect 124 27 199 39)(font "Arial" ))
-		(line (pt 208 32)(pt 192 32)(line_width 3))
-	)
-	(port
-		(pt 208 48)
-		(output)
-		(text "offsetX[10..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "offsetX[10..0]" (rect 130 43 198 55)(font "Arial" ))
-		(line (pt 208 48)(pt 192 48)(line_width 3))
-	)
-	(port
-		(pt 208 64)
-		(output)
-		(text "offsetY[10..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "offsetY[10..0]" (rect 128 59 198 71)(font "Arial" ))
-		(line (pt 208 64)(pt 192 64)(line_width 3))
-	)
-	(parameter
-		"Tile_WIDTH_X"
-		"64"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"Tile_HEIGHT_Y"
-		"64"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 192 96))
-	)
-	(annotation_block (parameter)(rect 240 1360 440 1424))
-)
-(symbol
-	(rect 704 1464 816 1512)
-	(text "numberPosition" (rect 12 0 118 16)(font "Arial" (font_size 10)))
-	(text "inst17" (rect 8 32 36 49)(font "Intel Clear" ))
-	(port
-		(pt 112 24)
-		(output)
-		(text "result[10..0]" (rect 0 0 67 14)(font "Arial" (font_size 8)))
-		(text "200" (rect 75 17 96 31)(font "Arial" (font_size 8)))
-		(line (pt 112 24)(pt 96 24)(line_width 3))
-	)
-	(drawing
-		(text "11" (rect 95 26 106 38)(font "Arial" ))
-		(line (pt 106 20)(pt 98 28))
-		(line (pt 16 16)(pt 16 32))
-		(line (pt 16 16)(pt 96 16))
-		(line (pt 16 32)(pt 96 32))
-		(line (pt 96 16)(pt 96 32))
-		(line (pt 0 0)(pt 114 0))
-		(line (pt 114 0)(pt 114 50))
-		(line (pt 0 50)(pt 114 50))
-		(line (pt 0 0)(pt 0 50))
-		(line (pt 0 0)(pt 0 0))
-		(line (pt 0 0)(pt 0 0))
-		(line (pt 0 0)(pt 0 0))
-		(line (pt 0 0)(pt 0 0))
-	)
-)
-(symbol
-	(rect 992 1368 1232 1512)
+	(rect 992 1368 1232 1544)
 	(text "step_1" (rect 5 0 38 12)(font "Arial" ))
-	(text "inst21" (rect 8 128 36 145)(font "Intel Clear" ))
+	(text "inst12" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1718,6 +1636,13 @@ agreement for further details.
 		(text "tileTopLeftY[10..0]" (rect 0 0 92 12)(font "Arial" ))
 		(text "tileTopLeftY[10..0]" (rect 21 107 113 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "step_type[2..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "step_type[2..0]" (rect 21 123 96 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
 		(pt 240 32)
@@ -1773,9 +1698,73 @@ agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 224 128))
+		(rectangle (rect 16 16 224 160))
 	)
 	(annotation_block (parameter)(rect 1232 1248 1504 1368))
+)
+(symbol
+	(rect 560 1408 784 1520)
+	(text "step_controller" (rect 5 0 76 12)(font "Arial" ))
+	(text "inst22" (rect 8 96 36 113)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 21 27 81 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 21 43 83 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "step_type[2..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "step_type[2..0]" (rect 140 27 215 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 3))
+	)
+	(port
+		(pt 224 48)
+		(output)
+		(text "tileTopLeftX[10..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "tileTopLeftX[10..0]" (rect 128 43 217 55)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48)(line_width 3))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "tileTopLeftY[10..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "tileTopLeftY[10..0]" (rect 126 59 218 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64)(line_width 3))
+	)
+	(parameter
+		"Tile_WIDTH_X"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Tile_HEIGHT_Y"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_OF_ROWS"
+		"7"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_OF_COLS"
+		"10"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 208 96))
+	)
+	(annotation_block (parameter)(rect 784 1312 984 1408))
 )
 (connector
 	(pt 440 360)
@@ -2502,23 +2491,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "pixelX[10..0]" (rect 208 1456 267 1473)(font "Intel Clear" ))
-	(pt 248 1472)
-	(pt 200 1472)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 208 1472 267 1489)(font "Intel Clear" ))
-	(pt 248 1488)
-	(pt 200 1488)
-	(bus)
-)
-(connector
-	(pt 816 1488)
-	(pt 920 1488)
-	(bus)
-)
-(connector
 	(text "pixelY[10..0]" (rect 94 864 153 881)(font "Intel Clear" ))
 	(pt 176 880)
 	(pt 72 880)
@@ -2547,38 +2519,65 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 920 1464)
-	(pt 992 1464)
-	(bus)
-)
-(connector
-	(pt 920 1480)
-	(pt 992 1480)
-	(bus)
-)
-(connector
-	(pt 920 1464)
-	(pt 920 1480)
-	(bus)
-)
-(connector
-	(pt 920 1480)
-	(pt 920 1488)
-	(bus)
-)
-(connector
 	(text "step_VGA[7..0]" (rect 1232 1432 1302 1449)(font "Intel Clear" ))
 	(pt 1232 1448)
 	(pt 1288 1448)
 	(bus)
 )
 (connector
-	(text "step_req" (rect 1232 1408 1273 1425)(font "Intel Clear" ))
+	(text "step_req" (rect 1232 1416 1273 1433)(font "Intel Clear" ))
 	(pt 1232 1432)
 	(pt 1264 1432)
 )
+(connector
+	(text "step_type[2..0]" (rect 918 1496 988 1513)(font "Intel Clear" ))
+	(pt 992 1496)
+	(pt 952 1496)
+	(bus)
+)
+(connector
+	(text "tileTopLeftX[10..0]" (rect 916 1448 1004 1465)(font "Intel Clear" ))
+	(pt 992 1464)
+	(pt 944 1464)
+	(bus)
+)
+(connector
+	(text "tileTopLeftY[10..0]" (rect 916 1464 1004 1481)(font "Intel Clear" ))
+	(pt 992 1480)
+	(pt 952 1480)
+	(bus)
+)
+(connector
+	(text "tileTopLeftY[10..0]" (rect 801 1456 889 1473)(font "Intel Clear" ))
+	(pt 784 1472)
+	(pt 816 1472)
+	(bus)
+)
+(connector
+	(text "pixelX[10..0]" (rect 520 1424 579 1441)(font "Intel Clear" ))
+	(pt 560 1440)
+	(pt 512 1440)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 520 1440 579 1457)(font "Intel Clear" ))
+	(pt 560 1456)
+	(pt 512 1456)
+	(bus)
+)
+(connector
+	(text "step_type[2..0]" (rect 808 1424 878 1441)(font "Intel Clear" ))
+	(pt 784 1440)
+	(pt 824 1440)
+	(bus)
+)
+(connector
+	(text "tileTopLeftX[10..0]" (rect 800 1440 888 1457)(font "Intel Clear" ))
+	(pt 784 1456)
+	(pt 824 1456)
+	(bus)
+)
 (junction (pt 736 912))
-(junction (pt 920 1480))
 (text "Sound Unit" (rect 960 752 1026 771)(font "Intel Clear" (font_size 8)))
 (text "Output to 7Seg" (rect 880 1032 970 1051)(font "Intel Clear" (font_size 8)))
 (text "Smileyface moving and drawing" (rect 856 88 1045 107)(font "Intel Clear" (font_size 8)))
