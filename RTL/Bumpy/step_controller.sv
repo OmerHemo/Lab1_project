@@ -14,8 +14,14 @@ module	step_controller	(
 					output 	logic	[10:0] offsetY
 );
 
+//__________________________________
 parameter  int Tile_WIDTH_X = 64;
 parameter  int Tile_HEIGHT_Y = 64;
+//__________________________________
+const logic [2:0] FREE=3'b000, REGULAR_STEP=3'b001;
+parameter  int NUM_OF_ROWS = 7;
+parameter  int NUM_OF_COLS = 10;
+
 
 logic [0:2] [0:2] [2:0] tile_map = {
 {3'd0,3'd1,3'd0,3'd0,3'd0,3'd0,3'd0,3'd0},

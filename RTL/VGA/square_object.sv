@@ -51,7 +51,7 @@ begin
 		insideBracket  = 	 ( (pixelX  >= topLeftX) &&  (pixelX < rightX) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 						   && (pixelY  >= topLeftY) &&  (pixelY < bottomY) )  ; 
 		
-		if (insideBracket ) // test if it is inside the rectangle 
+		if (insideBracket) // test if it is inside the rectangle 
 		begin 
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
