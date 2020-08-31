@@ -1812,7 +1812,7 @@ agreement for further details.
 (symbol
 	(rect -64 1480 192 1592)
 	(text "debug" (rect 5 0 34 12)(font "Arial" ))
-	(text "inst18" (rect 8 96 36 113)(font "Intel Clear" ))
+	(text "inst16" (rect 8 96 36 113)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1886,7 +1886,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_OF_COLS"
-		"30"
+		"40"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -1894,15 +1894,10 @@ agreement for further details.
 		"01011011"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"random_num"
-		"0000000001"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 240 96))
 	)
-	(annotation_block (parameter)(rect 192 1344 456 1480))
+	(annotation_block (parameter)(rect 192 1360 440 1480))
 )
 (connector
 	(pt 440 360)
