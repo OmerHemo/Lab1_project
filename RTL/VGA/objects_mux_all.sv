@@ -45,6 +45,14 @@ begin
 			tmpRGB	<= 8'b0;
 	end
 	else begin
+		if (stepDrawingRequest == 1'b1 )   
+				tmpRGB <= stepRGB;  //second priority
+		else
+			tmpRGB <= backGroundRGB ; // last priority 
+	end
+end
+	/*
+	else begin
 		if (smileyDrawingRequest == 1'b1 )   
 			tmpRGB <= smileyRGB;  //first priority 
 		
@@ -56,9 +64,9 @@ begin
 			
 		else
 			tmpRGB <= backGroundRGB ; // last priority 
-		end ; 
+		end; 
 	end
-
+*/
 endmodule
 
 
