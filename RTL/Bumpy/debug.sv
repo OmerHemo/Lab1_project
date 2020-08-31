@@ -37,7 +37,7 @@ const logic [1:0] FREE=2'b00, REGU=2'b01; //orientation consts
 
 
 // Maps
-const logic [0:NUM_OF_COLS-1] [0:NUM_OF_ROWS-1] [1:0] map0 = {
+const logic [NUM_OF_COLS-1:0] [NUM_OF_ROWS-1:0] [1:0] map0 = {
 	{REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{REGU,FREE,FREE,FREE,REGU,REGU,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,FREE,REGU,REGU,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{REGU,FREE,FREE,FREE,REGU,REGU,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,FREE,REGU,REGU,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
@@ -72,7 +72,7 @@ const logic [0:NUM_OF_COLS-1] [0:NUM_OF_ROWS-1] [1:0] map0 = {
 
 
 
-logic [0:NUM_OF_COLS-1] [0:NUM_OF_ROWS-1] [1:0] grid;
+logic [NUM_OF_COLS-1:0] [NUM_OF_ROWS-1:0] [1:0] grid;
 //
 int X_index_in_grid ;  
 int y_index_in_grid ;
@@ -81,7 +81,7 @@ logic inside_grid;
 
 assign X_index_in_grid = ((pixelX)>> 4);
 assign y_index_in_grid = (pixelY >> 4);
-assign inside_grid = (pixelX <= x_GRID_SIZE)&&(pixely <= y_GRID_SIZE);
+assign inside_grid = ((pixelX <= x_GRID_SIZE)&&(pixelY <= y_GRID_SIZE));
 
 
 //======--------------------------------------------------------------------------------------------------------------=
@@ -99,7 +99,7 @@ begin
 			//drawing offset logic
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			//draw logic
-			BrickWall_drawingRequest <= (grid[y_index_in_grid][X_index_in_grid] == REGU) ;
+			BrickWall_drawingRequest <= (grid[X_index_in_grid][y_index_in_grid] == REGU) ;
 			offsetX	<= (pixelX % BRICK_WIDTH_X); //calculate relative offsets from top left corner of the brick
 			offsetY	<= (pixelY % BRICK_HEIGHT_Y); //calculate relative offsets from top left corner of the brick
 		end
