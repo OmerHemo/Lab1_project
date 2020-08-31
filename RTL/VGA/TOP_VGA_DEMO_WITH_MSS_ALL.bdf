@@ -1703,22 +1703,36 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1232 1248 1504 1368))
 )
 (symbol
-	(rect 560 1408 784 1520)
+	(rect 560 1408 784 1552)
 	(text "step_controller" (rect 5 0 76 12)(font "Arial" ))
-	(text "inst22" (rect 8 96 36 113)(font "Intel Clear" ))
+	(text "inst26" (rect 8 128 36 145)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "pixelX[10..0]" (rect 21 27 81 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 21 59 81 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
 		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "pixelY[10..0]" (rect 21 43 83 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
+		(text "pixelY[10..0]" (rect 21 75 83 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
 		(pt 224 32)
@@ -1741,6 +1755,20 @@ agreement for further details.
 		(text "tileTopLeftY[10..0]" (rect 126 59 218 71)(font "Arial" ))
 		(line (pt 224 64)(pt 208 64)(line_width 3))
 	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "drawingRequest" (rect 0 0 77 12)(font "Arial" ))
+		(text "drawingRequest" (rect 138 75 215 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80))
+	)
+	(port
+		(pt 224 96)
+		(output)
+		(text "RGBout[7..0]" (rect 0 0 64 12)(font "Arial" ))
+		(text "RGBout[7..0]" (rect 149 91 213 103)(font "Arial" ))
+		(line (pt 224 96)(pt 208 96)(line_width 3))
+	)
 	(parameter
 		"Tile_WIDTH_X"
 		"6"
@@ -1752,19 +1780,34 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
+		"OBJECT_COLOR"
+		"01011011"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"BRICK_WIDTH_X"
+		"16"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BRICK_HEIGHT_Y"
+		"16"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"NUM_OF_ROWS"
-		"7"
+		"30"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"NUM_OF_COLS"
-		"10"
+		"30"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 208 96))
+		(rectangle (rect 16 16 208 128))
 	)
-	(annotation_block (parameter)(rect 784 1312 984 1408))
+	(annotation_block (parameter)(rect 632 1216 880 1368))
 )
 (connector
 	(pt 440 360)
@@ -2519,17 +2562,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "step_VGA[7..0]" (rect 1232 1432 1302 1449)(font "Intel Clear" ))
-	(pt 1232 1448)
-	(pt 1288 1448)
-	(bus)
-)
-(connector
-	(text "step_req" (rect 1232 1416 1273 1433)(font "Intel Clear" ))
-	(pt 1232 1432)
-	(pt 1264 1432)
-)
-(connector
 	(text "step_type[2..0]" (rect 918 1496 988 1513)(font "Intel Clear" ))
 	(pt 992 1496)
 	(pt 952 1496)
@@ -2554,18 +2586,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "pixelX[10..0]" (rect 520 1424 579 1441)(font "Intel Clear" ))
-	(pt 560 1440)
-	(pt 512 1440)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 520 1440 579 1457)(font "Intel Clear" ))
-	(pt 560 1456)
-	(pt 512 1456)
-	(bus)
-)
-(connector
 	(text "step_type[2..0]" (rect 808 1424 878 1441)(font "Intel Clear" ))
 	(pt 784 1440)
 	(pt 824 1440)
@@ -2576,6 +2596,39 @@ agreement for further details.
 	(pt 784 1456)
 	(pt 824 1456)
 	(bus)
+)
+(connector
+	(text "step_req" (rect 799 1472 840 1489)(font "Intel Clear" ))
+	(pt 784 1488)
+	(pt 808 1488)
+)
+(connector
+	(text "step_VGA[7..0]" (rect 790 1488 860 1505)(font "Intel Clear" ))
+	(pt 784 1504)
+	(pt 808 1504)
+	(bus)
+)
+(connector
+	(text "clk" (rect 528 1424 542 1441)(font "Intel Clear" ))
+	(pt 560 1440)
+	(pt 520 1440)
+)
+(connector
+	(text "pixelX[10..0]" (rect 520 1456 579 1473)(font "Intel Clear" ))
+	(pt 560 1472)
+	(pt 512 1472)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 520 1472 579 1489)(font "Intel Clear" ))
+	(pt 560 1488)
+	(pt 512 1488)
+	(bus)
+)
+(connector
+	(text "resetN" (rect 528 1440 558 1457)(font "Intel Clear" ))
+	(pt 560 1456)
+	(pt 520 1456)
 )
 (junction (pt 736 912))
 (text "Sound Unit" (rect 960 752 1026 771)(font "Intel Clear" (font_size 8)))
