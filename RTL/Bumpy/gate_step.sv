@@ -1,4 +1,4 @@
-module	regular_step	(	
+module	gate_step	(	
 					input		logic	clk,
 					input		logic	resetN,
 					input 	logic	[10:0] pixelX,// current VGA pixel 
@@ -33,13 +33,13 @@ parameter  int NUM_OF_COLS = 10;
 
 
 //__________________________________
-parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
+parameter  logic [7:0] OBJECT_COLOR = 8'h01; 
 
 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
 
 
-const logic [2:0] FREE=3'b000, REGU=3'b001; //orientation consts
+const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010; //orientation consts
 
 
 int Left_step_x;
@@ -62,7 +62,7 @@ begin
 		RGBout			<=	8'b0;
 		drawingRequest	<=	1'b0;
 	end
-	else if(step_type==REGU) begin 
+	else if(step_type==GATE) begin 
 			insideBracket  = ( (pixelX  >= Left_step_x) &&  (pixelX < Right_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 								&& (pixelY  >= Top_step_y) &&  (pixelY < Bottom_step_y) )  ; 
 			
