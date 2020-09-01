@@ -25,7 +25,7 @@ parameter  int NUM_OF_COLS = 10;
 
 //======--------------------------------------------------------------------------------------------------------------=
 
-const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010; //orientation consts
+const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, DEATH=3'b011; //orientation consts
 
 
 // Maps
