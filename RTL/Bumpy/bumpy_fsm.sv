@@ -2,19 +2,20 @@
 module bumpy_fsm (
 	input logic clk, 
 	input logic resetN,
-	input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
 	input	logic	up_direction,left_direction,right_direction,down_direction,
 	input logic bumpy_collision,
-	input	logic	[3:0] HitEdgeCode //one bit per edge {Left, Top, Right, Bottom}	
+	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic bumpy_died,
-	
-	                              
-	output logic [3:0] state,
+	input logic [0:3] [2:0] area,
+	          
+	output logic [3:0] state
    );                            
 
 enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top} prState, nxtState;
  	
 const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts	
+
+const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010; //orientation consts
 
 always @(posedge clk or negedge resetN)
    begin
