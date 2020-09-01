@@ -18,7 +18,10 @@ module	objects_mux_all	(
 					
 		// step 
 					input		logic	stepDrawingRequest,
-					input		logic	[7:0] stepRGB,	
+					input		logic	[7:0] stepRGB,
+		// prize 
+					input		logic	prizeDrawingRequest,
+					input		logic	[7:0] prizeRGB,		
 					
 					
 		// background 
@@ -47,6 +50,8 @@ begin
 	else begin
 		if (stepDrawingRequest == 1'b1 )   
 				tmpRGB <= stepRGB;  //second priority
+		else if(prizeDrawingRequest  == 1'b1 ) 
+				tmpRGB <= prizeRGB;
 		else
 			tmpRGB <= backGroundRGB ; // last priority 
 	end
