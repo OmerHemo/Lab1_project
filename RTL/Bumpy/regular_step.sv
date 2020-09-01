@@ -22,9 +22,9 @@ const int x_GRID_SIZE = x_FRAME_SIZE;
 const int y_GRID_SIZE = y_FRAME_SIZE;
 //_______________________________
 //__________________________________
-parameter  int STEP_WIDTH_X = 60;
+parameter  int STEP_WIDTH_X = 50;
 parameter  int STEP_HEIGHT_Y = 7;
-parameter  int STEP_TILE_OFFSET_x = 2;
+parameter  int STEP_TILE_OFFSET_x = 7;
 parameter  int STEP_TILE_OFFSET_y = 50;
 
 //__________________________________
