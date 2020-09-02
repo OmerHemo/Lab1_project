@@ -1,8 +1,3 @@
-//-- Alex Grinshpun Apr 2017
-//-- Dudy Nov 13 2017
-// SystemVerilog version Alex Grinshpun May 2018
-// coding convention dudy December 2018
-
 
 module	bumpy_move(	
 	input	logic	clk,
@@ -20,7 +15,7 @@ module	bumpy_move(
 
 const int FIXED_POINT_MULTIPLIER	=	64;
 const int Tile_size = 64;
-const int bumpy_size = 16;
+const int bumpy_size = 16*FIXED_POINT_MULTIPLIER;
 
 // FIXED_POINT_MULTIPLIER is used to work with integers in high resolution 
 // we do all calulations with topLeftX_FixedPoint  so we get a resulytion inthe calcuatuions of 1/64 pixel 
@@ -35,23 +30,21 @@ const int center_topleft_y = y_FRAME_SIZE/2 - bumpy_size/2;
 int pos_x, pos_y,curr_tile_x,curr_tile_y; 
 int speed_x,speed_y;
 
-assign curr_tile_x = ((pos_x >> 6) << 6);
-assign curr_tile_y = ((pos_x >> 6) << 6);
+assign curr_tile_x = ((pos_x >> 6) << 6)*x_FRAME_SIZE;
+assign curr_tile_y = ((pos_x >> 6) << 6)*y_FRAME_SIZE;
 
 // y axis speed
-
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN)
 		speed_y	<= 0;
 	else begin
-	
 		case(state)
 			Sreset,Sdie: begin
 				speed_y	<= 0;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
-				if((pos_y > (curr_tile_y + y_FRAME_SIZE + bumpy_size - 10)) && (speed_y >0))
+				if((pos_y > (curr_tile_y + y_FRAME_SIZE - bumpy_size - 10)) && (speed_y >0))
 					speed_y <= -5;
 				if( (pos_y < (curr_tile_y + 10)) && (speed_y <0))
 					speed_y <= 5;
@@ -96,7 +89,7 @@ begin
 					speed_x <= -5;
 			end
 			Sbounce_from_right:begin
-				if((pos_x > (curr_tile_x + y_FRAME_SIZE + bumpy_size - 10)) && (speed_x > 0))
+				if((pos_x > (curr_tile_x + y_FRAME_SIZE - bumpy_size - 10)) && (speed_x > 0))
 					speed_x <= -5;
 				else
 					speed_x <= 5;

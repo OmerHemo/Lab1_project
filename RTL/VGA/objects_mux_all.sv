@@ -49,32 +49,19 @@ begin
 			tmpRGB	<= 8'b0;
 	end
 	else begin
-		if(stopwatchDrawingRequest == 1'b1 )
-				tmpRGB <= stopwatchRGB;  //first priority
+		if(bumpyDrawingRequest == 1'b1 )
+			tmpRGB <= bumpyRGB;
+		else if(stopwatchDrawingRequest == 1'b1 )
+				tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
-				tmpRGB <= stepRGB;  //second priority
+				tmpRGB <= stepRGB;  
 		else if(prizeDrawingRequest  == 1'b1 ) 
 				tmpRGB <= prizeRGB;
 		else
-			tmpRGB <= backGroundRGB ; // last priority 
+			tmpRGB <= backGroundRGB ; 
 	end
 end
-	/*
-	else begin
-		if (smileyDrawingRequest == 1'b1 )   
-			tmpRGB <= smileyRGB;  //first priority 
-		
-		else if (boxDrawingRequest == 1'b1 )   
-			tmpRGB <= boxRGB;  //second priority
-			
-		else if (stepDrawingRequest == 1'b1 )   
-			tmpRGB <= stepRGB;  //second priority
-			
-		else
-			tmpRGB <= backGroundRGB ; // last priority 
-		end; 
-	end
-*/
+	
 endmodule
 
 

@@ -16,7 +16,6 @@ const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //or
 
 const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, DEATH=3'b011, WALL=3'b100 ; //orientation consts
 
-logic bumpy_died;
 
 logic up_key, left_key, right_key, down_key;
 
@@ -36,16 +35,6 @@ always @(posedge clk or negedge resetN)
 	end // always
 	
 	
-always_comb // bumpy_died
-	begin
-		if((prState == Sdown) && (area[3]==DEATH))
-			bumpy_died=1;
-		else
-			bumpy_died=0;
-	end
-	
-	
-	
 always_comb // Update next state and outputs
 	begin
 		nxtState = prState; // default values 
@@ -60,20 +49,22 @@ always_comb // Update next state and outputs
 				end 
 		
 			Sidle: begin
-				if (up_key) 
-					nxtState = Sup;
-				else if(left_key)
-					nxtState = Sleft;
-				else if(right_key) 
-					nxtState = Sright;
+				if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+					if (up_key) 
+						nxtState = Sup;
+					else if(left_key)
+						nxtState = Sleft;
+					else if(right_key) 
+						nxtState = Sright;
+					else
+						nxtState = Sidle;
+				end
 				else
 					nxtState = Sidle;
-				end 
+			end 
 						
 			Sleft: begin
-						if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
 							else if(left_key) begin
@@ -92,9 +83,7 @@ always_comb // Update next state and outputs
 				end
 						
 			Sright: begin
-						if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
 							else if(left_key)
@@ -113,7 +102,7 @@ always_comb // Update next state and outputs
 				end 
 				
 			Sdown: begin 
-						if(bumpy_died)
+						if(area[3]==DEATH)
 							nxtState = Sdie;
 						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
@@ -130,9 +119,7 @@ always_comb // Update next state and outputs
 				end 
 					
 			Sup: begin
-					if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) begin
 								if(area[1]==WALL)
 									nxtState = Sbounce_from_top;
@@ -155,9 +142,7 @@ always_comb // Update next state and outputs
 				end 
 				
 			Sbounce_from_left: begin
-					 if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
 							else if(left_key)
@@ -172,9 +157,7 @@ always_comb // Update next state and outputs
 				end 
 				
 			Sbounce_from_right: begin
-					 if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
 							else if(left_key)
@@ -189,9 +172,7 @@ always_comb // Update next state and outputs
 				end 
 				
 			Sbounce_from_top: begin
-					 if(bumpy_died)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
+						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
 							else if(left_key)
