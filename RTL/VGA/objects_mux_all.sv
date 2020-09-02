@@ -27,6 +27,10 @@ module	objects_mux_all	(
 					input		logic	debugDrawingRequest,
 					input		logic	[7:0] debugRGB,
 					
+		//gate
+					input		logic	gateDrawingRequest,
+					input		logic	[7:0] gateRGB,
+					
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
@@ -63,6 +67,8 @@ begin
 				tmpRGB <= prizeRGB;
 		else if(debugDrawingRequest  == 1'b1 ) 
 				tmpRGB <= debugRGB;
+		else if(gateDrawingRequest  == 1'b1 ) 
+				tmpRGB <= gateRGB;
 		else
 			tmpRGB <= backGroundRGB ; 
 	end

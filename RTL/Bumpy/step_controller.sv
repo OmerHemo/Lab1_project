@@ -1,6 +1,7 @@
 
 module	step_controller	(	
 					input		logic	clk,
+					input 	logic resetN,
 					input 	logic	[10:0] pixelX,// current VGA pixel 
 					input 	logic	[10:0] pixelY,
 					input 	logic gate,
@@ -39,11 +40,23 @@ logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map0 = {
 	{FREE,REGU,FREE,REGU,FREE,REGU,FREE,REGU,FREE,REGU},
 	{FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE},
 	{REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE},
-	{FREE,REGU,REGU,REGU,GATE,REGU,FREE,REGU,FREE,REGU}
+	{FREE,REGU,REGU,REGU,FREE,REGU,FREE,REGU,FREE,REGU}
 };
 
-int X_index_in_grid ;  
-int y_index_in_grid ;
+
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap = {
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{REGU,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE},
+	{FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{FREE,REGU,FREE,REGU,FREE,REGU,FREE,REGU,FREE,REGU},
+	{FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE},
+	{REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE},
+	{FREE,REGU,REGU,REGU,FREE,REGU,FREE,REGU,FREE,REGU}
+};
+
+int X_index_in_grid, y_index_in_grid;
+int X_bumpy_index_in_grid, y_bumpy_index_in_grid;
+
 logic	[10:0] topLeftY;
 logic inside_grid;
 
@@ -55,45 +68,46 @@ assign y_bumpy_index_in_grid = ((bumpy_y) >> 6);
 
 
 //======--------------------------------------------------------------------------------------------------------------=
-always_ff@(posedge clk)
+always_ff@(posedge clk or negedge resetN)
 begin
-
-
+		if(!resetN)
+			currentMap <= map0;
+		
 		case(X_bumpy_index_in_grid)
 			(NUM_OF_COLS-1): begin
 				area[2] <= WALL; // right
-				area[0] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
+				area[0] <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
 			end 
 			0: begin
-				area[2] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
+				area[2] <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
 				area[0] <= WALL; // left
 			end
 			default: begin
-				area[2] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
-				area[0] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
+				area[2] <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
+				area[0] <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
 			end
 		endcase
 		
 		case(y_bumpy_index_in_grid)
 			(NUM_OF_ROWS-1): begin
-				area[1] <= map0[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
+				area[1] <= currentMap[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
 				area[3] <= DEATH; // down
 			end 
 			0: begin
 				area[1] <= WALL; // up
-				area[3] <= map0[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
+				area[3] <= currentMap[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
 			end
 			default: begin
-				area[1] <= map0[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
-				area[3] <= map0[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
+				area[1] <= currentMap[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
+				area[3] <= currentMap[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
 			end
 		endcase
 
 
 		if(gate) begin
-			map0[4][6] <= GATE; 
+			currentMap[6][4] <= GATE; 
 		end
-		step_type <= (map0[y_index_in_grid][X_index_in_grid]);
+		step_type <= (currentMap[y_index_in_grid][X_index_in_grid]);
 		tileTopLeftX	<= ((X_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 end 
