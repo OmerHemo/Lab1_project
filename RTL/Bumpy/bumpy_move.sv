@@ -39,13 +39,14 @@ assign curr_tile_y = ((pos_y / y_FRAME_SIZE) * y_FRAME_SIZE);
 // y axis speed
 always_ff@(posedge clk or negedge resetN)
 begin
-	if(!resetN)
+	if(!resetN) begin
 		speed_y	<= 0;
+		debug_led <= 1'b0;
+	end
 	else begin
 		case(state)
 			Sreset,Sdie: begin
 				speed_y	<= 0;
-				debug_led <= 1'b0;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
 				if(speed_y == 0)

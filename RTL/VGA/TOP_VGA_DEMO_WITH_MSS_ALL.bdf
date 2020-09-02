@@ -2887,7 +2887,7 @@ agreement for further details.
 (symbol
 	(rect 1112 1624 1384 1768)
 	(text "bumpy_move" (rect 5 0 73 12)(font "Arial" ))
-	(text "inst57" (rect 8 128 36 145)(font "Intel Clear" ))
+	(text "inst58" (rect 8 128 36 145)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
