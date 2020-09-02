@@ -46,7 +46,7 @@ always_comb // Update next state and outputs
 		
 			Sreset: begin
 				if (up_key || left_key || right_key || down_key) begin
-					nxtState = Sidle;
+					nxtState = Sdown;
 				end
 				else begin
 					nxtState = Sreset;
