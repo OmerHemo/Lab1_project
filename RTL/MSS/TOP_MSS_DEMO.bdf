@@ -234,7 +234,7 @@ agreement for further details.
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
 )
 (symbol
-	(rect 1080 136 1352 408)
+	(rect 1080 128 1352 400)
 	(text "audio_codec_controller" (rect 5 0 117 12)(font "Arial" ))
 	(text "inst2" (rect 8 256 31 268)(font "Arial" ))
 	(port
@@ -548,76 +548,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "clk" (rect 1035 152 1049 169)(font "Intel Clear" ))
-	(pt 1008 168)
-	(pt 1080 168)
-)
-(connector
-	(text "resetN" (rect 1018 168 1048 185)(font "Intel Clear" ))
-	(pt 1008 184)
-	(pt 1080 184)
-)
-(connector
-	(text "sinVal[15..0]" (rect 1006 216 1065 233)(font "Intel Clear" ))
-	(pt 984 232)
-	(pt 1080 232)
-	(bus)
-)
-(connector
-	(text "<<__$DEF_ALIAS1435>>" (rect 996 200 1114 217)(font "Intel Clear" )(invisible))
-	(pt 984 216)
-	(pt 1080 216)
-	(bus)
-)
-(connector
-	(pt 944 216)
-	(pt 944 200)
-)
-(connector
-	(pt 944 200)
-	(pt 1080 200)
-)
-(connector
-	(pt 1352 168)
-	(pt 1368 168)
-)
-(connector
-	(pt 1352 280)
-	(pt 1368 280)
-)
-(connector
-	(pt 1352 296)
-	(pt 1368 296)
-)
-(connector
-	(pt 1352 312)
-	(pt 1368 312)
-)
-(connector
-	(pt 1352 328)
-	(pt 1368 328)
-)
-(connector
-	(pt 1352 344)
-	(pt 1368 344)
-)
-(connector
-	(pt 1352 360)
-	(pt 1368 360)
-)
-(connector
-	(pt 1352 376)
-	(pt 1368 376)
-)
-(connector
-	(pt 1080 248)
-	(pt 1048 248)
-)
-(connector
-	(pt 1048 248)
-	(pt 1048 280)
-)
-(connector
 	(pt 1000 280)
 	(pt 1048 280)
 )
@@ -690,14 +620,148 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 984 168)
-	(pt 984 216)
+	(text "clk" (rect 1035 144 1049 161)(font "Intel Clear" ))
+	(pt 1008 160)
+	(pt 1080 160)
+)
+(connector
+	(text "resetN" (rect 1018 160 1048 177)(font "Intel Clear" ))
+	(pt 1008 176)
+	(pt 1080 176)
+)
+(connector
+	(text "sinVal[15..0]" (rect 1006 208 1065 225)(font "Intel Clear" ))
+	(pt 984 224)
+	(pt 1080 224)
 	(bus)
 )
 (connector
-	(pt 984 216)
-	(pt 984 232)
+	(text "<<__$DEF_ALIAS1435>>" (rect 996 192 1114 209)(font "Intel Clear" )(invisible))
+	(pt 984 208)
+	(pt 1080 208)
 	(bus)
 )
-(junction (pt 984 216))
+(connector
+	(pt 944 216)
+	(pt 944 192)
+)
+(connector
+	(pt 944 192)
+	(pt 1080 192)
+)
+(connector
+	(pt 1360 168)
+	(pt 1360 160)
+)
+(connector
+	(pt 1368 168)
+	(pt 1360 168)
+)
+(connector
+	(pt 1360 160)
+	(pt 1352 160)
+)
+(connector
+	(pt 1360 280)
+	(pt 1360 272)
+)
+(connector
+	(pt 1368 280)
+	(pt 1360 280)
+)
+(connector
+	(pt 1360 272)
+	(pt 1352 272)
+)
+(connector
+	(pt 1360 296)
+	(pt 1360 288)
+)
+(connector
+	(pt 1368 296)
+	(pt 1360 296)
+)
+(connector
+	(pt 1360 288)
+	(pt 1352 288)
+)
+(connector
+	(pt 1360 312)
+	(pt 1360 304)
+)
+(connector
+	(pt 1368 312)
+	(pt 1360 312)
+)
+(connector
+	(pt 1360 304)
+	(pt 1352 304)
+)
+(connector
+	(pt 1360 328)
+	(pt 1360 320)
+)
+(connector
+	(pt 1368 328)
+	(pt 1360 328)
+)
+(connector
+	(pt 1360 320)
+	(pt 1352 320)
+)
+(connector
+	(pt 1360 344)
+	(pt 1360 336)
+)
+(connector
+	(pt 1368 344)
+	(pt 1360 344)
+)
+(connector
+	(pt 1360 336)
+	(pt 1352 336)
+)
+(connector
+	(pt 1360 360)
+	(pt 1360 352)
+)
+(connector
+	(pt 1368 360)
+	(pt 1360 360)
+)
+(connector
+	(pt 1360 352)
+	(pt 1352 352)
+)
+(connector
+	(pt 1360 376)
+	(pt 1360 368)
+)
+(connector
+	(pt 1368 376)
+	(pt 1360 376)
+)
+(connector
+	(pt 1360 368)
+	(pt 1352 368)
+)
+(connector
+	(pt 1048 240)
+	(pt 1080 240)
+)
+(connector
+	(pt 1048 280)
+	(pt 1048 240)
+)
+(connector
+	(pt 984 168)
+	(pt 984 208)
+	(bus)
+)
+(connector
+	(pt 984 208)
+	(pt 984 224)
+	(bus)
+)
+(junction (pt 984 208))
 (text "// (c) Technion IIT, Department of Electrical Engineering 2018 \r\n// Written By Alex Grinshpun & David Bar-On  June 2018 \r\n" (rect 240 48 599 105)(font "Intel Clear" (font_size 8)))

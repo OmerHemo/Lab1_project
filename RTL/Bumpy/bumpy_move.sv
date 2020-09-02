@@ -8,7 +8,8 @@ module	bumpy_move(
 	input logic [7:0] bumpy_size_in,
 
 	output	 logic signed 	[10:0]	offset_topleft_X,// output the top left corner 
-	output	 logic signed	[10:0]	offset_topleft_Y
+	output	 logic signed	[10:0]	offset_topleft_Y,
+	output	 logic	debug_led
 );
 
 
@@ -44,6 +45,7 @@ begin
 		case(state)
 			Sreset,Sdie: begin
 				speed_y	<= 0;
+				debug_led <= 1'b0;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
 				if(speed_y == 0)
@@ -53,10 +55,13 @@ begin
 				if( (pos_y < (curr_tile_y + 10)) && (speed_y <=0))
 					speed_y <= SPEED;
 			end
-			Sdown:
+			Sdown: begin
 				speed_y <= SPEED;
-			Sup:
+				debug_led <= 1'b1;
+			end
+			Sup: begin
 				speed_y <= -SPEED;
+			end
 			Sbounce_from_top: begin
 				if((pos_y < curr_tile_y) && (speed_y <= 0))
 					speed_y <= SPEED;
