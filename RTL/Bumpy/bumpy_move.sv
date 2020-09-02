@@ -4,7 +4,7 @@ module	bumpy_move(
 	input	logic	resetN,
 	input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
 	input enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top} state,
-	
+	input logic bumpy_collision,
 	input logic [7:0] bumpy_size_in,
 
 	output	 logic signed 	[10:0]	offset_topleft_X,// output the top left corner 
@@ -27,7 +27,7 @@ const int	y_FRAME_SIZE	=	Tile_size * FIXED_POINT_MULTIPLIER;
 const int center_topleft_x = x_FRAME_SIZE/2 - bumpy_size/2;
 const int center_topleft_y = y_FRAME_SIZE/2 - bumpy_size/2;
 
-const int SPEED = 20;
+const int SPEED = 40;
 
 // local parameters 
 int pos_x, pos_y,curr_tile_x,curr_tile_y; 
@@ -54,7 +54,7 @@ begin
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
 				if(speed_y == 0)
 					speed_y <= SPEED;
-				if((pos_y > (curr_tile_y + y_FRAME_SIZE - bumpy_size - 10)) && (speed_y >=0))
+				if((bumpy_collision) && (speed_y >=0))
 					speed_y <= -SPEED;
 				if( (pos_y < (curr_tile_y + 10)) && (speed_y <=0))
 					speed_y <= SPEED;
