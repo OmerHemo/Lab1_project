@@ -24,7 +24,7 @@ set_location_assignment PIN_AF14 -to CLOCK_50
 #============================================================
 # KEY
 #============================================================
-set_location_assignment PIN_AJ4 -to resetN  ; # KEY[0]
+set_location_assignment PIN_AJ4 -to KEY[0]  ; # KEY[0]
 set_location_assignment PIN_AK4 -to KEY[1]
 set_location_assignment PIN_AA14 -to KEY[2]
 set_location_assignment PIN_AA15 -to KEY[3]
@@ -32,7 +32,7 @@ set_location_assignment PIN_AA15 -to KEY[3]
 #============================================================
 # SW
 #============================================================
-set_location_assignment PIN_AB30 -to SW[0] ; #SW[0]
+set_location_assignment PIN_AB30 -to resetN ; #SW[0]
 set_location_assignment PIN_Y27 -to SW[1] ; #SW[1]
 set_location_assignment PIN_AB28 -to SW[2] ; #SW[2]
 set_location_assignment PIN_AC30 -to SW[3] ; #SW[3]
