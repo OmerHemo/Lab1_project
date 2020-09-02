@@ -1,5 +1,5 @@
 
-module	bumpy_tile_selector	(	
+module	tile_selector	(	
 					input		logic	clk,
 					input 	logic	[10:0] bumpyX,// current VGA pixel 
 					input 	logic	[10:0] bumpyY,
