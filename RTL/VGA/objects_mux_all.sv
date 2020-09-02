@@ -8,17 +8,18 @@ module	objects_mux_all	(
 //		--------	Clock Input	 	
 					input		logic	clk,
 					input		logic	resetN,
-		// smiley 
-					input		logic	smileyDrawingRequest, // two set of inputs per unit
-					input		logic	[7:0] smileyRGB, 
+		// bumpy 
+					input		logic	bumpyDrawingRequest, // two set of inputs per unit
+					input		logic	[7:0] bumpyRGB, 
 					
-		// add the box here 
-					input		logic	boxDrawingRequest,
-					input		logic	[7:0] boxRGB,
+		// stopwatch 
+					input		logic	stopwatchDrawingRequest,
+					input		logic	[7:0] stopwatchRGB,
 					
 		// step 
 					input		logic	stepDrawingRequest,
 					input		logic	[7:0] stepRGB,
+					
 		// prize 
 					input		logic	prizeDrawingRequest,
 					input		logic	[7:0] prizeRGB,		
@@ -48,7 +49,9 @@ begin
 			tmpRGB	<= 8'b0;
 	end
 	else begin
-		if (stepDrawingRequest == 1'b1 )   
+		if(stopwatchDrawingRequest == 1'b1 )
+				tmpRGB <= stopwatchRGB;  //first priority
+		else if (stepDrawingRequest == 1'b1 )   
 				tmpRGB <= stepRGB;  //second priority
 		else if(prizeDrawingRequest  == 1'b1 ) 
 				tmpRGB <= prizeRGB;

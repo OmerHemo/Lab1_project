@@ -6,7 +6,6 @@ module decimal_3_digits_counter
 	input  logic ena, 
 	input  logic ena_cnt, 
 	input  logic loadN, 
-	input  logic [11:0] Data_init,
 	output logic [11:0] Count_out,
 	output logic tc
    );
@@ -14,7 +13,8 @@ module decimal_3_digits_counter
 	logic tc_ones;
 	logic tc_tens;
 	logic tc_hundreds;
-	assign enable = ena & ena_cnt;	
+	assign enable = ena & ena_cnt;
+	logic [11:0] Data_init = 12'b100110011001;
 	
 	
 // units (Ones) 
@@ -49,8 +49,8 @@ module decimal_3_digits_counter
 		.ena(enable), 
 		.ena_cnt(tc_tens),
 		.loadN(loadN), 
-		.datain(Data_init[7:4]),
-		.count(Count_out[7:4]),
+		.datain(Data_init[11:8]),
+		.count(Count_out[11:8]),
 		.tc(tc_hundreds)	
 	);
 
