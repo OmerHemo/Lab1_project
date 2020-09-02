@@ -23,11 +23,14 @@ module	objects_mux_all	(
 		// prize 
 					input		logic	prizeDrawingRequest,
 					input		logic	[7:0] prizeRGB,		
-					
+		//debug
+					input		logic	debugDrawingRequest,
+					input		logic	[7:0] debugRGB,
 					
 		// background 
 					input		logic	[7:0] backGroundRGB, 
-
+		
+		
 					output	logic	[7:0] redOut, // full 24 bits color output
 					output	logic	[7:0] greenOut, 
 					output	logic	[7:0] blueOut 
@@ -57,6 +60,8 @@ begin
 				tmpRGB <= stepRGB;  
 		else if(prizeDrawingRequest  == 1'b1 ) 
 				tmpRGB <= prizeRGB;
+		else if(debugDrawingRequest  == 1'b1 ) 
+				tmpRGB <= debugRGB;
 		else
 			tmpRGB <= backGroundRGB ; 
 	end
