@@ -5,7 +5,7 @@
 // (c) Technion IIT, Department of Electrical Engineering 2019 
 
 
-module	debug_square	(	
+module	debug_rect	(	
 					input		logic	clk,
 					input		logic	resetN,
 					input 	logic	[10:0] pixelX,// current VGA pixel 

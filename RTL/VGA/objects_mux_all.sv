@@ -28,7 +28,8 @@ module	objects_mux_all	(
 					input		logic	[7:0] debugRGB,
 					
 		// background 
-					input		logic	[7:0] backGroundRGB, 
+					input		logic	[7:0] backGroundRGB,
+					
 		
 		
 					output	logic	[7:0] redOut, // full 24 bits color output
