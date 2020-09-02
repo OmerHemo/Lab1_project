@@ -6,17 +6,19 @@
 module	game_controller	(	
 			input		logic	clk,
 			input		logic	resetN,
-			input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
-			input	logic	drawing_request_Ball,
-			input	logic	drawing_request_1,
-			input	logic	drawing_request_box,
+			input		logic	startOfFrame,  // short pulse every start of frame 30Hz 
+			input		logic	drawing_request_bumpy,
+			input		logic	drawing_request_tile,
+			input		logic	drawing_request_prize,
 		
-			
-			output logic collision, // active in case of collision between two objects
+			output logic tile_collision, // active in case of collision between two objects
+			output logic prize_collision, // active in case of collision between two objects
 			output logic SingleHitPulse // critical code, generating A single pulse in a frame 
 );
 
-assign collision = (drawing_request_Ball &&  (drawing_request_1  == 1'b1 || drawing_request_box  == 1'b1) ) ; 
+
+assign tile_collision = (drawing_request_bumpy &&  (drawing_request_tile  == 1'b1)); 
+assign prize_collision = (drawing_request_bumpy &&  (drawing_request_prize  == 1'b1)); 
 
 logic flag ; // a semaphore to set the output only once per frame / regardless of the number of collisions 
 
@@ -32,7 +34,7 @@ begin
 			SingleHitPulse <= 1'b0 ; // default 
 			if(startOfFrame) 
 				flag = 1'b0 ; // reset for next time 
-			if ( collision  && (flag == 1'b0)) begin 
+			if ((tile_collision || prize_collision)  && (flag == 1'b0)) begin 
 				flag	<= 1'b1; // to enter only once 
 				SingleHitPulse <= 1'b1 ; 
 			end ; 
