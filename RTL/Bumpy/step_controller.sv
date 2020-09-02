@@ -5,6 +5,8 @@ module	step_controller	(
 					input 	logic	[10:0] pixelY,
 					input 	logic gate,
 					
+					input		logic [10:0] bumpy_x,
+					input		logic [10:0] bumpy_y,
 					output	logic [2:0] step_type,
 					output 	logic	[10:0] tileTopLeftX, 
 					output 	logic	[10:0] tileTopLeftY,
@@ -48,39 +50,42 @@ logic inside_grid;
 assign X_index_in_grid = ((pixelX) >> 6);
 assign y_index_in_grid = ((pixelY) >> 6);
 
+assign X_bumpy_index_in_grid = ((bumpy_x) >> 6);
+assign y_bumpy_index_in_grid = ((bumpy_y) >> 6);
+
 
 //======--------------------------------------------------------------------------------------------------------------=
 always_ff@(posedge clk)
 begin
 
 
-		case(X_index_in_grid)
+		case(X_bumpy_index_in_grid)
 			(NUM_OF_COLS-1): begin
 				area[2] <= WALL; // right
-				area[0] <= map0[y_index_in_grid][X_index_in_grid-1]; // left
+				area[0] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
 			end 
 			0: begin
-				area[2] <= map0[y_index_in_grid][X_index_in_grid+1]; // right
+				area[2] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
 				area[0] <= WALL; // left
 			end
 			default: begin
-				area[2] <= map0[y_index_in_grid][X_index_in_grid+1]; // right
-				area[0] <= map0[y_index_in_grid][X_index_in_grid-1]; // left
+				area[2] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid+1]; // right
+				area[0] <= map0[y_bumpy_index_in_grid][X_bumpy_index_in_grid-1]; // left
 			end
 		endcase
 		
-		case(y_index_in_grid)
+		case(y_bumpy_index_in_grid)
 			(NUM_OF_ROWS-1): begin
-				area[1] <= map0[y_index_in_grid-1][X_index_in_grid]; // up
+				area[1] <= map0[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
 				area[3] <= DEATH; // down
 			end 
 			0: begin
 				area[1] <= WALL; // up
-				area[3] <= map0[y_index_in_grid+1][X_index_in_grid]; // down
+				area[3] <= map0[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
 			end
 			default: begin
-				area[1] <= map0[y_index_in_grid-1][X_index_in_grid]; // up
-				area[3] <= map0[y_index_in_grid+1][X_index_in_grid]; // down
+				area[1] <= map0[y_bumpy_index_in_grid-1][X_bumpy_index_in_grid]; // up
+				area[3] <= map0[y_bumpy_index_in_grid+1][X_bumpy_index_in_grid]; // down
 			end
 		endcase
 

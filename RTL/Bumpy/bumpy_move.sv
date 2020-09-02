@@ -43,9 +43,12 @@ begin
 		speed_y	<= 0;
 	else begin
 		case(state)
-			Sreset,Sdie: begin
+			Sreset: begin
 				speed_y	<= 0;
 				debug_led <= 1'b0;
+			end
+			Sdie: begin
+				debug_led <= 1'b1;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
 				if(speed_y == 0)
@@ -57,7 +60,7 @@ begin
 			end
 			Sdown: begin
 				speed_y <= SPEED;
-				debug_led <= 1'b1;
+				debug_led <= 1'b0;
 			end
 			Sup: begin
 				speed_y <= -SPEED;
