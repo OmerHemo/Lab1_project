@@ -26,12 +26,14 @@ const int	y_FRAME_SIZE	=	Tile_size * FIXED_POINT_MULTIPLIER;
 const int center_topleft_x = x_FRAME_SIZE/2 - bumpy_size/2;
 const int center_topleft_y = y_FRAME_SIZE/2 - bumpy_size/2;
 
+const int SPEED = 20;
+
 // local parameters 
 int pos_x, pos_y,curr_tile_x,curr_tile_y; 
 int speed_x,speed_y;
 
-assign curr_tile_x = ((pos_x >> 6) << 6)*x_FRAME_SIZE;
-assign curr_tile_y = ((pos_x >> 6) << 6)*y_FRAME_SIZE;
+assign curr_tile_x = ((pos_x / x_FRAME_SIZE) * x_FRAME_SIZE);
+assign curr_tile_y = ((pos_y / y_FRAME_SIZE) * y_FRAME_SIZE);
 
 // y axis speed
 always_ff@(posedge clk or negedge resetN)
@@ -44,20 +46,22 @@ begin
 				speed_y	<= 0;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
-				if((pos_y > (curr_tile_y + y_FRAME_SIZE - bumpy_size - 10)) && (speed_y >0))
-					speed_y <= -5;
-				if( (pos_y < (curr_tile_y + 10)) && (speed_y <0))
-					speed_y <= 5;
+				if(speed_y == 0)
+					speed_y <= SPEED;
+				if((pos_y > (curr_tile_y + y_FRAME_SIZE - bumpy_size - 10)) && (speed_y >=0))
+					speed_y <= -SPEED;
+				if( (pos_y < (curr_tile_y + 10)) && (speed_y <=0))
+					speed_y <= SPEED;
 			end
 			Sdown:
-				speed_y <= 5;
+				speed_y <= SPEED;
 			Sup:
-				speed_y <= -5;
+				speed_y <= -SPEED;
 			Sbounce_from_top: begin
-				if((pos_y < curr_tile_y) && (speed_y < 0))
-					speed_y <= 5;
+				if((pos_y < curr_tile_y) && (speed_y <= 0))
+					speed_y <= SPEED;
 				else
-					speed_y <= -5;
+					speed_y <= -SPEED;
 			end
 			
 		endcase
@@ -79,20 +83,20 @@ begin
 			Sreset,Sidle,Sdown,Sup,Sbounce_from_top,Sdie:
 				speed_x	<= 0;
 			Sleft:
-				speed_x <= -5;
+				speed_x <= -SPEED;
 			Sright:
-				speed_x <= 5;
+				speed_x <= SPEED;
 			Sbounce_from_left: begin
-				if((pos_x < (curr_tile_x + 10)) && (speed_x < 0))
-					speed_x <= 5;
+				if((pos_x < (curr_tile_x + 10)) && (speed_x <= 0))
+					speed_x <= SPEED;
 				else
-					speed_x <= -5;
+					speed_x <= -SPEED;
 			end
 			Sbounce_from_right:begin
-				if((pos_x > (curr_tile_x + y_FRAME_SIZE - bumpy_size - 10)) && (speed_x > 0))
-					speed_x <= -5;
+				if((pos_x > (curr_tile_x + y_FRAME_SIZE - bumpy_size - 10)) && (speed_x >= 0))
+					speed_x <= -SPEED;
 				else
-					speed_x <= 5;
+					speed_x <= SPEED;
 			end
 		endcase
 		
