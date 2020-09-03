@@ -78,7 +78,7 @@ always_comb // Update next state and outputs
 			
 
 			Sleft,Sright,Sdown: begin
-						if((prState == Sdown) && (border_collision)) begin
+						if((prState == Sdown) && (HitEdgeCode==BOTTOM) && (border_collision)) begin
 							nxtState = Sdie;
 						end
 						else if((prState == Sright) && (border_collision)) begin
