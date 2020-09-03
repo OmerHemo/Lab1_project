@@ -35,10 +35,14 @@ always @(posedge clk or negedge resetN)
 	   
    if (!resetN) begin  // Asynchronic reset
 		prState <= Sreset;
+		led_debug <= 0;
 	end
-   else		// Synchronic logic FSM
+   else begin	// Synchronic logic FSM
 		prState <= nxtState;
-	end // always
+		if(bumpy_collision)
+			led_debug <= 1;
+	end	
+end // always
 	
 	
 always_comb // Update next state and outputs
@@ -49,7 +53,7 @@ always_comb // Update next state and outputs
 		
 			Sreset: begin
 				if (up_key || left_key || right_key || down_key) begin
-					nxtState = Sidle; // replace to Sdown
+					nxtState = Sdown; // replace to Sdown
 				end
 				else begin
 					nxtState = Sreset;
