@@ -31,7 +31,7 @@ const int center_topleft_y = tile_size/2 - bumpy_size/2; // Daniel added
 
 const int SPEED_X = 60;
 const int SPEED_Y = 2*SPEED_X;
-const int JUMP_LIMIT = tile_size + step_size;
+const int JUMP_LIMIT = tile_size - step_size;
 const int Border_OFFSET = 100;
 
 // local parameters 
@@ -77,7 +77,7 @@ begin
 				else if((bumpy_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
 					speed_y <= -SPEED_Y;
 				end
-				else if((pos_y < (jump_start_y + - JUMP_LIMIT)) && (speed_y <=0)) begin
+				else if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0)) begin
 					speed_y <= SPEED_Y;
 				end
 			end
