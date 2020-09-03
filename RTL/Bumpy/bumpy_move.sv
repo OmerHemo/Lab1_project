@@ -16,6 +16,7 @@ module	bumpy_move(
 
 const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts
 const int FIXED_POINT_MULTIPLIER	=	64;
+const int tile_size = 64*FIXED_POINT_MULTIPLIER;
 const int bumpy_size = 16*FIXED_POINT_MULTIPLIER;
 
 // FIXED_POINT_MULTIPLIER is used to work with integers in high resolution 
@@ -27,9 +28,9 @@ const int	y_FRAME_SIZE	=	479 * FIXED_POINT_MULTIPLIER;
 const int center_topleft_x = bumpy_size/2;
 const int center_topleft_y = bumpy_size/2;
 
-const int SPEED = 40;
-const int JUMP_LIMIT = 200;
-const int Border_OFFSET = 40;
+const int SPEED = 60;
+const int JUMP_LIMIT = tile_size;
+const int Border_OFFSET = 100;
 
 // local parameters 
 int pos_x, pos_y; 
@@ -89,12 +90,11 @@ begin
 				else
 					speed_y <= -SPEED;
 			end
-			Sdown_from_left:begin
+			Sdown_from_left,Sdown_from_right:begin
 				if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0))
 					speed_y <= SPEED;
 			end
 		endcase
-		
 	end
 end
 
@@ -126,6 +126,14 @@ begin
 					speed_x <= -SPEED;
 				else
 					speed_x <= SPEED;
+			end
+			Sdown_from_left:begin
+				if((pos_x < jump_start_x - JUMP_LIMIT) && (speed_x <= 0))
+					speed_x <= 0;
+			end
+			Sdown_from_right:begin
+				if((pos_x > jump_start_x + JUMP_LIMIT) && (speed_x >= 0))
+					speed_x <= 0;
 			end
 		endcase
 		
