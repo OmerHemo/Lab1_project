@@ -18,7 +18,7 @@ module	back_ground_drawSquare	(
 
 const int	xFrameSize	=	639;
 const int	yFrameSize	=	479;
-const int	bracketOffset =	30;
+const int	bracketOffset =	0;
 
 logic [2:0] redBits;
 logic [2:0] greenBits;

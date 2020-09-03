@@ -29,9 +29,10 @@ const int	y_FRAME_SIZE	=	479 * FIXED_POINT_MULTIPLIER;
 const int center_topleft_x = tile_size/2 - bumpy_size/2; // Daniel added
 const int center_topleft_y = tile_size/2 - bumpy_size/2; // Daniel added
 
-const int SPEED_X = 60;
-const int SPEED_Y = 2*SPEED_X;
-const int JUMP_LIMIT = tile_size - step_size;
+const int SPEED_X = 80;
+const int SPEED_Y = 100;
+const int JUMP_LIMIT_Y = tile_size - 3*step_size;
+const int JUMP_LIMIT_X = tile_size;
 const int Border_OFFSET = 100;
 
 // local parameters 
@@ -77,7 +78,7 @@ begin
 				else if((bumpy_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
 					speed_y <= -SPEED_Y;
 				end
-				else if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0)) begin
+				else if((pos_y < (jump_start_y - JUMP_LIMIT_Y)) && (speed_y <=0)) begin
 					speed_y <= SPEED_Y;
 				end
 			end
@@ -95,7 +96,7 @@ begin
 					speed_y <= -SPEED_Y;
 			end
 			Sdown_from_left,Sdown_from_right:begin
-				if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0))
+				if((pos_y < (jump_start_y - JUMP_LIMIT_Y)) && (speed_y <=0))
 					speed_y <= SPEED_Y;
 			end
 		endcase
@@ -115,10 +116,18 @@ begin
 		case(state)
 			Sreset,Sidle,Sdown,Sup,Sbounce_from_top,Sdie:
 				speed_x	<= 0;
-			Sleft:
-				speed_x <= -SPEED_X;
-			Sright:
-				speed_x <= SPEED_X;
+			Sleft: begin
+				if((pos_x < jump_start_x - JUMP_LIMIT_X) && (speed_x <= 0))
+					speed_x <= 0;
+				else
+					speed_x <= -SPEED_X;
+			end
+			Sright: begin
+				if((pos_x > jump_start_x + JUMP_LIMIT_X) && (speed_x >= 0))
+					speed_x <= 0;
+				else
+					speed_x <= SPEED_X;
+			end
 			Sbounce_from_left: begin
 				if((pos_x < Border_OFFSET) && (speed_x <= 0))
 					speed_x <= SPEED_X;
@@ -132,11 +141,11 @@ begin
 					speed_x <= SPEED_X;
 			end
 			Sdown_from_left:begin
-				if((pos_x < jump_start_x - JUMP_LIMIT) && (speed_x <= 0))
+				if((pos_x < jump_start_x - JUMP_LIMIT_X) && (speed_x <= 0))
 					speed_x <= 0;
 			end
 			Sdown_from_right:begin
-				if((pos_x > jump_start_x + JUMP_LIMIT) && (speed_x >= 0))
+				if((pos_x > jump_start_x + JUMP_LIMIT_X) && (speed_x >= 0))
 					speed_x <= 0;
 			end
 		endcase
