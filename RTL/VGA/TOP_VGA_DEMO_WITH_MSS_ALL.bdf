@@ -2810,7 +2810,7 @@ agreement for further details.
 (symbol
 	(rect 392 1472 632 1648)
 	(text "step_controller" (rect 5 0 76 12)(font "Arial" ))
-	(text "inst29" (rect 8 160 36 177)(font "Intel Clear" ))
+	(text "inst20" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -2911,12 +2911,12 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 160))
 	)
-	(annotation_block (parameter)(rect 728 1480 936 1576))
+	(annotation_block (parameter)(rect 744 1472 952 1568))
 )
 (symbol
 	(rect 520 1288 760 1464)
 	(text "prize_controller" (rect 5 0 78 12)(font "Arial" ))
-	(text "inst31" (rect 8 160 36 177)(font "Intel Clear" ))
+	(text "inst21" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
