@@ -54,6 +54,12 @@ begin
 			jump_start_y <= pos_y;
 			jump_start_x <= pos_x;
 		end
+		else if(border_collision) begin
+			if(HitEdgeCode == LEFT)
+				jump_start_x <= (pos_x - (JUMP_LIMIT_X/2) - (bumpy_size/2));
+			else if(HitEdgeCode == RIGHT)
+				jump_start_x <= (pos_x + (JUMP_LIMIT_X/2) + (bumpy_size/2));
+		end
 	end
 end
 
