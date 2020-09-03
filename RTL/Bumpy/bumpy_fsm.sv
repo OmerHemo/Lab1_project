@@ -12,7 +12,7 @@ module bumpy_fsm (
    output logic led_debug
 	);                            
 
-enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top} prState, nxtState;
+enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} prState, nxtState;
  	
 const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts	
 
@@ -118,13 +118,13 @@ always_comb // Update next state and outputs
 								if(area[LEFT_AREA] == REGU)
 									nxtState = Sright;
 								else if(area[LEFT_AREA] == FREE)
-									nxtState = Sright_down;
+									nxtState = Sdown_from_left;
 							end
 							else if(right_key) begin
 								if(area[RIGHT_AREA] == REGU)
 									nxtState = Sright;
 								else if(area[RIGHT_AREA] == FREE)
-									nxtState = Sright_down;
+									nxtState = Sdown_from_right;
 							end
 							else
 								nxtState = Sidle;
