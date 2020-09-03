@@ -18,6 +18,7 @@ const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //or
 const int FIXED_POINT_MULTIPLIER	=	64;
 const int tile_size = 64*FIXED_POINT_MULTIPLIER;
 const int bumpy_size = 16*FIXED_POINT_MULTIPLIER;
+const int step_size = 7*FIXED_POINT_MULTIPLIER;
 
 // FIXED_POINT_MULTIPLIER is used to work with integers in high resolution 
 // we do all calulations with topLeftX_FixedPoint  so we get a resulytion inthe calcuatuions of 1/64 pixel 
@@ -25,11 +26,12 @@ const int bumpy_size = 16*FIXED_POINT_MULTIPLIER;
 const int	x_FRAME_SIZE	=	639 * FIXED_POINT_MULTIPLIER; // note it must be 2^n 
 const int	y_FRAME_SIZE	=	479 * FIXED_POINT_MULTIPLIER;
 
-const int center_topleft_x = bumpy_size/2;
-const int center_topleft_y = bumpy_size/2;
+const int center_topleft_x = tile_size/2 - bumpy_size/2; // Daniel added
+const int center_topleft_y = tile_size/2 - bumpy_size/2; // Daniel added
 
-const int SPEED = 60;
-const int JUMP_LIMIT = tile_size;
+const int SPEED_X = 60;
+const int SPEED_Y = 2*SPEED_X;
+const int JUMP_LIMIT = tile_size + step_size;
 const int Border_OFFSET = 100;
 
 // local parameters 
@@ -69,30 +71,32 @@ begin
 				debug_led <= 1'b1;
 			end
 			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
-				if(speed_y == 0)
-					speed_y <= SPEED;
-				if((bumpy_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
-					speed_y <= -SPEED;
+				if(speed_y == 0) begin
+					speed_y <= SPEED_Y;
 				end
-				if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0))
-					speed_y <= SPEED;
+				else if((bumpy_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
+					speed_y <= -SPEED_Y;
+				end
+				else if((pos_y < (jump_start_y + - JUMP_LIMIT)) && (speed_y <=0)) begin
+					speed_y <= SPEED_Y;
+				end
 			end
 			Sdown: begin
-				speed_y <= SPEED;
+				speed_y <= SPEED_Y;
 				debug_led <= 1'b0;
 			end
 			Sup: begin
-				speed_y <= -SPEED;
+				speed_y <= -SPEED_Y;
 			end
 			Sbounce_from_top: begin
 				if((bumpy_collision) && (HitEdgeCode == TOP) && (speed_y <= 0))
-					speed_y <= SPEED;
+					speed_y <= SPEED_Y;
 				else
-					speed_y <= -SPEED;
+					speed_y <= -SPEED_Y;
 			end
 			Sdown_from_left,Sdown_from_right:begin
 				if((pos_y < (jump_start_y - JUMP_LIMIT)) && (speed_y <=0))
-					speed_y <= SPEED;
+					speed_y <= SPEED_Y;
 			end
 		endcase
 	end
@@ -112,20 +116,20 @@ begin
 			Sreset,Sidle,Sdown,Sup,Sbounce_from_top,Sdie:
 				speed_x	<= 0;
 			Sleft:
-				speed_x <= -SPEED;
+				speed_x <= -SPEED_X;
 			Sright:
-				speed_x <= SPEED;
+				speed_x <= SPEED_X;
 			Sbounce_from_left: begin
 				if((pos_x < Border_OFFSET) && (speed_x <= 0))
-					speed_x <= SPEED;
+					speed_x <= SPEED_X;
 				else
-					speed_x <= -SPEED;
+					speed_x <= -SPEED_X;
 			end
 			Sbounce_from_right:begin
 				if(( (pos_x +  bumpy_size) > (x_FRAME_SIZE  - Border_OFFSET) ) && (speed_x >= 0))
-					speed_x <= -SPEED;
+					speed_x <= -SPEED_X;
 				else
-					speed_x <= SPEED;
+					speed_x <= SPEED_X;
 			end
 			Sdown_from_left:begin
 				if((pos_x < jump_start_x - JUMP_LIMIT) && (speed_x <= 0))
