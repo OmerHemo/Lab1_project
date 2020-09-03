@@ -11,7 +11,8 @@ module prize_counter(
 	output logic [10:0] offsetX,// offset inside bracket from top left position 
 	output logic [10:0] offsetY,
 	output logic drawingRequest, // indicates pixel inside the bracket
-	output logic [7:0] RGBout //optional color output for mux 
+	output logic [7:0] RGBout, //optional color output for mux 
+	output logic debug_led
    );
 
 
@@ -19,12 +20,15 @@ always_ff @(posedge prize_collision or negedge resetN) begin
 	if(!resetN) begin
 		prize_counter <= 4'b0000;
 		open_gate <= 1'b0;
+		debug_led <= 1'b0;
 	end
    else if(enable) begin
 		if(prize_counter == 4'h9)
 			open_gate <= 1'b1;
-		else
-			prize_counter<=prize_counter+1;
+		else begin
+			prize_counter <= prize_counter+1;
+			debug_led <= 1'b1;
+		end
 	end
 end	
 
