@@ -43,7 +43,6 @@ logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map0 = {
 	{FREE,REGU,REGU,REGU,FREE,REGU,FREE,REGU,FREE,REGU}
 };
 
-
 logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap;
 
 int X_index_in_grid, y_index_in_grid;

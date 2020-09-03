@@ -1,5 +1,5 @@
 
-module stopwatch_bitmap	(	
+module digit_bitmap	(	
 					input		logic	clk,
 					input		logic	resetN,
 					input 	logic	[10:0] offsetX,// offset from top left  position 
