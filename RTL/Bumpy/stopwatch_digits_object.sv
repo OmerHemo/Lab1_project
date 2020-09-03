@@ -80,24 +80,28 @@ begin
 			drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - hundredsTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - hundredsTopLeftY);
+			digit <= hundreds_digit;
 		end 
 		else if(insideBracketTens) begin
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - tensTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - tensTopLeftY);
+			digit <= tens_digit;
 		end
 		else if(insideBracketOnes) begin
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - onesTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - onesTopLeftY);
+			digit <= ones_digit;
 		end
 		else begin  
 			RGBout <= TRANSPARENT_ENCODING ; // so it will not be displayed 
 			drawingRequest <= 1'b0 ;// transparent color 
 			offsetX	<= 0; //no offset
 			offsetY	<= 0; //no offset
+			digit <= 0;
 		end 
 	end
 end 
