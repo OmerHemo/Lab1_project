@@ -30,8 +30,8 @@ const int	y_FRAME_SIZE	=	479 * FIXED_POINT_MULTIPLIER;
 const int center_topleft_x = tile_size/2 - bumpy_size/2; // Daniel added
 const int center_topleft_y = tile_size/2 - bumpy_size/2; // Daniel added
 
-const int SPEED_X = 80;
-const int SPEED_Y = 100;
+const int SPEED_X = 120;
+const int SPEED_Y = 150;
 const int JUMP_LIMIT_Y = tile_size - 3*step_size;
 const int JUMP_LIMIT_X = tile_size;
 const int Border_OFFSET = 100;
