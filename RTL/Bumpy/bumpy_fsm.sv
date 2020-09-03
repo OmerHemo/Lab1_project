@@ -16,6 +16,8 @@ enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_l
  	
 const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts	
 
+const logic [3:0] LEFT_AREA = 4'd0, UP_AREA = 4'd1, RIGHT_AREA = 4'd2, DOWN_AREA = 4'd3;
+
 const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, DEATH=3'b011, WALL=3'b100 ; //orientation consts
 
 
@@ -112,10 +114,18 @@ always_comb // Update next state and outputs
 						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) 
 								nxtState = Sup;
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) 
-								nxtState = Sright;
+							else if(left_key) begin
+								if(area[LEFT_AREA] == REGU)
+									nxtState = Sright;
+								else if(area[LEFT_AREA] == FREE)
+									nxtState = Sright_down;
+							end
+							else if(right_key) begin
+								if(area[RIGHT_AREA] == REGU)
+									nxtState = Sright;
+								else if(area[RIGHT_AREA] == FREE)
+									nxtState = Sright_down;
+							end
 							else
 								nxtState = Sidle;
 						end
