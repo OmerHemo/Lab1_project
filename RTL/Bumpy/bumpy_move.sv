@@ -4,7 +4,8 @@ module	bumpy_move(
 	input	logic	resetN,
 	input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
 	input enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} state,
-	input logic bumpy_collision,
+	input logic step_collision,
+	input logic free_collision,
 	input	logic	[3:0] HitEdgeCode,
 	input logic [7:0] bumpy_size_in,
 
@@ -48,7 +49,7 @@ begin
 		jump_start_x <= 0;
 	end
 	else begin
-		if((bumpy_collision) && (HitEdgeCode == BOTTOM)) begin
+		if(((step_collision) && (HitEdgeCode == BOTTOM)) || ( (state==Sup) && (free_collision) && (HitEdgeCode == BOTTOM) ) ) begin
 			jump_start_y <= pos_y;
 			jump_start_x <= pos_x;
 		end
@@ -71,11 +72,8 @@ begin
 			Sdie: begin
 				debug_led <= 1'b1;
 			end
-			Sidle,Sleft,Sright,Sbounce_from_left,Sbounce_from_right: begin
-				if(speed_y == 0) begin
-					speed_y <= SPEED_Y;
-				end
-				else if((bumpy_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
+			Sidle,Sleft,Sright/*,Sbounce_from_left,Sbounce_from_right*/: begin
+				if((step_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
 					speed_y <= -SPEED_Y;
 				end
 				else if((pos_y < (jump_start_y - JUMP_LIMIT_Y)) && (speed_y <=0)) begin
@@ -88,16 +86,6 @@ begin
 			end
 			Sup: begin
 				speed_y <= -SPEED_Y;
-			end
-			Sbounce_from_top: begin
-				if((bumpy_collision) && (HitEdgeCode == TOP) && (speed_y <= 0))
-					speed_y <= SPEED_Y;
-				else
-					speed_y <= -SPEED_Y;
-			end
-			Sdown_from_left,Sdown_from_right:begin
-				if((pos_y < (jump_start_y - JUMP_LIMIT_Y)) && (speed_y <=0))
-					speed_y <= SPEED_Y;
 			end
 		endcase
 	end
@@ -114,7 +102,7 @@ begin
 	else begin
 	
 		case(state)
-			Sreset,Sidle,Sdown,Sup,Sbounce_from_top,Sdie:
+			Sreset,Sidle,Sdown,Sup,Sdie:
 				speed_x	<= 0;
 			Sleft: begin
 				if((pos_x < jump_start_x - JUMP_LIMIT_X) && (speed_x <= 0))
@@ -127,26 +115,6 @@ begin
 					speed_x <= 0;
 				else
 					speed_x <= SPEED_X;
-			end
-			Sbounce_from_left: begin
-				if((pos_x < Border_OFFSET) && (speed_x <= 0))
-					speed_x <= SPEED_X;
-				else
-					speed_x <= -SPEED_X;
-			end
-			Sbounce_from_right:begin
-				if(( (pos_x +  bumpy_size) > (x_FRAME_SIZE  - Border_OFFSET) ) && (speed_x >= 0))
-					speed_x <= -SPEED_X;
-				else
-					speed_x <= SPEED_X;
-			end
-			Sdown_from_left:begin
-				if((pos_x < jump_start_x - JUMP_LIMIT_X) && (speed_x <= 0))
-					speed_x <= 0;
-			end
-			Sdown_from_right:begin
-				if((pos_x > jump_start_x + JUMP_LIMIT_X) && (speed_x >= 0))
-					speed_x <= 0;
 			end
 		endcase
 		

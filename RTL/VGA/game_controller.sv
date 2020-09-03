@@ -20,7 +20,7 @@ module	game_controller	(
 			output logic gate_collision, // active in case of collision between two objects
 			output logic step_free_collision,
 			output logic border_collision,
-			output logic SingleHitPulse // critical code, generating A single pulse in a frame
+			output logic SingleHitPulse_regular_step // critical code, generating A single pulse in a frame
 			
 );
 
@@ -38,16 +38,16 @@ begin
 	if(!resetN)
 	begin 
 		flag	<= 1'b0;
-		SingleHitPulse <= 1'b0 ; 
+		SingleHitPulse_regular_step <= 1'b0 ; 
 	end 
 	else begin 
 
-			SingleHitPulse <= 1'b0 ; // default 
+			SingleHitPulse_regular_step <= 1'b0 ; // default 
 			if(startOfFrame) 
 				flag = 1'b0 ; // reset for next time 
-			if ((step_regular_collision || prize_collision || gate_collision || step_free_collision)  && (flag == 1'b0)) begin 
+			if ((step_regular_collision)  && (flag == 1'b0)) begin 
 				flag	<= 1'b1; // to enter only once 
-				SingleHitPulse <= 1'b1 ; 
+				SingleHitPulse_regular_step <= 1'b1 ; 
 			end ; 
 	end 
 end
