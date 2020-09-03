@@ -77,7 +77,7 @@ always_comb // Update next state and outputs
 			end 
 			
 
-			Sleft,Sright,Sdown,Sdown_from_right,Sdown_from_left: begin
+			Sleft,Sright,Sdown: begin
 						if((prState == Sdown) && (border_collision)) begin
 							nxtState = Sdie;
 						end
@@ -92,15 +92,9 @@ always_comb // Update next state and outputs
 									nxtState = Sup;
 							end
 							else if(left_key) begin
-								if(area[LEFT_AREA]==FREE)
-									nxtState = Sdown_from_left;
-								else
 									nxtState = Sleft;
 							end
 							else if(right_key) begin 
-								if(area[RIGHT_AREA]==FREE)
-									nxtState = Sdown_from_right;
-								else
 									nxtState = Sright;
 							end
 							else
@@ -113,10 +107,6 @@ always_comb // Update next state and outputs
 								nxtState = Sright;
 							else if(prState == Sdown)
 								nxtState = Sdown;
-							else if(prState == Sdown_from_right)
-								nxtState = Sdown_from_right;
-							else if(prState == Sdown_from_left)
-								nxtState = Sdown_from_left;
 						end
 				end
 						
@@ -127,15 +117,9 @@ always_comb // Update next state and outputs
 				end
 				else if((free_collision) && (HitEdgeCode==BOTTOM)) begin
 							if(left_key) begin
-								if(area[LEFT_AREA]==FREE)
-									nxtState = Sdown_from_left;
-								else
 									nxtState = Sleft;
 							end
 							else if(right_key) begin 
-								if(area[RIGHT_AREA]==FREE)
-									nxtState = Sdown_from_right;
-								else
 									nxtState = Sright;
 							end
 							else
