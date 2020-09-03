@@ -34,12 +34,14 @@ module	objects_mux_all	(
 		//win
 					input		logic	winDrawingRequest,
 					input		logic	[7:0] winRGB,
+		
+		//prize counter
+					input		logic	prizeCounterDrawingRequest,
+					input		logic	[7:0] prizeCounterRGB,
 					
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
-		
-		
 					output	logic	[7:0] redOut, // full 24 bits color output
 					output	logic	[7:0] greenOut, 
 					output	logic	[7:0] blueOut 
@@ -65,6 +67,8 @@ begin
 			tmpRGB <= winRGB;
 		else if(bumpyDrawingRequest == 1'b1 )
 			tmpRGB <= bumpyRGB;
+		else if(prizeCounterDrawingRequest == 1'b1 )
+				tmpRGB <= prizeCounterRGB;
 		else if(stopwatchDrawingRequest == 1'b1 )
 				tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
