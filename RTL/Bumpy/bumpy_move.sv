@@ -6,6 +6,7 @@ module	bumpy_move(
 	input enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} state,
 	input logic step_collision,
 	input logic free_collision,
+	input logic border_collision,
 	input	logic	[3:0] HitEdgeCode,
 	input logic [7:0] bumpy_size_in,
 
