@@ -4,6 +4,7 @@ module bumpy_fsm (
 	input logic resetN,
 	input	logic	up_direction,left_direction,right_direction,down_direction,
 	input logic bumpy_collision,
+	input logic free_collision,
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	
@@ -70,136 +71,65 @@ always_comb // Update next state and outputs
 					nxtState = Sidle;
 			end 
 						
-			Sleft: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key) begin
-								if(area[0]==WALL)
-									nxtState = Sbounce_from_left;
-								else 
-									nxtState = Sleft;
-							end
-							else if(right_key) 
-								nxtState = Sright;
-							else
-								nxtState = Sidle;
+			Sleft,Sright,Sdown,Sup,Sbounce_from_left,Sbounce_from_right,Sbounce_from_top,Sdown_from_right,Sdown_from_left: begin
+						if(prState == Sdown) begin
+							if(area[DOWN_AREA]==DEATH)
+								nxtState = Sdie;
 						end
-						else
-							nxtState = Sleft;
-				end
-						
-			Sright: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) begin
-								if(area[2]==WALL)
-									nxtState = Sbounce_from_right;
-								else 
-									nxtState = Sright;
-							end
-							else
-								nxtState = Sidle;
-						end
-						else
-							nxtState = Sright;
-				end 
-				
-			Sdown: begin 
-						if(area[3]==DEATH)
-							nxtState = Sdie;
-						else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key) begin
-								if(area[LEFT_AREA] == REGU)
-									nxtState = Sright;
-								else if(area[LEFT_AREA] == FREE)
-									nxtState = Sdown_from_left;
-							end
-							else if(right_key) begin
-								if(area[RIGHT_AREA] == REGU)
-									nxtState = Sright;
-								else if(area[RIGHT_AREA] == FREE)
-									nxtState = Sdown_from_right;
-							end
-							else
-								nxtState = Sidle;
-						end
-						else
-							nxtState = Sdown;
-				end 
-					
-			Sup: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) begin
-								if(area[1]==WALL)
+						else if(((bumpy_collision) && (HitEdgeCode==BOTTOM)) && ((prState != Sup) || ((prState == Sup) && free_collision))) begin
+							if (up_key) begin 
+								if(area[UP_AREA]==WALL || area[UP_AREA]==REGU)
 									nxtState = Sbounce_from_top;
 								else
 									nxtState = Sup;
 							end
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) 
-								nxtState = Sright;
+							else if(left_key) begin
+								if(area[LEFT_AREA]==WALL)
+									nxtState = Sbounce_from_left;
+								else if(area[LEFT_AREA]==FREE)
+									nxtState = Sdown_from_left;
+								else
+									nxtState = Sleft;
+							end
+							else if(right_key) begin 
+								if(area[RIGHT_AREA]==WALL)
+									nxtState = Sbounce_from_right;
+								else if(area[RIGHT_AREA]==FREE)
+									nxtState = Sdown_from_right;
+								else
+									nxtState = Sright;
+							end
 							else
 								nxtState = Sidle;
 						end
-						else
-							nxtState = Sup;
-				end 
+						else begin
+							if(prState == Sleft)
+								nxtState = Sleft;
+							else if(prState == Sright)
+								nxtState = Sright;
+							else if(prState == Sdown)
+								nxtState = Sdown;
+							else if(prState == Sbounce_from_left)
+								nxtState = Sbounce_from_left;
+							else if(prState == Sbounce_from_right)
+								nxtState = Sbounce_from_right;
+							else if(prState == Sbounce_from_top)
+								nxtState = Sbounce_from_top;
+							else if(prState == Sdown_from_right)
+								nxtState = Sdown_from_right;
+							else if(prState == Sdown_from_left)
+								nxtState = Sdown_from_left;
+							else if(prState == Sup)
+								nxtState = Sup;
+
+						end
+				end
+						
 						
 			Sdie: begin
 					// sub in life counter 
 				end 
 				
-			Sbounce_from_left: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) 
-								nxtState = Sright;
-							else
-								nxtState = Sidle;
-						end
-						else
-							nxtState = Sbounce_from_left;
-				end 
-				
-			Sbounce_from_right: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) 
-								nxtState = Sright;
-							else
-								nxtState = Sidle;
-						end
-						else
-							nxtState = Sbounce_from_right;
-				end 
-				
-			Sbounce_from_top: begin
-						if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
-							if (up_key) 
-								nxtState = Sup;
-							else if(left_key)
-								nxtState = Sleft;
-							else if(right_key) 
-								nxtState = Sright;
-							else
-								nxtState = Sidle;
-						end
-						else
-							nxtState = Sbounce_from_top;
-				end 
 						
 			endcase
 	end 
