@@ -26,7 +26,7 @@ module	game_controller	(
 assign tile_collision = (drawing_request_bumpy &&  (drawing_request_tile  == 1'b1)); 
 assign prize_collision = (drawing_request_bumpy &&  (drawing_request_prize  == 1'b1)); 
 assign gate_collision = (drawing_request_bumpy &&  (drawing_request_gate  == 1'b1));
-assign step_free_collision (drawing_request_bumpy &&  (drawing_request_step_free  == 1'b1));
+assign step_free_collision = (drawing_request_bumpy &&  (drawing_request_step_free  == 1'b1));
 
 logic flag ; // a semaphore to set the output only once per frame / regardless of the number of collisions 
 

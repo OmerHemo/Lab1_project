@@ -77,6 +77,7 @@ always_comb // Update next state and outputs
 								nxtState = Sdie;
 						end
 						else if(((bumpy_collision) && (HitEdgeCode==BOTTOM)) && ((prState != Sup) || ((prState == Sup) && free_collision))) begin
+						//else if((bumpy_collision) && (HitEdgeCode==BOTTOM)) begin
 							if (up_key) begin 
 								if(area[UP_AREA]==WALL || area[UP_AREA]==REGU)
 									nxtState = Sbounce_from_top;
