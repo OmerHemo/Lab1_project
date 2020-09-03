@@ -3188,7 +3188,7 @@ agreement for further details.
 (symbol
 	(rect 728 1592 944 1800)
 	(text "bumpy_fsm" (rect 5 0 65 12)(font "Arial" ))
-	(text "inst18" (rect 8 192 36 209)(font "Intel Clear" ))
+	(text "inst21" (rect 8 192 36 209)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)

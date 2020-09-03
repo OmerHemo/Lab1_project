@@ -76,9 +76,8 @@ always_comb // Update next state and outputs
 			end 
 						
 			Sleft,Sright,Sdown,Sup,Sbounce_from_left,Sbounce_from_right,Sbounce_from_top,Sdown_from_right,Sdown_from_left: begin
-						if(prState == Sdown) begin
-							if(area[DOWN_AREA]==DEATH)
-								nxtState = Sdie;
+						if((prState == Sdown) && (area[DOWN_AREA]==DEATH)) begin
+							nxtState = Sdie;
 						end
 						else if(((bumpy_collision) && (HitEdgeCode==BOTTOM)) && ((prState != Sup) || ((prState == Sup) && free_collision))) begin
 							if (up_key) begin 
