@@ -81,10 +81,10 @@ always_comb // Update next state and outputs
 						if((prState == Sdown) && (HitEdgeCode==BOTTOM) && (border_collision)) begin
 							nxtState = Sdie;
 						end
-						else if((prState == Sright) && (border_collision)) begin
+						else if((prState == Sright) && (HitEdgeCode==RIGHT) && (border_collision)) begin
 							nxtState = Sleft;
 						end
-						else if((prState == Sleft) && (border_collision)) begin
+						else if((prState == Sleft) && (HitEdgeCode==LEFT) && (border_collision)) begin
 							nxtState = Sright;
 						end
 						else if((step_collision) && (HitEdgeCode==BOTTOM)) begin
