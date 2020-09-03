@@ -31,6 +31,10 @@ module	objects_mux_all	(
 					input		logic	gateDrawingRequest,
 					input		logic	[7:0] gateRGB,
 					
+		//win
+					input		logic	winDrawingRequest,
+					input		logic	[7:0] winRGB,
+					
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
@@ -57,7 +61,9 @@ begin
 			tmpRGB	<= 8'b0;
 	end
 	else begin
-		if(bumpyDrawingRequest == 1'b1 )
+		if(winDrawingRequest == 1'b1 )
+			tmpRGB <= winRGB;
+		else if(bumpyDrawingRequest == 1'b1 )
 			tmpRGB <= bumpyRGB;
 		else if(stopwatchDrawingRequest == 1'b1 )
 				tmpRGB <= stopwatchRGB;
