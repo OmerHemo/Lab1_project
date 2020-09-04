@@ -68,15 +68,24 @@ begin
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 end 
 
+
+logic [2:0] prev_step;
+logic flage_change_gate;
 // map change clock
 always_ff@(posedge clk or negedge resetN)
 begin
 		if(!resetN) begin
 			currentMap <= maps[0];
+			prev_step <= maps[0][6][4];
+			flage_change_gate <= 0;
 		end
 		else begin 
 			if(gate) begin
+				prev_step <= currentMap[6][4];
 				currentMap[6][4] <= GATE; 
+			end
+			else begin
+				currentMap[6][4] <= prev_step;
 			end
 			if(next_lvl) begin
 				currentMap <= maps[lvl];
