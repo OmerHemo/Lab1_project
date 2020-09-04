@@ -18,7 +18,7 @@ module	debug_rect	(
 
 parameter  int OBJECT_WIDTH_X = 64;
 parameter  int OBJECT_HEIGHT_Y = 64;
-parameter  logic [3:0][7:0]  OBJECT_COLOR = {8'h6b,8'h5b ,8'h4b, 8'h3b, 8'h2b, 8'h1b, 8'h0b, 8'h5c, 8'h4c, 8'h3c, 8'h2c,8'h1c,8'h0c}; 
+parameter  logic [3:0][7:0]  OBJECT_COLOR = {8'h6b,8'h5b ,8'h4b, 8'h3b, 8'h2b, 8'h1b, 8'h00, 8'h5c, 8'h4c, 8'h3c, 8'h2c,8'h1c,8'h0c}; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
 parameter logic signed	[10:0] topLeftX = 200; //position on the screen 
 parameter logic	signed [10:0] topLeftY = 5;

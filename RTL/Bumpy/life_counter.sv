@@ -20,19 +20,19 @@ module life_counter(
 
 always_ff @(posedge die or negedge resetN) begin
 	if(!resetN) begin
-		life_counter <= 4'b0000;
+		life_counter <= 4'b0011;
 		lost_all_lifes <= 1'b0;
 	end
    else if(enable && die) begin
-		life_counter <= life_counter+1;
-		if(life_counter >= 4'h2)
+		life_counter <= life_counter-1;
+		if(life_counter <= 4'b0000)
 			lost_all_lifes <= 1'b1;
 	end
 end	
 
 parameter  int OBJECT_WIDTH_X = 16;
 parameter  int OBJECT_HEIGHT_Y = 16;
-parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
+parameter  logic [7:0] OBJECT_COLOR = 8'h6b; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;// bitmap  representation for a transparent pixel 
  
 logic insideBracketLeftLife, insideBracketMidLife, insideBracketRightLife;
