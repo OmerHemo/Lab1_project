@@ -16,8 +16,8 @@ module	prize_controller	(
 );
 
 
-parameter  int NUM_OF_ROWS = 7;
-parameter  int NUM_OF_COLS = 10;
+parameter int NUM_OF_ROWS = 7;
+parameter int NUM_OF_COLS = 10;
 
 //======--------------------------------------------------------------------------------------------------------------=
 
