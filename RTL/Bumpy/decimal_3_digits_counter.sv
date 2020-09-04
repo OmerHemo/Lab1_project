@@ -18,13 +18,16 @@ module decimal_3_digits_counter
 	logic hundreds_en;
 	assign hundreds_en = tc_ones & tc_tens;
 	
+	logic resetCounterN;
+	assign resetCounterN = ((!loadN) || (hundreds_en && tc_hundreds))? 1'b0 : 1'b1;
+	
 // units (Ones) 
 	decimal_down_counter ones_counter(
 		.clk(clk), 
 		.resetN(resetN), 
 		.ena(enable), 
 		.ena_cnt(enable),  
-		.loadN(loadN), 
+		.loadN(resetCounterN), 
 		.datain(Data_init[3:0]),
 		.count(Count_out[3:0]),
 		.tc(tc_ones)
@@ -37,7 +40,7 @@ module decimal_3_digits_counter
 		.resetN(resetN), 
 		.ena(enable), 
 		.ena_cnt(tc_ones),
-		.loadN(loadN), 
+		.loadN(resetCounterN), 
 		.datain(Data_init[7:4]),
 		.count(Count_out[7:4]),
 		.tc(tc_tens)	
@@ -49,13 +52,14 @@ module decimal_3_digits_counter
 		.resetN(resetN), 
 		.ena(enable), 
 		.ena_cnt(hundreds_en),
-		.loadN(loadN), 
+		.loadN(resetCounterN), 
 		.datain(Data_init[11:8]),
 		.count(Count_out[11:8]),
 		.tc(tc_hundreds)	
 	);
 
 	 
-		assign tc = (Count_out == 0) ? 1'b1 :1'b0;	
+		assign tc = (Count_out == 0) ? 1'b1 :1'b0;
+
  
 endmodule
