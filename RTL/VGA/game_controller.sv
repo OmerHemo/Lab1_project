@@ -32,7 +32,7 @@ module	game_controller	(
 assign step_regular_collision = (drawing_request_bumpy &&  (drawing_request_step_regular  == 1'b1)); 
 assign prize_collision = (drawing_request_bumpy &&  (drawing_request_prize  == 1'b1)); 
 assign gate_collision = (drawing_request_bumpy &&  (drawing_request_gate  == 1'b1));
-assign step_free_collision = (drawing_request_bumpy &&  (drawing_request_step_free  == 1'b1));
+assign step_free_collision = (drawing_request_bumpy &&  (drawing_request_step_free  == 1'b1)) || step_brake_collision ;
 assign border_collision = (drawing_request_bumpy &&  (drawing_request_border  == 1'b1));
 assign step_spike_collision = (drawing_request_bumpy &&  (drawing_request_step_spike == 1'b1));
 assign step_brake_collision = (drawing_request_bumpy &&  (drawing_request_step_brake == 1'b1));

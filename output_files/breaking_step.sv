@@ -36,9 +36,8 @@ parameter  int NUM_OF_COLS = 10;
 //__________________________________
 //parameter  logic [7:0] OBJECT_COLOR = 8'h8b; 
 
-logic [1:0][7:0] OBJECT_COLOR = {8'h7b,8'h2b}; 
+logic [1:0][7:0] OBJECT_COLOR = {8'hf0,8'h0f}; 
 
-logic [1:0] break_counter;
 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;// bitmap  representation for a transparent pixel 
 
@@ -64,13 +63,13 @@ assign Bottom_step_y	= (Top_step_y + STEP_HEIGHT_Y);
 
 // Maps
 logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] map = {
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2},
-		{2,2,2,2,2,2,2,2,2,2}	
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10},
+		{2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10,2'b10}
 };
  
 
@@ -89,12 +88,12 @@ begin
 		drawingRequest	<=	1'b0;
 	end
 	else if(step_type==BRAKE) begin 
-			insideBracket  = ( (pixelX  >= Left_step_x) &&  (pixelX < Right_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
+			insideBracket = ( (pixelX  >= Left_step_x) &&  (pixelX < Right_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 								&& (pixelY  >= Top_step_y) &&  (pixelY < Bottom_step_y) )  ; 
 			
-			if (insideBracket && (break_counter > 2'b00)) // test if it is inside the rectangle 
+			if ((insideBracket) && (currentMap[y_index_in_grid][X_index_in_grid] > 2'b00)) // test if it is inside the rectangle 
 			begin 
-				RGBout  <= OBJECT_COLOR[break_counter-1];	// colors table 
+				RGBout  <= OBJECT_COLOR[currentMap[y_index_in_grid][X_index_in_grid]-1];	// colors table 
 				drawingRequest <= 1'b1 ;
 				offsetX	<= (pixelX - Left_step_x); //calculate relative offsets from top left corner
 				offsetY	<= (pixelY - Top_step_y);
@@ -112,14 +111,20 @@ begin
 	end
 end 
 
+logic flag;
 
-
-always_ff @(posedge breaking_step_collision or negedge resetN) begin
+always_ff @(posedge clk or negedge resetN) begin
 	if(!resetN) begin
 		currentMap <= map;
+		flag <= 1'b0;
 	end
 	else begin
-	currentMap[y_index_in_grid][X_index_in_grid] <= currentMap[y_index_in_grid][X_index_in_grid]-1;
+	if((breaking_step_collision) && (flag==1'b0)) begin
+		currentMap[y_index_in_grid][X_index_in_grid] <= currentMap[y_index_in_grid][X_index_in_grid]-1;
+		flag <= 1'b1;
+	end
+	else if(!breaking_step_collision)
+		flag <= 1'b0;
 	end
 end	
 endmodule 
