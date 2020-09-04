@@ -14,7 +14,7 @@ module decimal_3_digits_counter
 	logic tc_tens;
 	logic tc_hundreds;
 	assign enable = ena & ena_cnt;
-	logic [11:0] Data_init = 12'b100110011001;
+	logic [11:0] Data_init = 12'b000100100000;
 	logic hundreds_en;
 	assign hundreds_en = tc_ones & tc_tens;
 	
