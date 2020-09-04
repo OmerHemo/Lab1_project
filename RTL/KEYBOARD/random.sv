@@ -12,8 +12,8 @@ parameter SIZE_BITS = 8;
 parameter MIN_VAL = 0;  //set the min and max values 
 parameter MAX_VAL = 479;
 
-	logic [SIZE_BITS-1:0] counter;
-	logic rise_d;
+logic [SIZE_BITS-1:0] counter;
+logic rise_d;
 	
 	
 always_ff @(posedge clk or negedge resetN) begin
