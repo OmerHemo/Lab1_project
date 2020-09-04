@@ -25,8 +25,9 @@ always_ff @(posedge die or negedge resetN) begin
 	end
    else if(enable && die) begin
 		life_counter <= life_counter-1;
-		if(life_counter <= 4'b0000)
+		if(life_counter <= 4'b0000) begin
 			lost_all_lifes <= 1'b1;
+		end	
 	end
 end	
 
@@ -70,9 +71,9 @@ assign rightLifeBottomY = (rightLifeTopLeftY + OBJECT_HEIGHT_Y);
 // Inside Bracket + Calc Digits
 always_ff@(posedge clk or negedge resetN)
 begin
-	insideBracketLeftLife = ((pixelX >= leftLifeTopLeftX) &&  (pixelX < leftLifeRightX) && (pixelY >= leftLifeTopLeftY) &&  (pixelY < leftLifeBottomY) && (life_counter >= 4'h2));
-	insideBracketMidLife = ((pixelX >= midLifeTopLeftX) &&  (pixelX < midLifeRightX) && (pixelY >= midLifeTopLeftY) &&  (pixelY < midLifeBottomY) && (life_counter >= 4'h1)); 
-	insideBracketRightLife = ((pixelX >= rightLifeTopLeftX) &&  (pixelX < rightLifeRightX) && (pixelY >= rightLifeTopLeftY) &&  (pixelY < rightLifeBottomY) && (life_counter >= 4'h0));
+	insideBracketLeftLife = ((pixelX >= leftLifeTopLeftX) &&  (pixelX < leftLifeRightX) && (pixelY >= leftLifeTopLeftY) &&  (pixelY < leftLifeBottomY) && (life_counter > 4'h2));
+	insideBracketMidLife = ((pixelX >= midLifeTopLeftX) &&  (pixelX < midLifeRightX) && (pixelY >= midLifeTopLeftY) &&  (pixelY < midLifeBottomY) && (life_counter > 4'h1)); 
+	insideBracketRightLife = ((pixelX >= rightLifeTopLeftX) &&  (pixelX < rightLifeRightX) && (pixelY >= rightLifeTopLeftY) &&  (pixelY < rightLifeBottomY) && (life_counter > 4'h0));
 end
 
 

@@ -38,7 +38,7 @@ always @(posedge clk or negedge resetN)
 		prState <= Sreset;
 		die <= 1'b0;
 	end
-   else if(prState == Sdie)
+   else if(prState == Sdie || nxtState == Sdie)
 		die <= 1'b1;
 	else begin	// Synchronic logic FSM
 		prState <= nxtState;
@@ -79,7 +79,7 @@ always_comb // Update next state and outputs
 			
 
 			Sleft,Sright,Sdown: begin
-						if((prState == Sdown) && (HitEdgeCode==BOTTOM) && (border_collision)) begin
+						if((HitEdgeCode==BOTTOM) && (border_collision)) begin
 							nxtState = Sdie;
 						end
 						else if((prState == Sright) && (HitEdgeCode==RIGHT) && (border_collision)) begin
@@ -134,7 +134,7 @@ always_comb // Update next state and outputs
 			end
 				
 			Sdie: begin
-					//die = 1'b1;
+					nxtState = Sdie;
 				end 
 				
 						
