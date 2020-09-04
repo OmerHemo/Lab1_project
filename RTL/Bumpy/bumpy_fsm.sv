@@ -9,9 +9,8 @@ module bumpy_fsm (
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	
-	
 	output logic [3:0] state,
-   output logic led_debug
+	output logic die
 	);                            
 
 enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} prState, nxtState;
@@ -31,17 +30,16 @@ assign right_key = !right_direction;
 assign down_key = !down_direction;
 assign state = prState;
 
+assign die = (prState == Sdie) ? 1'b1 :1'b0;
+
 always @(posedge clk or negedge resetN)
    begin
 	   
    if (!resetN) begin  // Asynchronic reset
 		prState <= Sreset;
-		led_debug <= 0;
 	end
    else begin	// Synchronic logic FSM
 		prState <= nxtState;
-		if(step_collision)
-			led_debug <= 1;
 	end	
 end // always
 	
@@ -133,7 +131,7 @@ always_comb // Update next state and outputs
 			end
 				
 			Sdie: begin
-					// sub in life counter 
+					//die = 1'b1;
 				end 
 				
 						

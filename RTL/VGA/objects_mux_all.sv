@@ -39,6 +39,10 @@ module	objects_mux_all	(
 					input		logic	prizeCounterDrawingRequest,
 					input		logic	[7:0] prizeCounterRGB,
 					
+		//life counter
+					input		logic	lifeCounterDrawingRequest,
+					input		logic	[7:0] lifeCounterRGB,
+					
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
@@ -69,6 +73,8 @@ begin
 			tmpRGB <= bumpyRGB;
 		else if(prizeCounterDrawingRequest == 1'b1 )
 				tmpRGB <= prizeCounterRGB;
+		else if(lifeCounterDrawingRequest == 1'b1 )
+				tmpRGB <= lifeCounterRGB;
 		else if(stopwatchDrawingRequest == 1'b1 )
 				tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
