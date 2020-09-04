@@ -10,8 +10,7 @@ module	level_manager	(
 					output	logic died_screen,
 					output	logic win_screen,
 					output	logic reset_fsm_N,
-					output	logic [2:0] lvl,
-					output	logic next_lvl
+					output	logic [2:0] lvl
 );
 
 const int SCREEN_DURATION_SEC = 3;  
@@ -29,14 +28,12 @@ begin
 		if(!resetN) begin
 			win_screen <= 0;
 			lvl <= 0;
-			next_lvl <= 0;
 			flag_win <= 0;
 		end
 		else begin
 			if(level_comp && (flag_win == 0)) begin
 				win_screen <= 1;
 				lvl <= lvl + 1;
-				next_lvl <= 1;
 				flag_win <= 1;
 			end
 			else if(timer_win >= SCREEN_DURATION_SEC - 1) begin
