@@ -30,15 +30,17 @@ assign right_key = !right_direction;
 assign down_key = !down_direction;
 assign state = prState;
 
-assign die = (prState == Sdie) ? 1'b1 :1'b0;
+//assign die = (prState == Sdie) ? 1'b1 :1'b0;
 
 always @(posedge clk or negedge resetN)
-   begin
-	   
+   begin 
    if (!resetN) begin  // Asynchronic reset
 		prState <= Sreset;
+		die <= 1'b0;
 	end
-   else begin	// Synchronic logic FSM
+   else if(prState == Sdie)
+		die <= 1'b1;
+	else begin	// Synchronic logic FSM
 		prState <= nxtState;
 	end	
 end // always
@@ -46,7 +48,8 @@ end // always
 	
 always_comb // Update next state and outputs
 	begin
-		nxtState = prState; // default values 
+		nxtState = prState; // default values
+		//die = 1'b0;
 		
 		case (prState)
 		
