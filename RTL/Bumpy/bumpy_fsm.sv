@@ -6,6 +6,7 @@ module bumpy_fsm (
 	input logic step_collision,
 	input logic free_collision,
 	input logic border_collision,
+	input logic spike_collision,
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	
@@ -30,7 +31,7 @@ assign right_key = !right_direction;
 assign down_key = !down_direction;
 assign state = prState;
 
-//assign die = (prState == Sdie) ? 1'b1 :1'b0;
+//assign  = (prState == Sdie) ? 1'b1 :1'b0;
 
 always_ff@(posedge clk or negedge resetN)
    begin 
@@ -93,7 +94,7 @@ always_comb // Update next state and outputs
 			
 
 			Sleft,Sright,Sdown: begin
-						if((HitEdgeCode==BOTTOM) && (border_collision)) begin
+						if((HitEdgeCode==BOTTOM) && ((border_collision) || (spike_collision))) begin
 							nxtState = Sdie;
 						end
 						else if((prState == Sright) && (HitEdgeCode==RIGHT) && (border_collision)) begin

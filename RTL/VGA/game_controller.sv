@@ -13,6 +13,7 @@ module	game_controller	(
 			input		logic	drawing_request_gate,
 			input		logic drawing_request_step_free,
 			input		logic drawing_request_border,
+			input		logic drawing_request_step_spike,
 			
 		
 			output logic step_regular_collision, // active in case of collision between two objects
@@ -20,6 +21,7 @@ module	game_controller	(
 			output logic gate_collision, // active in case of collision between two objects
 			output logic step_free_collision,
 			output logic border_collision,
+			output logic step_spike_collision,
 			output logic SingleHitPulse_regular_step // critical code, generating A single pulse in a frame
 			
 );
@@ -30,6 +32,7 @@ assign prize_collision = (drawing_request_bumpy &&  (drawing_request_prize  == 1
 assign gate_collision = (drawing_request_bumpy &&  (drawing_request_gate  == 1'b1));
 assign step_free_collision = (drawing_request_bumpy &&  (drawing_request_step_free  == 1'b1));
 assign border_collision = (drawing_request_bumpy &&  (drawing_request_border  == 1'b1));
+assign step_spike_collision = (drawing_request_bumpy &&  (drawing_request_step_spike  == 1'b1));
 
 logic flag ; // a semaphore to set the output only once per frame / regardless of the number of collisions 
 

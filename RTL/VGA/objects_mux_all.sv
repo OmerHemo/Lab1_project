@@ -42,6 +42,11 @@ module	objects_mux_all	(
 		//life counter
 					input		logic	lifeCounterDrawingRequest,
 					input		logic	[7:0] lifeCounterRGB,
+		
+		//spike step
+					input		logic	spikeStepDrawingRequest,
+					input		logic	[7:0] spikeStepRGB,
+							
 					
 		// background 
 					input		logic	[7:0] backGroundRGB,
@@ -79,6 +84,8 @@ begin
 				tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
 				tmpRGB <= stepRGB;  
+		else if (spikeStepDrawingRequest == 1'b1 )   
+				tmpRGB <= spikeStepRGB;  		
 		else if(prizeDrawingRequest  == 1'b1 ) 
 				tmpRGB <= prizeRGB;
 		else if(debugDrawingRequest  == 1'b1 ) 
