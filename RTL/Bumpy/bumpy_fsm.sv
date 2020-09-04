@@ -32,19 +32,33 @@ assign state = prState;
 
 //assign die = (prState == Sdie) ? 1'b1 :1'b0;
 
-always @(posedge clk or negedge resetN)
+always_ff@(posedge clk or negedge resetN)
    begin 
    if (!resetN) begin  // Asynchronic reset
 		prState <= Sreset;
-		die <= 1'b0;
 	end
-   else if(prState == Sdie || nxtState == Sdie)
-		die <= 1'b1;
 	else begin	// Synchronic logic FSM
 		prState <= nxtState;
-	end	
-end // always
+	end
+
 	
+end // always
+
+// die output
+
+always_ff@(posedge clk or negedge resetN)
+   begin 
+   if (!resetN) begin  // Asynchronic reset
+		die <= 1'b0;
+	end
+	else begin	// Synchronic logic FSM
+		if(prState == Sdie)
+			die <= 1;
+	end
+
+	
+end // always
+
 	
 always_comb // Update next state and outputs
 	begin

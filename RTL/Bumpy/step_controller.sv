@@ -78,7 +78,7 @@ begin
 			if(gate) begin
 				currentMap[6][4] <= GATE; 
 			end
-			else if(next_lvl) begin
+			if(next_lvl) begin
 				currentMap <= maps[lvl];
 			end
 		end

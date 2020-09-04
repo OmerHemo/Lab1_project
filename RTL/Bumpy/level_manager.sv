@@ -92,7 +92,7 @@ begin
 		if( timer_died >= SCREEN_DURATION_SEC - 1) begin
 			timer_died <= 0;
 		end
-		else if(win_screen) begin
+		else if(died_screen) begin
 			timer_died <= timer_died + 1;
 		end
 	end
