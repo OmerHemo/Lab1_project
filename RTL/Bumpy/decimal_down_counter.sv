@@ -15,35 +15,22 @@ module decimal_down_counter
 	output logic tc
    );
 
+assign tc = (count==0) ? 1'b1 :1'b0;	
+	
 // Down counter
-always_ff @(posedge clk or negedge resetN)
-  begin
-	
-	if ( !resetN )	begin // Asynchronic reset
-				// fill your code here
-				count=4'b0000;
-			end
-      else 	begin		// Synchronic logic	
-				
-					// fill your code here
-					if(loadN==0) begin
-						count=datain;
-					end
-					else if(ena==1 && ena_cnt==1) begin
-						if (count == 0) begin
-							  count<=4'h9;
-						end
-						else begin
-								count<=count-1;
-						end
-					end
-				
-		end //Synch
-	end //always	
-
-	
-	// Asynchronic tc
-	assign tc = (count==0) ? 1'b1 :1'b0;			
-			
+always_ff @(posedge clk or negedge resetN) begin
+	if(!resetN)
+		count <= datain;			
+	else begin
+		if(!loadN)
+			count <= datain;	
+		else if((ena==1) && (ena_cnt==1)) begin
+			if(count == 0)
+				count <= 4'h9;
+			else
+				count<=count-1;
+		end
+	end
+end
 					
 endmodule
