@@ -6,6 +6,7 @@ module	regular_prize	(
 					input 	logic	[10:0] tileTopLeftX, //position of specific tile in the grid
 					input 	logic	[10:0] tileTopLeftY,  //position of specific tile in the grid
 					input		logic [2:0] prize_type,
+					input 	logic [1:0] random_prize_color,
 					
 					
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
@@ -28,13 +29,16 @@ parameter  int prize_TILE_OFFSET_x = 20;
 parameter  int prize_TILE_OFFSET_y = 20;
 
 //__________________________________
-parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
+//parameter  logic [7:0] OBJECT_COLOR = 8'h5b; 
+logic [3:0][7:0]  OBJECT_COLOR = {8'h6b,8'h5b ,8'h4b, 8'h3b}; 
 
 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
 
 
 const logic [2:0] FREE=3'b000, REGU=3'b001; //orientation consts
+
+
 
 
 int Left_prize_x;
@@ -63,7 +67,7 @@ begin
 			
 			if (insideBracket) // test if it is inside the rectangle 
 			begin 
-				RGBout  <= OBJECT_COLOR ;	// colors table 
+				RGBout  <= OBJECT_COLOR[random_prize_color] ;	// colors table 
 				drawingRequest <= 1'b1 ;
 				offsetX	<= (pixelX - Left_prize_x); //calculate relative offsets from top left corner
 				offsetY	<= (pixelY - Top_prize_y);

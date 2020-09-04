@@ -1984,7 +1984,7 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1680 1472 1935 1548))
 )
 (symbol
-	(rect 976 1200 1216 1376)
+	(rect 960 1200 1200 1376)
 	(text "regular_prize" (rect 5 0 66 12)(font "Arial" ))
 	(text "inst41" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
@@ -2092,7 +2092,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 160))
 	)
-	(annotation_block (parameter)(rect 1256 1112 1528 1232))
+	(annotation_block (parameter)(rect 1240 1112 1512 1232))
 )
 (symbol
 	(rect 1936 1552 2176 1696)
@@ -2822,7 +2822,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 160))
 	)
-	(annotation_block (parameter)(rect 760 1216 960 1280))
+	(annotation_block (parameter)(rect 688 1184 888 1248))
 )
 (symbol
 	(rect -224 1976 -8 2120)
@@ -4341,57 +4341,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "clk" (rect 948 1216 962 1233)(font "Intel Clear" ))
-	(pt 940 1232)
-	(pt 976 1232)
-)
-(connector
-	(text "resetN" (rect 948 1232 978 1249)(font "Intel Clear" ))
-	(pt 940 1248)
-	(pt 976 1248)
-)
-(connector
-	(text "pixelX[10..0]" (rect 908 1248 967 1265)(font "Intel Clear" ))
-	(pt 976 1264)
-	(pt 916 1264)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 908 1264 967 1281)(font "Intel Clear" ))
-	(pt 940 1280)
-	(pt 976 1280)
-	(bus)
-)
-(connector
-	(text "prizeTileTopLeftX[10..0]" (rect 904 1280 1017 1297)(font "Intel Clear" ))
-	(pt 932 1296)
-	(pt 976 1296)
-	(bus)
-)
-(connector
-	(text "prizeTileTopLeftY[10..0]" (rect 904 1296 1017 1313)(font "Intel Clear" ))
-	(pt 940 1312)
-	(pt 976 1312)
-	(bus)
-)
-(connector
-	(text "prize_type[2..0]" (rect 906 1328 979 1345)(font "Intel Clear" ))
-	(pt 940 1328)
-	(pt 976 1328)
-	(bus)
-)
-(connector
-	(text "prize_req" (rect 1231 1248 1274 1265)(font "Intel Clear" ))
-	(pt 1216 1264)
-	(pt 1240 1264)
-)
-(connector
-	(text "prize_VGA[7..0]" (rect 1238 1264 1311 1281)(font "Intel Clear" ))
-	(pt 1216 1280)
-	(pt 1240 1280)
-	(bus)
-)
-(connector
 	(text "boarders_Drawing_Request" (rect 409 536 539 553)(font "Intel Clear" ))
 	(pt 352 552)
 	(pt 440 552)
@@ -5518,6 +5467,57 @@ agreement for further details.
 	(text "time_over" (rect -384 2008 -336 2025)(font "Intel Clear" ))
 	(pt -392 2024)
 	(pt -360 2024)
+)
+(connector
+	(text "clk" (rect 932 1216 946 1233)(font "Intel Clear" ))
+	(pt 924 1232)
+	(pt 960 1232)
+)
+(connector
+	(text "resetN" (rect 932 1232 962 1249)(font "Intel Clear" ))
+	(pt 924 1248)
+	(pt 960 1248)
+)
+(connector
+	(text "pixelX[10..0]" (rect 892 1248 951 1265)(font "Intel Clear" ))
+	(pt 960 1264)
+	(pt 900 1264)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 892 1264 951 1281)(font "Intel Clear" ))
+	(pt 924 1280)
+	(pt 960 1280)
+	(bus)
+)
+(connector
+	(text "prizeTileTopLeftX[10..0]" (rect 888 1280 1001 1297)(font "Intel Clear" ))
+	(pt 916 1296)
+	(pt 960 1296)
+	(bus)
+)
+(connector
+	(text "prizeTileTopLeftY[10..0]" (rect 888 1296 1001 1313)(font "Intel Clear" ))
+	(pt 924 1312)
+	(pt 960 1312)
+	(bus)
+)
+(connector
+	(text "prize_type[2..0]" (rect 890 1328 963 1345)(font "Intel Clear" ))
+	(pt 924 1328)
+	(pt 960 1328)
+	(bus)
+)
+(connector
+	(text "prize_req" (rect 1215 1248 1258 1265)(font "Intel Clear" ))
+	(pt 1200 1264)
+	(pt 1224 1264)
+)
+(connector
+	(text "prize_VGA[7..0]" (rect 1222 1264 1295 1281)(font "Intel Clear" ))
+	(pt 1200 1280)
+	(pt 1224 1280)
+	(bus)
 )
 (junction (pt 736 912))
 (junction (pt -608 2056))

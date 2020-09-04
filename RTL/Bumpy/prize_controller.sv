@@ -7,7 +7,9 @@ module	prize_controller	(
 					input 	logic prize_collision,
 					input		logic [10:0] bumpy_x,
 					input		logic [10:0] bumpy_y,
+					input 	logic [9:0] random_prize,	
 					
+					output 	logic [1:0] random_prize_color,
 					output	logic [2:0] prize_type,
 					output 	logic	[10:0] tileTopLeftX, 
 					output 	logic	[10:0] tileTopLeftY
@@ -53,6 +55,8 @@ begin
 		prize_type <= (currentMap[y_index_in_grid][X_index_in_grid]);
 		tileTopLeftX	<= ((X_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
+		random_prize_color[0] <= random_prize[X_index_in_grid];
+		random_prize_color[1] <= random_prize[y_index_in_grid];
 end 
 
 
