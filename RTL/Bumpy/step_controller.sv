@@ -13,7 +13,8 @@ module	step_controller	(
 					output	logic [2:0] step_type,
 					output 	logic	[10:0] tileTopLeftX, 
 					output 	logic	[10:0] tileTopLeftY,
-					output 	logic [3:0] [2:0] area // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
+					output 	logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
+					output 	logic debug
 );
 
 
@@ -70,25 +71,32 @@ end
 
 
 logic [2:0] prev_step;
-logic flage_change_gate;
+logic flag_change_gate;
 // map change clock
 always_ff@(posedge clk or negedge resetN)
 begin
 		if(!resetN) begin
 			currentMap <= maps[0];
 			prev_step <= maps[0][6][4];
-			flage_change_gate <= 0;
+			flag_change_gate <= 0;
+			debug <= 0;
 		end
 		else begin 
-			if(gate) begin
+			if(gate && (flag_change_gate ==0)) begin
 				prev_step <= currentMap[6][4];
-				currentMap[6][4] <= GATE; 
+				currentMap[6][4] <= GATE;
+				flag_change_gate <= 1;
+				debug <= 1;
 			end
-			else begin
+			else if(gate == 0) begin
 				currentMap[6][4] <= prev_step;
+				flag_change_gate <= 0;
+				debug <= 0;
 			end
 			if(next_lvl) begin
 				currentMap <= maps[lvl];
+				prev_step <= maps[lvl][6][4];
+				flag_change_gate <= 0;
 			end
 		end
 end
