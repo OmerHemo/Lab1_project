@@ -7,7 +7,9 @@ module	prize_controller	(
 					input 	logic prize_collision,
 					input		logic [10:0] bumpy_x,
 					input		logic [10:0] bumpy_y,
-					input 	logic [9:0] random_prize,	
+					input 	logic [9:0] random_prize,
+					input		logic [2:0] lvl,
+					input		logic next_lvl,	
 					
 					output 	logic [1:0] random_prize_color,
 					output	logic [2:0] prize_type,
@@ -25,7 +27,8 @@ const logic [2:0] FREE=3'b000, REGU=3'b001; //orientation consts
 
 
 // Maps
-logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map0 = {
+logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
+	{
 	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{REGU,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
@@ -33,6 +36,16 @@ logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map0 = {
 	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
 	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE}
+	},
+	{
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU,REGU},
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+	{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE}
+	}
 };
 
 
@@ -60,12 +73,18 @@ begin
 end 
 
 
-always_ff@(posedge prize_collision or  negedge resetN)
+always_ff@(posedge clk or  negedge resetN)
 begin
 		if(!resetN)
-			currentMap <= map0;
-		else if(prize_collision)
-			currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
+			currentMap <= maps[0];
+		else begin
+			if(prize_collision) begin
+				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
+			end
+			if(next_lvl) begin
+					currentMap <= maps[lvl];
+			end
+		end
 end 
 
 endmodule 
