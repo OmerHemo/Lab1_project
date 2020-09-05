@@ -11,7 +11,8 @@ module bumpy_fsm (
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	
 	output logic [3:0] state,
-	output logic die
+	output logic die,
+	output logic reset_state_N
 	);                            
 
 enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} prState, nxtState;
@@ -51,10 +52,17 @@ always_ff@(posedge clk or negedge resetN)
    begin 
    if (!resetN) begin  // Asynchronic reset
 		die <= 1'b0;
+		reset_state_N <= 1'b0;
 	end
 	else begin	// Synchronic logic FSM
 		if(prState == Sdie)
 			die <= 1;
+		else begin
+			if(prState == Sreset)
+				reset_state_N <= 1'b0;
+			else 
+				reset_state_N <= 1'b1;
+		end
 	end
 
 	
