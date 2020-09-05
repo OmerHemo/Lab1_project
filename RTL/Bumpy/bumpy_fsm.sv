@@ -10,6 +10,7 @@ module bumpy_fsm (
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	input logic time_over,
+	input	logic teleport_step_collision,
 	
 	output logic [3:0] state,
 	output logic die,
@@ -44,6 +45,9 @@ always_ff@(posedge clk or negedge resetN)
 		prState <= nxtState;
 		if(time_over) begin
 			prState <= Sdie;
+		end
+		if((HitEdgeCode==BOTTOM) && (teleport_step_collision)) begin
+			prState <= Sup;
 		end
 	end
 
