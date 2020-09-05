@@ -62,7 +62,9 @@ module	objects_mux_all	(
 					input		logic	teleportStepDrawingRequest,
 					input		logic	[7:0] teleportStepRGB,
 							
-					
+		//button
+					input		logic	buttonDrawingRequest,
+					input		logic	[7:0] buttonRGB,			
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
@@ -87,7 +89,9 @@ begin
 			tmpRGB	<= 8'b0;
 	end
 	else begin
-		if(winDrawingRequest == 1'b1 )
+		if(buttonDrawingRequest == 1'b1)
+			tmpRGB <= buttonRGB;
+		else if(winDrawingRequest == 1'b1 )
 			tmpRGB <= winRGB;
 		else if(dieDrawingRequest == 1'b1 )
 			tmpRGB <= dieRGB;
