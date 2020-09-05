@@ -4611,7 +4611,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 384 2272 608 2448)
+	(rect 376 2272 600 2448)
 	(text "menu_screen" (rect 5 0 71 12)(font "Arial" ))
 	(text "inst72" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
@@ -4747,7 +4747,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 208 160))
 	)
-	(annotation_block (parameter)(rect 608 2152 888 2272))
+	(annotation_block (parameter)(rect 600 2152 880 2272))
 )
 (symbol
 	(rect 752 2432 992 2608)
@@ -7069,43 +7069,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "clk" (rect 348 2288 362 2305)(font "Intel Clear" ))
-	(pt 340 2304)
-	(pt 384 2304)
-)
-(connector
-	(text "oneSec" (rect 349 2304 383 2321)(font "Intel Clear" ))
-	(pt 344 2320)
-	(pt 384 2320)
-)
-(connector
-	(text "pixelX[10..0]" (rect 348 2336 407 2353)(font "Intel Clear" ))
-	(pt 340 2352)
-	(pt 384 2352)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 348 2352 407 2369)(font "Intel Clear" ))
-	(pt 340 2368)
-	(pt 384 2368)
-	(bus)
-)
-(connector
-	(text "KEY[2]" (rect 352 2368 385 2385)(font "Intel Clear" ))
-	(pt 384 2384)
-	(pt 344 2384)
-)
-(connector
-	(text "KEY[1]" (rect 336 2384 369 2401)(font "Intel Clear" ))
-	(pt 384 2400)
-	(pt 338 2400)
-)
-(connector
-	(text "KEY[0]" (rect 336 2400 369 2417)(font "Intel Clear" ))
-	(pt 384 2416)
-	(pt 339 2416)
-)
-(connector
 	(text "die_on" (rect 232 2408 263 2425)(font "Intel Clear" ))
 	(pt 224 2424)
 	(pt 264 2424)
@@ -7216,46 +7179,6 @@ agreement for further details.
 	(pt 1888 2536)
 )
 (connector
-	(text "win_screen_req" (rect 610 2288 684 2305)(font "Intel Clear" ))
-	(pt 608 2304)
-	(pt 648 2304)
-)
-(connector
-	(text "win_screen_VGA[7..0]" (rect 613 2304 716 2321)(font "Intel Clear" ))
-	(pt 608 2320)
-	(pt 640 2320)
-	(bus)
-)
-(connector
-	(text "menu_comp" (rect 616 2368 675 2385)(font "Intel Clear" ))
-	(pt 608 2384)
-	(pt 656 2384)
-)
-(connector
-	(text "slct_lvl[2..0]" (rect 609 2384 668 2401)(font "Intel Clear" ))
-	(pt 608 2400)
-	(pt 656 2400)
-	(bus)
-)
-(connector
-	(text "Button_topLeft_Y[10..0]" (rect 616 2352 730 2369)(font "Intel Clear" ))
-	(pt 608 2368)
-	(pt 648 2368)
-	(bus)
-)
-(connector
-	(text "Button_topLeft_X[10..0]" (rect 630 2336 744 2353)(font "Intel Clear" ))
-	(pt 608 2352)
-	(pt 648 2352)
-	(bus)
-)
-(connector
-	(text "button_type[2..0]" (rect 616 2320 697 2337)(font "Intel Clear" ))
-	(pt 608 2336)
-	(pt 648 2336)
-	(bus)
-)
-(connector
 	(text "backGroundRGB[7..0]" (rect 1832 1288 1933 1305)(font "Intel Clear" ))
 	(pt 1944 1288)
 	(pt 1902 1288)
@@ -7276,11 +7199,6 @@ agreement for further details.
 	(text "resetN" (rect 192 2328 222 2345)(font "Intel Clear" ))
 	(pt 184 2344)
 	(pt 232 2344)
-)
-(connector
-	(text "reset_menu" (rect 304 2320 360 2337)(font "Intel Clear" ))
-	(pt 296 2336)
-	(pt 384 2336)
 )
 (connector
 	(text "pixelX[10..0]" (rect 712 2480 771 2497)(font "Intel Clear" ))
@@ -7337,6 +7255,88 @@ agreement for further details.
 	(text "menu_on" (rect 200 2312 244 2329)(font "Intel Clear" ))
 	(pt 192 2328)
 	(pt 232 2328)
+)
+(connector
+	(text "clk" (rect 340 2288 354 2305)(font "Intel Clear" ))
+	(pt 332 2304)
+	(pt 376 2304)
+)
+(connector
+	(text "oneSec" (rect 341 2304 375 2321)(font "Intel Clear" ))
+	(pt 336 2320)
+	(pt 376 2320)
+)
+(connector
+	(text "pixelX[10..0]" (rect 340 2336 399 2353)(font "Intel Clear" ))
+	(pt 332 2352)
+	(pt 376 2352)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 340 2352 399 2369)(font "Intel Clear" ))
+	(pt 332 2368)
+	(pt 376 2368)
+	(bus)
+)
+(connector
+	(text "KEY[2]" (rect 344 2368 377 2385)(font "Intel Clear" ))
+	(pt 376 2384)
+	(pt 336 2384)
+)
+(connector
+	(text "KEY[1]" (rect 328 2384 361 2401)(font "Intel Clear" ))
+	(pt 376 2400)
+	(pt 330 2400)
+)
+(connector
+	(text "KEY[0]" (rect 328 2400 361 2417)(font "Intel Clear" ))
+	(pt 376 2416)
+	(pt 331 2416)
+)
+(connector
+	(text "win_screen_req" (rect 602 2288 676 2305)(font "Intel Clear" ))
+	(pt 600 2304)
+	(pt 640 2304)
+)
+(connector
+	(text "win_screen_VGA[7..0]" (rect 605 2304 708 2321)(font "Intel Clear" ))
+	(pt 600 2320)
+	(pt 632 2320)
+	(bus)
+)
+(connector
+	(text "button_type[2..0]" (rect 608 2320 689 2337)(font "Intel Clear" ))
+	(pt 600 2336)
+	(pt 640 2336)
+	(bus)
+)
+(connector
+	(text "Button_topLeft_X[10..0]" (rect 622 2336 736 2353)(font "Intel Clear" ))
+	(pt 600 2352)
+	(pt 640 2352)
+	(bus)
+)
+(connector
+	(text "Button_topLeft_Y[10..0]" (rect 608 2352 722 2369)(font "Intel Clear" ))
+	(pt 600 2368)
+	(pt 640 2368)
+	(bus)
+)
+(connector
+	(text "menu_comp" (rect 608 2368 667 2385)(font "Intel Clear" ))
+	(pt 600 2384)
+	(pt 648 2384)
+)
+(connector
+	(text "slct_lvl[2..0]" (rect 601 2384 660 2401)(font "Intel Clear" ))
+	(pt 600 2400)
+	(pt 648 2400)
+	(bus)
+)
+(connector
+	(text "reset_menu" (rect 296 2320 352 2337)(font "Intel Clear" ))
+	(pt 296 2336)
+	(pt 376 2336)
 )
 (junction (pt 736 912))
 (junction (pt 448 1696))
