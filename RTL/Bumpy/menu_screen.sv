@@ -39,6 +39,7 @@ assign X_index_in_grid = ((pixelX) >> 7);
 assign y_index_in_grid = ((pixelY) >> 6);
 
 //__________________________________
+parameter  logic [7:0] OBJECT_COLOR_BACK = 8'b00000010;
 parameter  logic [7:0] OBJECT_COLOR_REGU = 8'b10000000;
 parameter  logic [7:0] OBJECT_COLOR_SLCT = 8'b00010000; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
@@ -91,7 +92,7 @@ begin
 end
 
 // menu_comp
-assign down_key = ~down_keyN;
+assign select_key = ~slct_keyN;
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
@@ -99,7 +100,7 @@ begin
 		selcted_lvl <= 0;
 	end
 	else begin
-		if(down_key) begin
+		if(select_key) begin
 			menu_comp	<=1;
 			selcted_lvl <= selected;
 		end
@@ -140,8 +141,8 @@ begin
 			end
 		end
 		else begin
-			RGBout			<=	8'b0;
-			drawingRequest	<=	1'b0;
+			RGBout			<=	OBJECT_COLOR_BACK;
+			drawingRequest	<=	1'b1;
 		end
 	end
 end
