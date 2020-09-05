@@ -7,6 +7,7 @@ module	level_manager	(
 					input		logic zero_lives,
 					input		logic level_comp,
 					
+					output	logic menu_screen,
 					output	logic died_screen,
 					output	logic win_screen,
 					output	logic reset_fsm_N,

@@ -1,8 +1,8 @@
 
-module	prize_controller	(	
+module	prize_controller	(
 					input		logic	clk,
 					input 	logic resetN,
-					input 	logic	[10:0] pixelX,// current VGA pixel 
+					input 	logic	[10:0] pixelX,// current VGA pixel
 					input 	logic	[10:0] pixelY,
 					input 	logic prize_collision,
 					input		logic [10:0] bumpy_x,
@@ -12,10 +12,12 @@ module	prize_controller	(
 					input		logic next_lvl,
 					input		logic coin_step_collision,
 					input		logic	[3:0] HitEdgeCode,
-					
+					input		logic bumpy_diedN,
+
+
 					output 	logic [1:0] random_prize_color,
 					output	logic [2:0] prize_type,
-					output 	logic	[10:0] tileTopLeftX, 
+					output 	logic	[10:0] tileTopLeftX,
 					output 	logic	[10:0] tileTopLeftY
 );
 
@@ -72,7 +74,7 @@ begin
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 		random_prize_color[0] <= random_prize[X_index_in_grid];
 		random_prize_color[1] <= random_prize[y_index_in_grid];
-end 
+end
 
 
 always_ff@(posedge clk or  negedge resetN)
@@ -83,13 +85,14 @@ begin
 			if(prize_collision) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
 			end
+
 			if((coin_step_collision) && (HitEdgeCode == BOTTOM)) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= REGU;
 			end
-			if(next_lvl) begin
+			if(next_lvl || !bumpy_diedN) begin
 					currentMap <= maps[lvl];
 			end
 		end
-end 
+end
 
-endmodule 
+endmodule
