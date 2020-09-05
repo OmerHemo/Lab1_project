@@ -46,6 +46,10 @@ module	objects_mux_all	(
 		//spike step
 					input		logic	spikeStepDrawingRequest,
 					input		logic	[7:0] spikeStepRGB,
+					
+		//brake step
+					input		logic	brakeStepDrawingRequest,
+					input		logic	[7:0] brakeStepRGB,
 							
 					
 		// background 
@@ -85,7 +89,9 @@ begin
 		else if (stepDrawingRequest == 1'b1 )   
 				tmpRGB <= stepRGB;  
 		else if (spikeStepDrawingRequest == 1'b1 )   
-				tmpRGB <= spikeStepRGB;  		
+				tmpRGB <= spikeStepRGB;  
+		else if (brakeStepDrawingRequest == 1'b1 )   
+				tmpRGB <= brakeStepRGB; 		
 		else if(prizeDrawingRequest  == 1'b1 ) 
 				tmpRGB <= prizeRGB;
 		else if(debugDrawingRequest  == 1'b1 ) 
