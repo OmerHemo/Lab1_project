@@ -34,6 +34,9 @@ module	objects_mux_all	(
 		//win
 					input		logic	winDrawingRequest,
 					input		logic	[7:0] winRGB,
+		//die
+					input		logic	dieDrawingRequest,
+					input		logic	[7:0] dieRGB,
 		
 		//prize counter
 					input		logic	prizeCounterDrawingRequest,
@@ -78,26 +81,28 @@ begin
 	else begin
 		if(winDrawingRequest == 1'b1 )
 			tmpRGB <= winRGB;
+		else if(dieDrawingRequest == 1'b1 )
+			tmpRGB <= dieRGB;
 		else if(bumpyDrawingRequest == 1'b1 )
 			tmpRGB <= bumpyRGB;
 		else if(prizeCounterDrawingRequest == 1'b1 )
-				tmpRGB <= prizeCounterRGB;
+			tmpRGB <= prizeCounterRGB;
 		else if(lifeCounterDrawingRequest == 1'b1 )
-				tmpRGB <= lifeCounterRGB;
+			tmpRGB <= lifeCounterRGB;
 		else if(stopwatchDrawingRequest == 1'b1 )
-				tmpRGB <= stopwatchRGB;
+			tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
-				tmpRGB <= stepRGB;  
+			tmpRGB <= stepRGB;  
 		else if (spikeStepDrawingRequest == 1'b1 )   
-				tmpRGB <= spikeStepRGB;  
+			tmpRGB <= spikeStepRGB;  
 		else if (brakeStepDrawingRequest == 1'b1 )   
-				tmpRGB <= brakeStepRGB; 		
+			tmpRGB <= brakeStepRGB; 		
 		else if(prizeDrawingRequest  == 1'b1 ) 
-				tmpRGB <= prizeRGB;
+			tmpRGB <= prizeRGB;
 		else if(debugDrawingRequest  == 1'b1 ) 
-				tmpRGB <= debugRGB;
+			tmpRGB <= debugRGB;
 		else if(gateDrawingRequest  == 1'b1 ) 
-				tmpRGB <= gateRGB;
+			tmpRGB <= gateRGB;
 		else
 			tmpRGB <= backGroundRGB ; 
 	end
