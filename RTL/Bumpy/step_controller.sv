@@ -108,16 +108,7 @@ begin
 				flag_change_gate <= 0;
 				debug <= 0;
 			end
-<<<<<<< HEAD
 		teleport_cordinates <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
-=======
-			if(next_lvl) begin
-				currentMap <= maps[lvl];
-				prev_step <= maps[lvl][6][4];
-				flag_change_gate <= 0;
-			end
-		teleport_cordinates <= currentTeleportCordinatesMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
->>>>>>> 85bd521b22c27198de862e64f1caf4907ecf693f
 		end
 end
 
