@@ -9,6 +9,8 @@ module	bumpy_move(
 	input logic border_collision,
 	input	logic	[3:0] HitEdgeCode,
 	input logic [7:0] bumpy_size_in,
+	input	logic teleport_step_collision,
+	input	logic	[7:0]	teleport_cordinates,
 
 	output	 logic signed 	[10:0]	offset_topleft_X,// output the top left corner 
 	output	 logic signed	[10:0]	offset_topleft_Y,
@@ -41,6 +43,7 @@ const int Border_OFFSET = 100;
 int pos_x, pos_y; 
 int speed_x,speed_y;
 int jump_start_y,jump_start_x;
+
 
 // jump clock
 always_ff@(posedge clk or negedge resetN)
@@ -139,7 +142,11 @@ begin
 		pos_y	<= center_topleft_x;
 	end
 	else begin
-		if (startOfFrame == 1'b1) begin // perform  position integral only 30 times per second 
+		if((teleport_step_collision) && (HitEdgeCode == BOTTOM)) begin
+			pos_x <= (((teleport_cordinates) >> 4) * tile_size) + center_topleft_x;
+			pos_y <= ((((teleport_cordinates) << 4) >> 4) * tile_size) + center_topleft_y;
+		end
+		else if (startOfFrame == 1'b1) begin // perform  position integral only 30 times per second 
 			pos_x  <= pos_x + speed_x; 
 			pos_y  <= pos_y + speed_y;
 		end

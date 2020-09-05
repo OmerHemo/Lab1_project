@@ -9,7 +9,9 @@ module	prize_controller	(
 					input		logic [10:0] bumpy_y,
 					input 	logic [9:0] random_prize,
 					input		logic [2:0] lvl,
-					input		logic next_lvl,	
+					input		logic next_lvl,
+					input		logic coin_step_collision,
+					input		logic	[3:0] HitEdgeCode,
 					
 					output 	logic [1:0] random_prize_color,
 					output	logic [2:0] prize_type,
@@ -80,6 +82,9 @@ begin
 		else begin
 			if(prize_collision) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
+			end
+			if((coin_step_collision) && (HitEdgeCode == BOTTOM)) begin
+				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= REGU;
 			end
 			if(next_lvl) begin
 					currentMap <= maps[lvl];
