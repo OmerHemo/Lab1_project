@@ -85,7 +85,6 @@ begin
 			if(prize_collision) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
 			end
-
 			if((coin_step_collision) && (HitEdgeCode == BOTTOM)) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= REGU;
 			end
