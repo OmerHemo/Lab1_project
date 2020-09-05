@@ -6,7 +6,6 @@ module	step_controller	(
 					input 	logic	[10:0] pixelY,
 					input 	logic gate,
 					input		logic [2:0] lvl,
-					input		logic next_lvl, 
 					
 					input		logic [10:0] bumpy_x,
 					input		logic [10:0] bumpy_y,
@@ -91,9 +90,9 @@ logic flag_change_gate;
 always_ff@(posedge clk or negedge resetN)
 begin
 		if(!resetN) begin
-			currentMap <= maps[0];
+			currentMap <= maps[lvl];
 			currentTeleportCordinatesMap <= teleportCordinatesMap;
-			prev_step <= maps[0][6][4];
+			prev_step <= maps[lvl][6][4];
 			flag_change_gate <= 0;
 			debug <= 0;
 		end
@@ -108,11 +107,6 @@ begin
 				currentMap[6][4] <= prev_step;
 				flag_change_gate <= 0;
 				debug <= 0;
-			end
-			if(next_lvl) begin
-				currentMap <= maps[lvl];
-				prev_step <= maps[lvl][6][4];
-				flag_change_gate <= 0;
 			end
 		teleport_cordinates <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
 		end

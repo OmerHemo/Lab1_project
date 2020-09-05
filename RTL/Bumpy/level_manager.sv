@@ -20,9 +20,9 @@ const int SCREEN_DURATION_SEC = 3;
 
 logic [3:0] timer_died, timer_win;
 
-logic flag_win,flag_died;
+logic flag_died;
 
-assign reset_lvl_N = ~(menu_screen || died_screen);
+assign reset_lvl_N = ((~(menu_screen || died_screen)) & resetN);
 
 
 // win screen		
@@ -31,16 +31,14 @@ begin
 		if(!resetN) begin
 			menu_screen <= 1;
 			lvl <= 0;
-			flag_win <= 0;
 		end
 		else begin
-			if(level_comp ) begin
+			if(level_comp) begin
 				menu_screen <= 1;
-				flag_win <= 1;
 			end
 			else if(menu_comp) begin
+				lvl <= lvl_selected;
 				menu_screen <= 0;
-				flag_win <= 0;
 			end
 		end
 end
