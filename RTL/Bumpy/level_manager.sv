@@ -6,11 +6,12 @@ module	level_manager	(
 					input 	logic bumpy_died,
 					input		logic zero_lives,
 					input		logic level_comp,
+					input		logic menu_comp,
+					input		logic [2:0] lvl_selected,
 					
-					output	logic menu_screen,
 					output	logic died_screen,
-					output	logic win_screen,
-					output	logic reset_fsm_N,
+					output	logic menu_screen,
+					output	logic reset_lvl_N,
 					output	logic [2:0] lvl
 );
 
@@ -21,24 +22,24 @@ logic [3:0] timer_died, timer_win;
 
 logic flag_win,flag_died;
 
-assign reset_fsm_N = ~(win_screen || died_screen);
+assign reset_lvl_N = ~(menu_screen || died_screen);
+
 
 // win screen		
 always_ff@(posedge clk or negedge resetN)
 begin
 		if(!resetN) begin
-			win_screen <= 0;
+			menu_screen <= 1;
 			lvl <= 0;
 			flag_win <= 0;
 		end
 		else begin
-			if(level_comp && (flag_win == 0)) begin
-				win_screen <= 1;
-				lvl <= lvl + 1;
+			if(level_comp ) begin
+				menu_screen <= 1;
 				flag_win <= 1;
 			end
-			else if(timer_win >= SCREEN_DURATION_SEC - 1) begin
-				win_screen <= 0;
+			else if(menu_comp) begin
+				menu_screen <= 0;
 				flag_win <= 0;
 			end
 		end
@@ -73,7 +74,7 @@ begin
 		if( timer_win >= SCREEN_DURATION_SEC - 1) begin
 			timer_win <= 0;
 		end
-		else if(win_screen) begin
+		else if(menu_screen) begin
 			timer_win <= timer_win + 1;
 		end
 	end
