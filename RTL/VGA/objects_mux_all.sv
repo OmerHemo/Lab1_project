@@ -53,6 +53,14 @@ module	objects_mux_all	(
 		//brake step
 					input		logic	brakeStepDrawingRequest,
 					input		logic	[7:0] brakeStepRGB,
+					
+		//coin step
+					input		logic	coinStepDrawingRequest,
+					input		logic	[7:0] coinStepRGB,
+					
+		//teleport step
+					input		logic	teleportStepDrawingRequest,
+					input		logic	[7:0] teleportStepRGB,
 							
 					
 		// background 
@@ -96,7 +104,11 @@ begin
 		else if (spikeStepDrawingRequest == 1'b1 )   
 			tmpRGB <= spikeStepRGB;  
 		else if (brakeStepDrawingRequest == 1'b1 )   
-			tmpRGB <= brakeStepRGB; 		
+			tmpRGB <= brakeStepRGB;
+		else if (coinStepDrawingRequest == 1'b1 )   
+			tmpRGB <= coinStepRGB;
+		else if (teleportStepDrawingRequest == 1'b1 )   
+			tmpRGB <= teleportStepRGB;
 		else if(prizeDrawingRequest  == 1'b1 ) 
 			tmpRGB <= prizeRGB;
 		else if(debugDrawingRequest  == 1'b1 ) 

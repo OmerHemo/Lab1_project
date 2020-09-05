@@ -40,6 +40,8 @@ localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation f
 
 const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, COIN=3'b011, WALL=3'b100, SPIKE=3'b101, BRAKE=3'b110; //orientation consts
 
+const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts	
+
 
 int Left_step_x;
 int Top_step_y;

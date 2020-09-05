@@ -29,6 +29,8 @@ parameter int NUM_OF_COLS = 10;
 
 const logic [2:0] FREE=3'b000, REGU=3'b001; //orientation consts
 
+const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts	
+
 
 // Maps
 logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
@@ -53,7 +55,21 @@ logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
 };
 
 
+// coin steps counters
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] coinCountersMap = {
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01},
+		{2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01,2'b01}
+};
+
+
 logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap;
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] currentCoinCountersMap;
+ 
 
 
 int X_index_in_grid, y_index_in_grid;
@@ -79,14 +95,17 @@ end
 
 always_ff@(posedge clk or  negedge resetN)
 begin
-		if(!resetN)
+		if(!resetN) begin
 			currentMap <= maps[0];
+			currentCoinCountersMap <= coinCountersMap;
+		end
 		else begin
 			if(prize_collision) begin
 				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= FREE;
 			end
-			if((coin_step_collision) && (HitEdgeCode == BOTTOM)) begin
-				currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid] <= REGU;
+			if((coin_step_collision) && (HitEdgeCode == TOP) && (currentCoinCountersMap[y_index_in_grid][X_index_in_grid] >= 2'b01)) begin
+				currentMap[y_index_in_grid][X_index_in_grid] <= REGU;
+				currentCoinCountersMap[y_index_in_grid][X_index_in_grid] <= currentCoinCountersMap[y_index_in_grid][X_index_in_grid] -1;
 			end
 			if(next_lvl || !bumpy_diedN) begin
 					currentMap <= maps[lvl];

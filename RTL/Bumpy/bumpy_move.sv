@@ -134,6 +134,13 @@ end
 //////////--------------------------------------------------------------------------------------------------------------=
 // position calculate 
 
+
+logic [3:0] X_teleport_cordinates;
+logic [3:0] Y_teleport_cordinates;
+
+assign X_teleport_cordinates = teleport_cordinates[3:0];
+assign Y_teleport_cordinates = teleport_cordinates[7:4];
+
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN)
@@ -143,8 +150,8 @@ begin
 	end
 	else begin
 		if((teleport_step_collision) && (HitEdgeCode == BOTTOM)) begin
-			pos_x <= (((teleport_cordinates) >> 4) * tile_size) + center_topleft_x;
-			pos_y <= ((((teleport_cordinates) << 4) >> 4) * tile_size) + center_topleft_y;
+			pos_x <= (X_teleport_cordinates * tile_size) + center_topleft_x;
+			pos_y <= (Y_teleport_cordinates * tile_size) + center_topleft_y;
 		end
 		else if (startOfFrame == 1'b1) begin // perform  position integral only 30 times per second 
 			pos_x  <= pos_x + speed_x; 
