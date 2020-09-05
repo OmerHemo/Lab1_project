@@ -7,6 +7,7 @@ module	breaking_step	(
 					input 	logic	[10:0] tileTopLeftY,  //position of specific tile in the grid
 					input		logic [2:0] step_type,
 					input		logic breaking_step_collision,
+					input		logic	[3:0] HitEdgeCode,
 					
 					
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
@@ -43,6 +44,8 @@ localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;// bitmap  representation fo
 
 
 const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, DEATH=3'b011, WALL=3'b100, SPIKE=3'b101, BRAKE=3'b110; //orientation consts
+
+const logic [3:0] BOTTOM=4'b0001, RIGHT=4'b0010, TOP=4'b0100, LEFT=4'b1000; //orientation consts
 
 
 
@@ -119,7 +122,7 @@ always_ff @(posedge clk or negedge resetN) begin
 		flag <= 1'b0;
 	end
 	else begin
-	if((breaking_step_collision) && (flag==1'b0)) begin
+	if((breaking_step_collision) && (HitEdgeCode == BOTTOM) && (flag==1'b0)) begin
 		currentMap[y_index_in_grid][X_index_in_grid] <= currentMap[y_index_in_grid][X_index_in_grid]-1;
 		flag <= 1'b1;
 	end
