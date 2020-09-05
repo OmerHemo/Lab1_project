@@ -9,6 +9,7 @@ module bumpy_fsm (
 	input logic spike_collision,
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
 	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
+	input logic time_over,
 	
 	output logic [3:0] state,
 	output logic die,
@@ -41,6 +42,9 @@ always_ff@(posedge clk or negedge resetN)
 	end
 	else begin	// Synchronic logic FSM
 		prState <= nxtState;
+		if(time_over) begin
+			prState <= Sdie;
+		end
 	end
 
 	
@@ -86,7 +90,10 @@ always_comb // Update next state and outputs
 			end 
 		
 			Sidle: begin
-				if((step_collision) && (HitEdgeCode==BOTTOM)) begin
+				if(((HitEdgeCode==BOTTOM) && (border_collision)) || (spike_collision)) begin
+					nxtState = Sdie;
+				end
+				else if((step_collision) && (HitEdgeCode==BOTTOM)) begin
 					if (up_key) 
 						nxtState = Sup;
 					else if(left_key)
