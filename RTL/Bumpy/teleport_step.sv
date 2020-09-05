@@ -11,9 +11,7 @@ module	teleport_step	(
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
 					output 	logic	[10:0] offsetY,
 					output	logic	drawingRequest, // indicates pixel inside the bracket
-					output	logic	[7:0]	 RGBout, //optional color output for mux 
-					output	logic	[7:0]	 teleport_cordinates
-					
+					output	logic	[7:0]	 RGBout //optional color output for mux 
 );
 // Frame size
 const int x_FRAME_SIZE = 639 ;
@@ -59,28 +57,6 @@ assign Right_step_x	= (Left_step_x + STEP_WIDTH_X);
 assign Bottom_step_y	= (Top_step_y + STEP_HEIGHT_Y);
 
 //======--------------------------------------------------------------------------------------------------------------=
-
-
-// Maps (4bits X index, 4bits Y index)
-logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [7:0] map = {
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
-		{8'b00001001,8'b01110110,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00010110,8'b00001001,8'b00001001}
-};
- 
-
- logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] currentMap;
- 
- 
-int X_index_in_grid, y_index_in_grid;
-assign X_index_in_grid = ((pixelX) >> 6);
-assign y_index_in_grid = ((pixelY) >> 6);
- 
-//======--------------------------------------------------------------------------------------------------------------=
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
@@ -111,15 +87,6 @@ begin
 	end
 end 
 
-
-always_ff @(posedge clk or negedge resetN) begin
-	if(!resetN) begin
-		currentMap <= map;
-	end
-	else begin
-		teleport_cordinates <= currentMap[y_index_in_grid][X_index_in_grid];
-	end	
-end
 endmodule 
 
 

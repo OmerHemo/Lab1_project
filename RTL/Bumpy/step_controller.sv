@@ -14,7 +14,8 @@ module	step_controller	(
 					output 	logic	[10:0] tileTopLeftX, 
 					output 	logic	[10:0] tileTopLeftY,
 					output 	logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
-					output 	logic debug
+					output 	logic debug,
+					output	logic	[7:0]	 teleport_cordinates
 );
 
 
@@ -49,6 +50,20 @@ logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
 };
 
 
+// Maps (4bits X index | 4bits Y index)
+const logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [7:0] teleportCordinatesMap = {
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001},
+		{8'b00001001,8'b01110110,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00001001,8'b00010110,8'b00001001,8'b00001001}
+};
+ 
+
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] currentTeleportCordinatesMap;
+
 logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap;
 
 int X_index_in_grid, y_index_in_grid;
@@ -77,6 +92,7 @@ always_ff@(posedge clk or negedge resetN)
 begin
 		if(!resetN) begin
 			currentMap <= maps[0];
+			currentTeleportCordinatesMap <= teleportCordinatesMap;
 			prev_step <= maps[0][6][4];
 			flag_change_gate <= 0;
 			debug <= 0;
@@ -98,6 +114,7 @@ begin
 				prev_step <= maps[lvl][6][4];
 				flag_change_gate <= 0;
 			end
+		teleport_cordinates <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
 		end
 end
 
