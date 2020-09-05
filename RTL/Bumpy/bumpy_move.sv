@@ -138,8 +138,8 @@ end
 logic [3:0] X_teleport_cordinates;
 logic [3:0] Y_teleport_cordinates;
 
-assign X_teleport_cordinates = teleport_cordinates[3:0];
-assign Y_teleport_cordinates = teleport_cordinates[7:4];
+assign Y_teleport_cordinates = teleport_cordinates[3:0];
+assign X_teleport_cordinates = teleport_cordinates[7:4];
 
 always_ff@(posedge clk or negedge resetN)
 begin
