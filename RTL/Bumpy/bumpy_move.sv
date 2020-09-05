@@ -72,7 +72,6 @@ always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
 		speed_y	<= 0;
-		debug_led <= 1'b0;
 	end
 	else begin
 		case(state)
@@ -80,7 +79,6 @@ begin
 				speed_y	<= 0;
 			end
 			Sdie: begin
-				debug_led <= 1'b1;
 			end
 			Sidle,Sleft,Sright/*,Sbounce_from_left,Sbounce_from_right*/: begin
 				if((step_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
@@ -92,7 +90,6 @@ begin
 			end
 			Sdown: begin
 				speed_y <= SPEED_Y;
-				debug_led <= 1'b0;
 			end
 			Sup: begin
 				speed_y <= -SPEED_Y;
@@ -135,11 +132,11 @@ end
 // position calculate 
 
 
-int X_teleport_cordinates;
-int Y_teleport_cordinates;
+//int X_teleport_cordinates;
+//int Y_teleport_cordinates;
 
-assign Y_teleport_cordinates = teleport_cordinates[3:0];
-assign X_teleport_cordinates = teleport_cordinates[7:4];
+//assign Y_teleport_cordinates = teleport_cordinates[3:0];
+//assign X_teleport_cordinates = teleport_cordinates[7:4];
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -147,11 +144,17 @@ begin
 	begin
 		pos_x	<= center_topleft_x;
 		pos_y	<= center_topleft_x;
+		debug_led <= 1'b0;
 	end
 	else begin
 		if((teleport_step_collision) && (HitEdgeCode == BOTTOM)) begin
-			pos_x <= (X_teleport_cordinates*tile_size) + center_topleft_x;
-			pos_y <= (Y_teleport_cordinates*tile_size) + center_topleft_y;
+			case(teleport_cordinates[7:4])
+				9: begin
+					pos_x <= (9*tile_size) + center_topleft_x;
+					pos_y <= (6*tile_size) + center_topleft_y;
+					debug_led <= 1'b1;
+				end
+			endcase
 		end
 		else if (startOfFrame == 1'b1) begin // perform  position integral only 30 times per second 
 			pos_x  <= pos_x + speed_x; 

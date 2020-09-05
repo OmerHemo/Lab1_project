@@ -44,7 +44,7 @@ logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
 		{BRAKE,FREE,FREE,FREE,FREE,COIN,BRAKE,FREE,FREE,FREE},
 		{FREE,FREE,FREE,FREE,BRAKE,FREE,FREE,FREE,BRAKE,FREE},
 		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{SPIKE,REGU,BRAKE,REGU,REGU,REGU,REGU,REGU,REGU,REGU}
+		{SPIKE,TPORT,TPORT,REGU,REGU,REGU,REGU,REGU,REGU,REGU}
 	}
 };
 
@@ -108,7 +108,8 @@ begin
 				flag_change_gate <= 0;
 				debug <= 0;
 			end
-		teleport_cordinates <= currentMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
+		//teleport_cordinates <= currentTeleportCordinatesMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
+		teleport_cordinates <= 8'b10010110;
 		end
 end
 
