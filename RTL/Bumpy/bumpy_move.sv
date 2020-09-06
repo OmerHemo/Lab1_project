@@ -142,19 +142,24 @@ always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN)
 	begin
-		pos_x	<= center_topleft_x;
-		pos_y	<= center_topleft_x;
+		//pos_x	<= center_topleft_x;
+		//pos_y	<= center_topleft_x;
+		pos_x <= (0*tile_size) + center_topleft_x;
+		pos_y <= (4*tile_size) + center_topleft_y;
 		debug_led <= 1'b0;
 	end
 	else begin
 		if((teleport_step_collision) && (HitEdgeCode == BOTTOM)) begin
-			case(teleport_cordinates[7:4])
+			pos_x <= ((teleport_cordinates[7:4])*tile_size) + center_topleft_x;
+			pos_y <= ((teleport_cordinates[3:0])*tile_size) + center_topleft_y;
+			/*case(teleport_cordinates[7:4])
 				9: begin
 					pos_x <= (9*tile_size) + center_topleft_x;
 					pos_y <= (6*tile_size) + center_topleft_y;
 					debug_led <= 1'b1;
 				end
 			endcase
+			*/
 		end
 		else if (startOfFrame == 1'b1) begin // perform  position integral only 30 times per second 
 			pos_x  <= pos_x + speed_x; 

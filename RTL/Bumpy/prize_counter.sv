@@ -22,7 +22,7 @@ always_ff @(posedge prize_collision or negedge resetN) begin
 	end
    else if(enable) begin
 		prize_counter <= prize_counter+1;
-		if(prize_counter >= 4'h0)
+		if(prize_counter >= 4'h8)
 			open_gate <= 1'b1;
 	end
 end	

@@ -23,45 +23,45 @@ parameter  int NUM_OF_COLS = 10;
 
 //======--------------------------------------------------------------------------------------------------------------=
 
-const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, COIN=3'b011, TPORT=3'b100, SPIKE=3'b101, BRAKE=3'b110; //orientation consts
+const logic [2:0] FREE=3'b000, REGU=3'b001, GATE=3'b010, COIN=3'b011, PORT=3'b100, SPIK=3'b101, BRAK=3'b110; //orientation consts
 
 
 // Maps
 logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
 	{
+		{SPIK,SPIK,SPIK,SPIK,SPIK,SPIK,SPIK,SPIK,SPIK,FREE},
 		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{BRAKE,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE},
-		{FREE,FREE,COIN,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{FREE,BRAKE,FREE,REGU,FREE,REGU,FREE,COIN,FREE,REGU},
-		{FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE},
-		{REGU,FREE,BRAKE,BRAKE,FREE,FREE,FREE,FREE,REGU,FREE},
-		{FREE,TPORT,REGU,REGU,FREE,SPIKE,FREE,TPORT,FREE,REGU}
+		{BRAK,BRAK,BRAK,BRAK,BRAK,BRAK,BRAK,FREE,FREE,FREE},
+		{SPIK,COIN,SPIK,COIN,SPIK,COIN,SPIK,BRAK,FREE,SPIK},
+		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,SPIK,BRAK,FREE},
+		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,SPIK,FREE},
+		{PORT,PORT,PORT,PORT,PORT,PORT,PORT,PORT,PORT,PORT}
 	},
 	{
 		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{BRAKE,FREE,FREE,FREE,FREE,COIN,BRAKE,FREE,FREE,FREE},
-		{FREE,FREE,FREE,FREE,BRAKE,FREE,FREE,FREE,BRAKE,FREE},
-		{FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
-		{SPIKE,TPORT,TPORT,REGU,REGU,REGU,REGU,REGU,REGU,REGU}
+		{BRAK,FREE,FREE,FREE,REGU,FREE,FREE,FREE,FREE,FREE},
+		{FREE,FREE,COIN,FREE,FREE,FREE,FREE,FREE,FREE,FREE},
+		{FREE,BRAK,FREE,REGU,FREE,REGU,FREE,COIN,FREE,REGU},
+		{FREE,FREE,FREE,FREE,FREE,FREE,REGU,FREE,FREE,FREE},
+		{REGU,FREE,BRAK,BRAK,FREE,FREE,FREE,FREE,REGU,FREE},
+		{FREE,PORT,REGU,REGU,FREE,SPIK,FREE,PORT,FREE,REGU}
 	}
 };
 
 
 // Maps (4bits X index | 4bits Y index)
 const logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [7:0] teleportCordinatesMap = {
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110},
-		{8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110,8'b10010110}
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000,8'b00000000},
+		{8'b00010110,8'b00100110,8'b00110110,8'b01000110,8'b01010110,8'b01100110,8'b01110110,8'b10000110,8'b10010110,8'b00000110}
 };
  
 
-logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] currentTeleportCordinatesMap;
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [7:0] currentTeleportCordinatesMap;
 
 logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap;
 
@@ -79,6 +79,7 @@ assign y_bumpy_index_in_grid = ((bumpy_y) >> 6);
 always_ff@(posedge clk)
 begin
 		step_type <= (currentMap[y_index_in_grid][X_index_in_grid]);
+		teleport_cordinates <= (currentTeleportCordinatesMap[y_index_in_grid][X_index_in_grid]);
 		tileTopLeftX	<= ((X_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 end 
@@ -92,24 +93,21 @@ begin
 		if(!resetN) begin
 			currentMap <= maps[lvl];
 			currentTeleportCordinatesMap <= teleportCordinatesMap;
-			prev_step <= maps[lvl][6][4];
+			prev_step <= maps[lvl][1][9];
 			flag_change_gate <= 0;
 			debug <= 0;
 		end
 		else begin 
 			if(gate && (flag_change_gate ==0)) begin
-				prev_step <= currentMap[6][4];
-				currentMap[6][4] <= GATE;
+				prev_step <= currentMap[1][9];
+				currentMap[1][9] <= GATE;
 				flag_change_gate <= 1;
-				debug <= 1;
 			end
 			else if(gate == 0) begin
-				currentMap[6][4] <= prev_step;
+				currentMap[1][9] <= prev_step;
 				flag_change_gate <= 0;
 				debug <= 0;
 			end
-		//teleport_cordinates <= currentTeleportCordinatesMap[y_bumpy_index_in_grid][X_bumpy_index_in_grid];
-		teleport_cordinates <= 8'b10010110;
 		end
 end
 
