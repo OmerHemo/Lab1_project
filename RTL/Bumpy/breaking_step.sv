@@ -65,18 +65,18 @@ assign Bottom_step_y	= (Top_step_y + STEP_HEIGHT_Y);
 
 
 // Maps
-logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] map = {
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11},
-		{2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11,2'b11}
+logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map = {
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b100,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011}
 };
  
 
- logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [1:0] currentMap;
+ logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] currentMap;
  
  
 int X_index_in_grid, y_index_in_grid;
@@ -94,7 +94,7 @@ begin
 			insideBracket = ( (pixelX  >= Left_step_x) &&  (pixelX < Right_step_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 								&& (pixelY  >= Top_step_y) &&  (pixelY < Bottom_step_y) )  ; 
 			
-			if ((insideBracket) && (currentMap[y_index_in_grid][X_index_in_grid] > 2'b00)) // test if it is inside the rectangle 
+			if ((insideBracket) && (currentMap[y_index_in_grid][X_index_in_grid] > 3'b000)) // test if it is inside the rectangle 
 			begin 
 				RGBout <= OBJECT_COLOR[currentMap[y_index_in_grid][X_index_in_grid]];	// colors table 
 				drawingRequest <= 1'b1;
@@ -122,7 +122,7 @@ always_ff @(posedge clk or negedge resetN) begin
 		flag <= 1'b0;
 	end
 	else begin
-	if((breaking_step_collision) && (HitEdgeCode == BOTTOM) && (flag==1'b0)) begin
+	if((breaking_step_collision) && (HitEdgeCode == BOTTOM) && (flag==1'b0) && (currentMap[y_index_in_grid][X_index_in_grid] > 3'b000)) begin
 		currentMap[y_index_in_grid][X_index_in_grid] <= currentMap[y_index_in_grid][X_index_in_grid]-1;
 		flag <= 1'b1;
 	end

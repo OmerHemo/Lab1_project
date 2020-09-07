@@ -147,7 +147,10 @@ always_comb // Update next state and outputs
 						
 			
 			Sup: begin
-				if(down_key) begin
+				if(((HitEdgeCode==BOTTOM) && (border_collision)) || (spike_collision)) begin
+							nxtState = Sdie;
+						end
+				else if(down_key) begin
 					nxtState = Sdown;
 				end
 				else if((free_collision) && (HitEdgeCode==BOTTOM)) begin
