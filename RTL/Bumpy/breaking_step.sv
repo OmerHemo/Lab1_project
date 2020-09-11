@@ -8,7 +8,7 @@ module	breaking_step	(
 					input		logic [2:0] step_type,
 					input		logic breaking_step_collision,
 					input		logic	[3:0] HitEdgeCode,
-					
+					input		logic start_of_frame,
 					
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
 					output 	logic	[10:0] offsetY,
@@ -37,7 +37,7 @@ parameter  int NUM_OF_COLS = 10;
 //__________________________________
 //parameter  logic [7:0] OBJECT_COLOR = 8'h8b; 
 
-logic [2:0][7:0] OBJECT_COLOR = {8'hf0,8'h0f,8'hFF}; 
+logic [2:0][7:0] OBJECT_COLOR = {8'h00,8'hf0,8'h0f,8'hcf,8'hff}; 
 
 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;// bitmap  representation for a transparent pixel 
@@ -70,7 +70,7 @@ logic [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] map = {
 		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
 		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
 		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
-		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b100,3'b011},
+		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
 		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011},
 		{3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011,3'b011}
 };
@@ -96,7 +96,7 @@ begin
 			
 			if ((insideBracket) && (currentMap[y_index_in_grid][X_index_in_grid] > 3'b000)) // test if it is inside the rectangle 
 			begin 
-				RGBout <= OBJECT_COLOR[currentMap[y_index_in_grid][X_index_in_grid]];	// colors table 
+				RGBout <= OBJECT_COLOR[(currentMap[y_index_in_grid][X_index_in_grid])];	// colors table 
 				drawingRequest <= 1'b1;
 				offsetX <= (pixelX - Left_step_x); //calculate relative offsets from top left corner
 				offsetY <= (pixelY - Top_step_y);
@@ -122,12 +122,24 @@ always_ff @(posedge clk or negedge resetN) begin
 		flag <= 1'b0;
 	end
 	else begin
-	if((breaking_step_collision) && (HitEdgeCode == BOTTOM) && (flag==1'b0) && (currentMap[y_index_in_grid][X_index_in_grid] > 3'b000)) begin
-		currentMap[y_index_in_grid][X_index_in_grid] <= currentMap[y_index_in_grid][X_index_in_grid]-1;
-		flag <= 1'b1;
-	end
-	else if(!breaking_step_collision)
-		flag <= 1'b0;
+		if((breaking_step_collision) && (HitEdgeCode == BOTTOM) && (flag==1'b0) && (currentMap[y_index_in_grid][X_index_in_grid] > 3'b000)) begin
+			//currentMap[y_index_in_grid][X_index_in_grid] <= (currentMap[y_index_in_grid][X_index_in_grid]-3'b001);
+			flag <= 1'b1;
+			case(currentMap[y_index_in_grid][X_index_in_grid])
+				3: begin
+					currentMap[y_index_in_grid][X_index_in_grid] <= 2;
+				end
+				2: begin
+					currentMap[y_index_in_grid][X_index_in_grid] <= 1;
+				end
+				1: begin
+					currentMap[y_index_in_grid][X_index_in_grid] <= 0;
+				end
+			endcase
+		end
+		else if(start_of_frame) begin
+			flag <= 1'b0;
+		end
 	end
 end	
 endmodule 

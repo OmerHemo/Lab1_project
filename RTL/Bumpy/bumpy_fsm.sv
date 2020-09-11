@@ -14,7 +14,8 @@ module bumpy_fsm (
 	
 	output logic [3:0] state,
 	output logic die,
-	output logic reset_state_N
+	output logic reset_state_N,
+	output logic debug
 	);                            
 
 enum logic [3:0] {Sreset ,Sidle, Sleft, Sright, Sdown, Sup, Sdie, Sbounce_from_left, Sbounce_from_right, Sbounce_from_top, Sdown_from_right, Sdown_from_left} prState, nxtState;
@@ -83,7 +84,6 @@ always_comb // Update next state and outputs
 		//die = 1'b0;
 		
 		case (prState)
-		
 			Sreset: begin
 				if (up_key || left_key || right_key || down_key) begin
 					nxtState = Sdown; // replace to Sdown
@@ -149,9 +149,12 @@ always_comb // Update next state and outputs
 			Sup: begin
 				if(((HitEdgeCode==BOTTOM) && (border_collision)) || (spike_collision)) begin
 							nxtState = Sdie;
-						end
+				end
 				else if(down_key) begin
 					nxtState = Sdown;
+				end
+				else if( (border_collision || step_collision) && HitEdgeCode==TOP) begin
+							nxtState = Sdown;
 				end
 				else if((free_collision) && (HitEdgeCode==BOTTOM)) begin
 							if(left_key) begin
@@ -162,9 +165,6 @@ always_comb // Update next state and outputs
 							end
 							else
 								nxtState = Sup;
-							end
-				else if(border_collision || ((step_collision) && (HitEdgeCode==TOP))) begin
-							nxtState = Sdown;
 				end
 				else
 					nxtState = Sup;
@@ -172,9 +172,7 @@ always_comb // Update next state and outputs
 				
 			Sdie: begin
 					nxtState = Sdie;
-				end 
-				
-						
+				end		
 			endcase
 	end 
 	

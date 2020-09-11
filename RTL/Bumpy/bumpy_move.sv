@@ -80,7 +80,7 @@ begin
 			end
 			Sdie: begin
 			end
-			Sidle,Sleft,Sright/*,Sbounce_from_left,Sbounce_from_right*/: begin
+			Sidle,Sleft,Sright: begin
 				if((step_collision) && (HitEdgeCode == BOTTOM) && (speed_y >=0)) begin
 					speed_y <= -SPEED_Y;
 				end
@@ -112,13 +112,13 @@ begin
 			Sreset,Sidle,Sdown,Sup,Sdie:
 				speed_x	<= 0;
 			Sleft: begin
-				if((pos_x < jump_start_x - JUMP_LIMIT_X) && (speed_x <= 0))
+				if((pos_x < jump_start_x - JUMP_LIMIT_X - speed_x) && (speed_x <= 0))
 					speed_x <= 0;
 				else
 					speed_x <= -SPEED_X;
 			end
 			Sright: begin
-				if((pos_x > jump_start_x + JUMP_LIMIT_X) && (speed_x >= 0))
+				if((pos_x > jump_start_x + JUMP_LIMIT_X - speed_x) && (speed_x >= 0))
 					speed_x <= 0;
 				else
 					speed_x <= SPEED_X;

@@ -2,6 +2,7 @@ module	menu_screen	(
 					input		logic	clk,
 					input		logic onSec,
 					input		logic	resetN,
+					input		logic menu_on,
 					input 	logic	[10:0] pixelX,// current VGA pixel 
 					input 	logic	[10:0] pixelY,
 					input		logic down_keyN,
@@ -42,7 +43,7 @@ begin
 		selected	<=	0;
 		press_flag <= 0;
 	end
-	else begin
+	else if(menu_on) begin
 		if(!down_keyN && (press_flag == 0) && (selected < (NUM_OF_LVLS-1))) begin
 			press_flag <= 1;
 			selected	<=	selected + 1;
@@ -65,7 +66,7 @@ begin
 		menu_comp	<=	0;
 		selcted_lvl <= 0;
 	end
-	else begin
+	else if(menu_on) begin
 		if(select_key) begin
 			menu_comp	<=1;
 			selcted_lvl <= selected;
@@ -105,12 +106,16 @@ begin
 			drawingRequest<= 0;
 			RGBout<= 0;
 		end
-		else begin
+		else if(menu_on) begin
 			button_type <= (current_map[y_index_in_grid][X_index_in_grid]);
 			tileTopLeftX	<= ((X_index_in_grid)<<7); //calculate relative offsets from top left corner of the brick
 			tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 			drawingRequest<= 1;
 			RGBout<= OBJECT_COLOR_BACK;
+		end
+		else begin
+			drawingRequest<= 0;
+			RGBout<= 0;
 		end
 		
 end
