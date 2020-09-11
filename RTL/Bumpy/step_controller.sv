@@ -5,7 +5,7 @@ module	step_controller	(
 					input 	logic	[10:0] pixelX,// current VGA pixel 
 					input 	logic	[10:0] pixelY,
 					input 	logic gate,
-					input		logic [2:0] lvl,
+					input		logic [1:0] lvl,
 					
 					input		logic [10:0] bumpy_x,
 					input		logic [10:0] bumpy_y,

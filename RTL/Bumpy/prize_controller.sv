@@ -8,7 +8,7 @@ module	prize_controller	(
 					input		logic [10:0] bumpy_x,
 					input		logic [10:0] bumpy_y,
 					input 	logic [9:0] random_prize,
-					input		logic [2:0] lvl,
+					input		logic [1:0] lvl,
 					input		logic coin_step_collision,
 					input		logic	[3:0] HitEdgeCode,
 

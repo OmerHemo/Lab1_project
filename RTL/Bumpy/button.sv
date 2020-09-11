@@ -29,7 +29,7 @@ parameter int BUTTON_PADDING_Y = 7;
 //__________________________________
 parameter  logic [7:0] OBJECT_COLOR_BACK = 8'b00000010;
 parameter  logic [7:0] OBJECT_COLOR_REGU = 8'b10000000;
-parameter  logic [7:0] OBJECT_COLOR_SLCT = 8'b00010000; 
+parameter  logic [7:0] OBJECT_COLOR_SLCT = 8'b10010001; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
 
 const logic [2:0] FREE=3'b000, REGU=3'b001, SLCT=3'b010; //orientation consts
@@ -62,7 +62,7 @@ begin
 			insideBracket  = ( (pixelX  >= Left_button_x) &&  (pixelX < Right_button_x) // ----- LEGAL BLOCKING ASSINGMENT in ALWAYS_FF CODE 
 								&& (pixelY  >= Top_button_y) &&  (pixelY < Bottom_button_y) )  ; 
 			
-			if (insideBracket) // test if it is inside the rectangle 
+			if ((button_type != FREE) && insideBracket) // test if it is inside the rectangle 
 			begin
 				debug2 <= 1;
 				if (button_type == SLCT) begin

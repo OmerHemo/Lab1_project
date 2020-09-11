@@ -17,17 +17,25 @@ module life_counter(
    );
 
 
-
-always_ff @(posedge die or negedge resetN) begin
+logic flag;
+always_ff @(posedge clk or negedge resetN) begin
 	if(!resetN) begin
 		life_counter <= 4'b0011;
 		lost_all_lifes <= 1'b0;
+		flag <= 0;
 	end
-   else if(enable && die) begin
-		life_counter <= life_counter-1;
-		if(life_counter <= 4'b0000) begin
-			lost_all_lifes <= 1'b1;
-		end	
+   else begin
+		if(enable && die && (flag == 0)) begin
+			flag <= 1;
+			life_counter <= life_counter-1;
+			if(life_counter <= 4'b0000) begin
+				lost_all_lifes <= 1'b1;
+			end
+		end
+		else if(~die) begin
+			flag <= 0;
+		end
+		
 	end
 end	
 
