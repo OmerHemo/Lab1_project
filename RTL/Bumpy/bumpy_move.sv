@@ -149,7 +149,7 @@ begin
 		debug_led <= 1'b0;
 	end
 	else begin
-		if((teleport_step_collision) && (HitEdgeCode == BOTTOM)) begin
+		if((teleport_step_collision) && (HitEdgeCode & BOTTOM)) begin
 			pos_x <= ((teleport_cordinates[7:4])*tile_size) + center_topleft_x;
 			pos_y <= ((teleport_cordinates[3:0])*tile_size) + center_topleft_y;
 			/*case(teleport_cordinates[7:4])

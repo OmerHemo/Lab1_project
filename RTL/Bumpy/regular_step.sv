@@ -42,8 +42,8 @@ localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation f
 const logic [2:0] FREE=3'b000, REGU=3'b001; //orientation consts
 
 
-int Left_step_x;
-int Top_step_y;
+logic	signed [10:0] Left_step_x;
+logic	signed [10:0] Top_step_y;
 int Right_step_x;
 int Bottom_step_y;
 logic insideBracket; 
@@ -72,6 +72,8 @@ begin
 				drawingRequest <= 1'b1 ;
 				offsetX	<= (pixelX - Left_step_x); //calculate relative offsets from top left corner
 				offsetY	<= (pixelY - Top_step_y);
+				//offsetX	<= 10; //calculate relative offsets from top left corner
+				//offsetY	<= 3;
 			end 
 			else begin  
 				RGBout <= TRANSPARENT_ENCODING ; // so it will not be displayed 

@@ -43,13 +43,14 @@ always_ff@(posedge clk or negedge resetN)
 		prState <= Sreset;
 	end
 	else begin	// Synchronic logic FSM
-		prState <= nxtState;
 		if(time_over) begin
 			prState <= Sdie;
 		end
-		if((HitEdgeCode==BOTTOM) && (teleport_step_collision)) begin
+		else if((HitEdgeCode & BOTTOM) && (teleport_step_collision)) begin
 			prState <= Sup;
 		end
+		else
+			prState <= nxtState;
 	end
 
 	

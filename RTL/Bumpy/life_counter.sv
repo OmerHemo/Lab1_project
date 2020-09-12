@@ -27,8 +27,10 @@ always_ff @(posedge clk or negedge resetN) begin
    else begin
 		if(enable && die && (flag == 0)) begin
 			flag <= 1;
-			life_counter <= life_counter-1;
-			if(life_counter <= 4'b0000) begin
+			if(life_counter > 0) begin
+				life_counter <= life_counter-1;
+			end
+			else begin
 				lost_all_lifes <= 1'b1;
 			end
 		end

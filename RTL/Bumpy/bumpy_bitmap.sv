@@ -35,6 +35,25 @@ localparam  int OBJECT_WIDTH_X_DIVIDER =  OBJECT_NUMBER_OF_X_BITS - 2;
 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// RGB value in the bitmap representing a transparent pixel 
 
+logic [0:OBJECT_WIDTH_X-1] [0:OBJECT_HEIGHT_Y-1] [8-1:0] object_colors = {
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hFF, 8'hFF, 8'hFF, 8'hF5, 8'hF5, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hF5, 8'hF5, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'h64, 8'h64, 8'h64, 8'hF5, 8'hF5, 8'h00, 8'hF5, 8'hFF, 8'hE0, 8'hE0, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'h64, 8'hF5, 8'h64, 8'hF5, 8'hF5, 8'hF5, 8'h00, 8'hF5, 8'hF5, 8'hE0, 8'hE0, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'h64, 8'hF5, 8'h64, 8'h64, 8'hF5, 8'hF5, 8'hF5, 8'h00, 8'hF5, 8'hF5, 8'hE0, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'h64, 8'h64, 8'hF5, 8'hF5, 8'hF5, 8'hF5, 8'h00, 8'h00, 8'h00, 8'hE0, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hF5, 8'hF5, 8'hF5, 8'hF5, 8'hF5, 8'hF5, 8'hE0, 8'hE0, 8'hFF, 8'hFF, 8'hFF },
+{8'hF5, 8'hF5, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'h07, 8'hE0, 8'hE0, 8'h07, 8'hE0, 8'hE0, 8'hFF, 8'hFF, 8'h64, 8'hFF },
+{8'hF5, 8'hF5, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'hE0, 8'h07, 8'hE0, 8'hE0, 8'h07, 8'hFF, 8'hFF, 8'h64, 8'h64, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hE0, 8'hE0, 8'h07, 8'h07, 8'h07, 8'hF8, 8'h07, 8'h07, 8'h64, 8'h64, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'h07, 8'h07, 8'h07, 8'hF8, 8'h07, 8'h07, 8'h07, 8'h07, 8'h64, 8'h64, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'h64, 8'h64, 8'h07, 8'h07, 8'h07, 8'h07, 8'h07, 8'h07, 8'h07, 8'h07, 8'h64, 8'h64, 8'hFF },
+{8'hFF, 8'hFF, 8'h64, 8'h64, 8'h64, 8'h07, 8'h07, 8'h07, 8'h07, 8'h07, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'h64, 8'h64, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF }
+};
+
 
 //////////--------------------------------------------------------------------------------------------------------------=
 //hit bit map has one bit per edge:  hit_colors[3:0] =   {Left, Top, Right, Bottom}	
@@ -62,8 +81,8 @@ begin
 
 	
 		if (InsideRectangle == 1'b1 )  // inside an external bracket 
-			//RGBout <= object_colors[offsetY][offsetX];	 
-			RGBout <=  {HitEdgeCode, 4'b0000 } ;  //get RGB from the colors table, option  for debug 
+			RGBout <= object_colors[offsetY][offsetX];	 
+			//RGBout <=  {HitEdgeCode, 4'b0000 } ;  //get RGB from the colors table, option  for debug 
 		else 
 			RGBout <= TRANSPARENT_ENCODING ; // force color to transparent so it will not be displayed 
 	end 

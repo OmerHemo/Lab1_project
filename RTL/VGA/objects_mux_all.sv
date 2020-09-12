@@ -22,14 +22,7 @@ module	objects_mux_all	(
 					
 		// prize 
 					input		logic	prizeDrawingRequest,
-					input		logic	[7:0] prizeRGB,		
-		//debug
-					input		logic	debugDrawingRequest,
-					input		logic	[7:0] debugRGB,
-					
-		//gate
-					input		logic	gateDrawingRequest,
-					input		logic	[7:0] gateRGB,
+					input		logic	[7:0] prizeRGB,	
 					
 		//win
 					input		logic	winDrawingRequest,
@@ -45,22 +38,6 @@ module	objects_mux_all	(
 		//life counter
 					input		logic	lifeCounterDrawingRequest,
 					input		logic	[7:0] lifeCounterRGB,
-		
-		//spike step
-					input		logic	spikeStepDrawingRequest,
-					input		logic	[7:0] spikeStepRGB,
-					
-		//brake step
-					input		logic	brakeStepDrawingRequest,
-					input		logic	[7:0] brakeStepRGB,
-					
-		//coin step
-					input		logic	coinStepDrawingRequest,
-					input		logic	[7:0] coinStepRGB,
-					
-		//teleport step
-					input		logic	teleportStepDrawingRequest,
-					input		logic	[7:0] teleportStepRGB,
 							
 		//button
 					input		logic	buttonDrawingRequest,
@@ -92,7 +69,7 @@ begin
 		if(buttonDrawingRequest == 1'b1)
 			tmpRGB <= buttonRGB;
 		else if(winDrawingRequest == 1'b1 )
-			tmpRGB <= winRGB;
+			tmpRGB <= backGroundRGB;
 		else if(dieDrawingRequest == 1'b1 )
 			tmpRGB <= dieRGB;
 		else if(bumpyDrawingRequest == 1'b1 )
@@ -105,20 +82,8 @@ begin
 			tmpRGB <= stopwatchRGB;
 		else if (stepDrawingRequest == 1'b1 )   
 			tmpRGB <= stepRGB;  
-		else if (spikeStepDrawingRequest == 1'b1 )   
-			tmpRGB <= spikeStepRGB;  
-		else if (brakeStepDrawingRequest == 1'b1 )   
-			tmpRGB <= brakeStepRGB;
-		else if (coinStepDrawingRequest == 1'b1 )   
-			tmpRGB <= coinStepRGB;
-		else if (teleportStepDrawingRequest == 1'b1 )   
-			tmpRGB <= teleportStepRGB;
 		else if(prizeDrawingRequest  == 1'b1 ) 
 			tmpRGB <= prizeRGB;
-		else if(debugDrawingRequest  == 1'b1 ) 
-			tmpRGB <= debugRGB;
-		else if(gateDrawingRequest  == 1'b1 ) 
-			tmpRGB <= gateRGB;
 		else
 			tmpRGB <= backGroundRGB ; 
 	end

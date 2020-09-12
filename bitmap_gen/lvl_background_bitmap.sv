@@ -1,37 +1,5 @@
-//-- Alex Grinshpun Apr 2017
-//-- Dudy Nov 13 2017
-// SystemVerilog version Alex Grinshpun May 2018
-// coding convention dudy December 2018
-// (c) Technion IIT, Department of Electrical Engineering 2019 
-
-
-module	back_ground_drawSquare	(	
-
-					input	logic	clk,
-					input	logic	resetN,
-					input 	logic	[10:0]	pixelX,
-					input 	logic	[10:0]	pixelY,
-
-					output	logic	[7:0]	BG_RGB,
-					output	logic		boardersDrawReq 
-);
-
-const int	xFrameSize	=	639;
-const int	yFrameSize	=	479;
-const int	bracketOffset =	1;
-
-
-// this is the devider used to acess the right pixel 
-localparam  int OBJECT_NUMBER_OF_Y_BITS = 7;  // 2^6 = 64 
-localparam  int OBJECT_NUMBER_OF_X_BITS = 7;  // 2^4 = 64 
-
-
-localparam  int OBJECT_HEIGHT_Y = 1 <<  OBJECT_NUMBER_OF_Y_BITS ;
-localparam  int OBJECT_WIDTH_X = 1 <<  OBJECT_NUMBER_OF_X_BITS;
-
-// this is the devider used to acess the right pixel 
-localparam  int OBJECT_HEIGHT_Y_DIVIDER = OBJECT_NUMBER_OF_Y_BITS - 2; //how many pixel bits are in every collision pixel
-localparam  int OBJECT_WIDTH_X_DIVIDER =  OBJECT_NUMBER_OF_X_BITS - 2;
+localparam  int OBJECT_HEIGHT_Y = 128;
+localparam  int OBJECT_WIDTH_X = 128;
 
 logic [0:OBJECT_WIDTH_X-1] [0:OBJECT_HEIGHT_Y-1] [8-1:0] object_colors = {
 {8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B, 8'h7B },
@@ -164,28 +132,9 @@ logic [0:OBJECT_WIDTH_X-1] [0:OBJECT_HEIGHT_Y-1] [8-1:0] object_colors = {
 {8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75, 8'h75 }
 };
 
-always_ff@(posedge clk or negedge resetN)
-begin
-	if(!resetN) begin
-			BG_RGB <= 0;
-			boardersDrawReq <= 0;		
-	end 
-	else begin
-		if (        pixelX == bracketOffset ||
-						pixelY == bracketOffset ||
-						pixelX == (xFrameSize-bracketOffset) || 
-						pixelY == (yFrameSize-bracketOffset)) 
-			begin 
-				boardersDrawReq <= 	1'b1 ; // pulse if drawing the boarders 
-			end
-		else begin
-			boardersDrawReq <= 	1'b0 ;
-		end
-	
-	// note numbers can be used inline if they appear only once 
-		BG_RGB <= object_colors[(pixelY >> 2)][(pixelX >> 3)];
-	
-	end; 	
-end 
-endmodule
+wire [7:0] red_sig, green_sig, blue_sig;
+assign red_sig     = {object_colors[offsetY][offsetX][7:5] , 5'd0};
+assign green_sig   = {object_colors[offsetY][offsetX][4:2] , 5'd0};
+assign blue_sig    = {object_colors[offsetY][offsetX][1:0] , 6'd0};
+
 

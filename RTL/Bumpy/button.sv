@@ -82,9 +82,5 @@ begin
 				offsetY	<= 0; //no offset
 			end 	
 	end
-	/*else begin
-			RGBout			<=	8'b0;
-			drawingRequest	<=	1'b0;
-	end*/
 end 
 endmodule 

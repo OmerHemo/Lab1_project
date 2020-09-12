@@ -23,8 +23,8 @@ const int x_GRID_SIZE = x_FRAME_SIZE;
 const int y_GRID_SIZE = y_FRAME_SIZE;
 //_______________________________
 //__________________________________
-parameter  int prize_WIDTH_X = 24;
-parameter  int prize_HEIGHT_Y = 24;
+parameter  int prize_WIDTH_X = 14;
+parameter  int prize_HEIGHT_Y = 16;
 parameter  int prize_TILE_OFFSET_x = 20;
 parameter  int prize_TILE_OFFSET_y = 20;
 

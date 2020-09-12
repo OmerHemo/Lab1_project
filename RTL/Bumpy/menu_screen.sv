@@ -67,6 +67,7 @@ begin
 		selcted_lvl <= 0;
 	end
 	else if(menu_on) begin
+		menu_comp	<=0;
 		if(select_key) begin
 			menu_comp	<=1;
 			selcted_lvl <= selected;

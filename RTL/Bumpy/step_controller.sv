@@ -12,8 +12,8 @@ module	step_controller	(
 					output	logic [2:0] step_type,
 					output 	logic	[10:0] tileTopLeftX, 
 					output 	logic	[10:0] tileTopLeftY,
-					output 	logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
-					output 	logic debug,
+					output 	logic	[10:0] offsetX,
+					output 	logic	[10:0] offsetY,
 					output	logic	[7:0]	 teleport_cordinates
 );
 
@@ -48,6 +48,8 @@ logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [2:0] maps = {
 	}
 };
 
+const logic [0:3] [3:0] gate_pos_x = {4'h9,4'h8,4'h8,4'h8};
+const logic [0:3] [3:0] gate_pos_y = {4'h1,4'h5,4'h5,4'h5};
 
 // Maps (4bits X index | 4bits Y index)
 const logic [0:1] [0:NUM_OF_ROWS-1] [0:NUM_OF_COLS-1] [7:0] teleportCordinatesMap = {
@@ -84,6 +86,9 @@ assign X_bumpy_index_in_grid = ((bumpy_x) >> 6);
 assign y_bumpy_index_in_grid = ((bumpy_y) >> 6);
 
 
+localparam  int STEP_TILE_OFFSET_x = 7;
+localparam  int STEP_TILE_OFFSET_y = 50;
+
 // tile clock
 always_ff@(posedge clk)
 begin
@@ -91,6 +96,8 @@ begin
 		teleport_cordinates <= (currentTeleportCordinatesMap[y_index_in_grid][X_index_in_grid]);
 		tileTopLeftX	<= ((X_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
 		tileTopLeftY	<= ((y_index_in_grid)<<6); //calculate relative offsets from top left corner of the brick
+		offsetX <= (pixelX - (((X_index_in_grid)<<6) + STEP_TILE_OFFSET_x));
+		offsetY <= (pixelY - (((y_index_in_grid)<<6) + STEP_TILE_OFFSET_y));
 end 
 
 
@@ -102,20 +109,18 @@ begin
 		if(!resetN) begin
 			currentMap <= maps[lvl];
 			currentTeleportCordinatesMap <= teleportCordinatesMap[lvl];
-			prev_step <= maps[lvl][1][9];
+			prev_step <= maps[(gate_pos_y[lvl])][(gate_pos_x[lvl])];
 			flag_change_gate <= 0;
-			debug <= 0;
 		end
 		else begin 
 			if(gate && (flag_change_gate ==0)) begin
-				prev_step <= currentMap[1][9];
-				currentMap[1][9] <= GATE;
+				prev_step <= currentMap[(gate_pos_y[lvl])][(gate_pos_x[lvl])];
+				currentMap[(gate_pos_y[lvl])][(gate_pos_x[lvl])] <= GATE;
 				flag_change_gate <= 1;
 			end
 			else if(gate == 0) begin
-				currentMap[1][9] <= prev_step;
+				currentMap[(gate_pos_y[lvl])][(gate_pos_x[lvl])] <= prev_step;
 				flag_change_gate <= 0;
-				debug <= 0;
 			end
 		end
 end

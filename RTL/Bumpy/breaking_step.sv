@@ -10,6 +10,7 @@ module	breaking_step	(
 					input		logic	[3:0] HitEdgeCode,
 					input		logic start_of_frame,
 					
+					output	logic [2:0] brake_state,
 					output 	logic	[10:0] offsetX,// offset inside bracket from top left position 
 					output 	logic	[10:0] offsetY,
 					output	logic	drawingRequest, // indicates pixel inside the bracket
@@ -98,6 +99,7 @@ begin
 			begin 
 				RGBout <= OBJECT_COLOR[(currentMap[y_index_in_grid][X_index_in_grid])];	// colors table 
 				drawingRequest <= 1'b1;
+				brake_state <= (currentMap[y_index_in_grid][X_index_in_grid]);
 				offsetX <= (pixelX - Left_step_x); //calculate relative offsets from top left corner
 				offsetY <= (pixelY - Top_step_y);
 			end 

@@ -21,7 +21,7 @@ const int SCREEN_DURATION_SEC = 3;
 logic [3:0] timer_died, timer_win;
 
 logic flag_died;
-
+logic [2:0] died_count;
 assign reset_lvl_N = ((~(menu_screen || died_screen)) & resetN);
 assign lvl = lvl_selected;
 
@@ -32,7 +32,7 @@ begin
 			menu_screen <= 1;
 		end
 		else begin
-			if(level_comp || zero_lives) begin
+			if(level_comp || (died_count > 3)) begin
 				menu_screen <= 1;
 			end
 			else if(menu_comp) begin
@@ -47,33 +47,23 @@ begin
 		if(!resetN) begin
 			died_screen <= 0;
 			flag_died <= 0;
+			died_count <= 0;
 		end
 		else begin
-			if(bumpy_died && (flag_died == 0)) begin
+			if(menu_screen) begin
+				died_count <= 0;
+				died_screen <= 0;
+			end
+			else if(bumpy_died && (flag_died == 0) && (died_count <= 3)) begin
 				died_screen <= 1;
 				flag_died <= 1;
+				died_count <= died_count + 1;
 			end
 			else if(timer_died >= SCREEN_DURATION_SEC - 1) begin
 				died_screen <= 0;
 				flag_died <= 0;
 			end
 		end
-end
-
-// win timer
-always_ff@(posedge one_sec or negedge resetN)
-begin
-	if(!resetN) begin
-		timer_win <= 0;
-	end
-	else begin
-		if( timer_win >= SCREEN_DURATION_SEC - 1) begin
-			timer_win <= 0;
-		end
-		else if(menu_screen) begin
-			timer_win <= timer_win + 1;
-		end
-	end
 end
 
 
