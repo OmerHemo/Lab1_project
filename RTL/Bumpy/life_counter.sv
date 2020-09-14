@@ -16,6 +16,38 @@ module life_counter(
 	output logic [7:0] RGBout //optional color output for mux 
    );
 
+	
+// this is the devider used to acess the right pixel 
+localparam  int OBJECT_NUMBER_OF_Y_BITS = 4;  // 2^4 = 16
+localparam  int OBJECT_NUMBER_OF_X_BITS = 4;  // 2^4 = 16 
+
+
+localparam  int BITMAP_OBJECT_HEIGHT_Y = 1 <<  OBJECT_NUMBER_OF_Y_BITS ;
+localparam  int BITMAP_OBJECT_WIDTH_X = 1 <<  OBJECT_NUMBER_OF_X_BITS;
+
+// generating a smiley bitmap
+
+localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// RGB value in the bitmap representing a transparent pixel 	
+	
+logic [0:BITMAP_OBJECT_WIDTH_X-1] [0:BITMAP_OBJECT_HEIGHT_Y-1] [8-1:0] object_colors = {
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'hFF, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'h00, 8'h00, 8'h80, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'h80, 8'h00, 8'h00, 8'hFF, 8'hFF },
+{8'hFF, 8'h00, 8'h80, 8'h80, 8'hC4, 8'hB6, 8'hB6, 8'hC4, 8'hCC, 8'hCC, 8'hCC, 8'hCC, 8'hC4, 8'h80, 8'h00, 8'hFF },
+{8'hFF, 8'h00, 8'h80, 8'hC4, 8'hB6, 8'hB6, 8'hB6, 8'hB6, 8'hCC, 8'hCC, 8'hCC, 8'hCC, 8'hCC, 8'hC4, 8'h00, 8'hFF },
+{8'h00, 8'h80, 8'h80, 8'hC4, 8'hB6, 8'hB6, 8'hB6, 8'hB6, 8'hCC, 8'hCC, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hC4, 8'h00 },
+{8'h00, 8'h80, 8'h80, 8'hC4, 8'hC4, 8'hB6, 8'hB6, 8'hCC, 8'hCC, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hB6, 8'h00 },
+{8'h00, 8'h80, 8'h80, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hCC, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hB6, 8'h00 },
+{8'h00, 8'h92, 8'h92, 8'h80, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hCC, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hDB, 8'hB6, 8'h00 },
+{8'h00, 8'h92, 8'h92, 8'h92, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hCC, 8'hDB, 8'hDB, 8'hDB, 8'hB6, 8'hC4, 8'h00 },
+{8'h00, 8'h92, 8'h92, 8'h92, 8'h80, 8'hC4, 8'hB6, 8'hB6, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'hC4, 8'h00 },
+{8'h00, 8'h92, 8'h92, 8'h92, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'hC4, 8'hC4, 8'hC4, 8'h00 },
+{8'hFF, 8'h00, 8'h92, 8'h00, 8'hCD, 8'hCD, 8'hDB, 8'hCD, 8'hCD, 8'hCD, 8'hDB, 8'hCD, 8'h00, 8'hC4, 8'h00, 8'hFF },
+{8'hFF, 8'hFF, 8'h00, 8'hCD, 8'hD6, 8'hD6, 8'h00, 8'hFA, 8'hFA, 8'hFA, 8'h00, 8'hFA, 8'hD6, 8'h00, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'h00, 8'hCD, 8'hD6, 8'hD6, 8'h92, 8'hFA, 8'hFA, 8'hFA, 8'h92, 8'hFA, 8'hCD, 8'h00, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'h00, 8'hCD, 8'hD6, 8'hD6, 8'hD6, 8'hFA, 8'hFA, 8'hD6, 8'hCD, 8'h00, 8'hFF, 8'hFF, 8'hFF },
+{8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'hFF, 8'hFF, 8'hFF, 8'hFF }
+};
+
 
 logic flag;
 always_ff @(posedge clk or negedge resetN) begin
@@ -43,8 +75,7 @@ end
 
 parameter  int OBJECT_WIDTH_X = 16;
 parameter  int OBJECT_HEIGHT_Y = 16;
-parameter  logic [7:0] OBJECT_COLOR = 8'h6b; 
-localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;// bitmap  representation for a transparent pixel 
+parameter  logic [7:0] OBJECT_COLOR = 8'h6b;
  
 logic insideBracketLeftLife, insideBracketMidLife, insideBracketRightLife;
 int leftLifeRightX, leftLifeBottomY, midLifeRightX, midLifeBottomY, rightLifeRightX, rightLifeBottomY;
@@ -91,36 +122,41 @@ end
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
-		RGBout			<=	8'b0;
-		drawingRequest	<=	1'b0;
+		RGBout			<=	TRANSPARENT_ENCODING;
+		//drawingRequest	<=	1'b0;
 	end
 	else begin 
 	
 		if(insideBracketLeftLife) // test if it is inside the rectangle 
 		begin 
-			RGBout  <= OBJECT_COLOR ;	// colors table 
-			drawingRequest <= 1'b1 ;
+			//RGBout  <= OBJECT_COLOR ;	// colors table 
+			RGBout <= object_colors[(pixelY - leftLifeTopLeftY)][(pixelX - leftLifeTopLeftX)];
+			//drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - leftLifeTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - leftLifeTopLeftY);
 		end 
 		else if(insideBracketMidLife) begin
-			RGBout  <= OBJECT_COLOR ;	// colors table 
-			drawingRequest <= 1'b1 ;
+			//RGBout  <= OBJECT_COLOR ;	// colors table 
+			RGBout <= object_colors[(pixelY - midLifeTopLeftY)][(pixelX - midLifeTopLeftX)];
+			//drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - midLifeTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - midLifeTopLeftY);
 		end
 		else if(insideBracketRightLife) begin
-			RGBout  <= OBJECT_COLOR ;	// colors table 
-			drawingRequest <= 1'b1 ;
+			//RGBout  <= OBJECT_COLOR ;	// colors table 
+			RGBout <= object_colors[(pixelY - rightLifeTopLeftY)][(pixelX - rightLifeTopLeftX)];
+			//drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - rightLifeTopLeftX); //calculate relative offsets from top left corner
 			offsetY	<= (pixelY - rightLifeTopLeftY);
 		end
 		else begin  
 			RGBout <= TRANSPARENT_ENCODING ; // so it will not be displayed 
-			drawingRequest <= 1'b0 ;// transparent color 
+			//RGBout <= object_colors[(pixelY - leftLifeTopLeftY)][(pixelX - leftLifeTopLeftX)];
+			//drawingRequest <= 1'b0 ;// transparent color 
 			offsetX	<= 0; //no offset
 			offsetY	<= 0; //no offset
 		end 
 	end
-end 
+end
+assign drawingRequest = (RGBout != TRANSPARENT_ENCODING ) ? 1'b1 : 1'b0 ; 
 endmodule 

@@ -8,7 +8,6 @@ module	bumpy_move(
 	input logic free_collision,
 	input logic border_collision,
 	input	logic	[3:0] HitEdgeCode,
-	input logic [7:0] bumpy_size_in,
 	input	logic teleport_step_collision,
 	input	logic	[7:0]	teleport_cordinates,
 

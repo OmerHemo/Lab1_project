@@ -1,0 +1,1198 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+
+HEADER
+{
+	VERSION = 1;
+	TIME_UNIT = ns;
+	DATA_OFFSET = 0.0;
+	DATA_DURATION = 1000.0;
+	SIMULATION_TIME = 0.0;
+	GRID_PHASE = 0.0;
+	GRID_PERIOD = 10.0;
+	GRID_DUTY_CYCLE = 50;
+}
+
+SIGNAL("clk")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("HitEdgeCode")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 4;
+	LSB_INDEX = 0;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("HitEdgeCode[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "HitEdgeCode";
+}
+
+SIGNAL("HitEdgeCode[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "HitEdgeCode";
+}
+
+SIGNAL("HitEdgeCode[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "HitEdgeCode";
+}
+
+SIGNAL("HitEdgeCode[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "HitEdgeCode";
+}
+
+SIGNAL("up_direction")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("step_collision")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("left_direction")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("down_direction")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("right_direction")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("resetN")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("free_collision")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("spike_collision")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("teleport_step_collision")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("time_over")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("border_collision")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("state")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 4;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("state[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "state";
+}
+
+SIGNAL("state[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "state";
+}
+
+SIGNAL("state[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "state";
+}
+
+SIGNAL("state[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "state";
+}
+
+TRANSITION_LIST("clk")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+			LEVEL 0 FOR 2.5;
+			LEVEL 1 FOR 2.5;
+		}
+	}
+}
+
+TRANSITION_LIST("HitEdgeCode[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("HitEdgeCode[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("HitEdgeCode[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("HitEdgeCode[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 1 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("up_direction")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 130.0;
+			LEVEL 1 FOR 60.0;
+			LEVEL 0 FOR 640.0;
+			LEVEL 1 FOR 60.0;
+			LEVEL 0 FOR 110.0;
+		}
+	}
+}
+
+TRANSITION_LIST("step_collision")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 20.0;
+			LEVEL 1 FOR 30.0;
+			LEVEL 0 FOR 80.0;
+			LEVEL 1 FOR 40.0;
+			LEVEL 0 FOR 310.0;
+			LEVEL 1 FOR 20.0;
+			LEVEL 0 FOR 110.0;
+			LEVEL 1 FOR 60.0;
+			LEVEL 0 FOR 170.0;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 25.0;
+		}
+	}
+}
+
+TRANSITION_LIST("left_direction")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 610.0;
+			LEVEL 1 FOR 80.0;
+			LEVEL 0 FOR 310.0;
+		}
+	}
+}
+
+TRANSITION_LIST("down_direction")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 300.0;
+			LEVEL 1 FOR 60.0;
+			LEVEL 0 FOR 640.0;
+		}
+	}
+}
+
+TRANSITION_LIST("right_direction")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 220.0;
+			LEVEL 1 FOR 40.0;
+			LEVEL 0 FOR 740.0;
+		}
+	}
+}
+
+TRANSITION_LIST("resetN")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 990.0;
+		}
+	}
+}
+
+TRANSITION_LIST("free_collision")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("spike_collision")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("teleport_step_collision")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("time_over")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("border_collision")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("state[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 1000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("state[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 12.5;
+			LEVEL 1 FOR 120.0;
+			LEVEL 0 FOR 350.0;
+			LEVEL 1 FOR 360.0;
+			LEVEL 0 FOR 50.0;
+			LEVEL 1 FOR 107.5;
+		}
+	}
+}
+
+TRANSITION_LIST("state[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 132.5;
+			LEVEL 1 FOR 350.0;
+			LEVEL 0 FOR 360.0;
+			LEVEL 1 FOR 50.0;
+			LEVEL 0 FOR 107.5;
+		}
+	}
+}
+
+TRANSITION_LIST("state[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 1;
+			LEVEL 0 FOR 22.5;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 435.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 115.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 225.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 30.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 25.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 2.5;
+		}
+	}
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "resetN";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 0;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "clk";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 1;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "up_direction";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 2;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "left_direction";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 3;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "down_direction";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 4;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "right_direction";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 5;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "step_collision";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 6;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "free_collision";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 7;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "border_collision";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 8;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "spike_collision";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 9;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HitEdgeCode";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 10;
+	TREE_LEVEL = 0;
+	CHILDREN = 11, 12, 13, 14;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HitEdgeCode[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 11;
+	TREE_LEVEL = 1;
+	PARENT = 10;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HitEdgeCode[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 12;
+	TREE_LEVEL = 1;
+	PARENT = 10;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HitEdgeCode[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 1;
+	PARENT = 10;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "HitEdgeCode[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 14;
+	TREE_LEVEL = 1;
+	PARENT = 10;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "time_over";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 15;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "teleport_step_collision";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 16;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "state";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 17;
+	TREE_LEVEL = 0;
+	CHILDREN = 18, 19, 20, 21;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "state[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 18;
+	TREE_LEVEL = 1;
+	PARENT = 17;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "state[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 19;
+	TREE_LEVEL = 1;
+	PARENT = 17;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "state[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 20;
+	TREE_LEVEL = 1;
+	PARENT = 17;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "state[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 21;
+	TREE_LEVEL = 1;
+	PARENT = 17;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+;
