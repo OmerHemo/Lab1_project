@@ -11,7 +11,7 @@ module one_frame_counter
 	output logic duty50
    );
 	
-	localparam oneSecVal = 26'd10_000_000; //// large value for real time
+	localparam oneSecVal = 26'd05_000_000; //// large value for real time
 	int oneSecCount;
 	int sec;
 

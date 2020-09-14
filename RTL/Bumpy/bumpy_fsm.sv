@@ -8,7 +8,6 @@ module bumpy_fsm (
 	input logic border_collision,
 	input logic spike_collision,
 	input	logic	[3:0] HitEdgeCode, //one bit per edge {Left, Top, Right, Bottom}	
-	input logic [3:0] [2:0] area, // area[0]=LEFT_TILE_TYPE | area[1]=UP_TILE_TYPE | area[2]=RIGHT_TILE_TYPE | area[3]=DOWN_TILE_TYPE
 	input logic time_over,
 	input	logic teleport_step_collision,
 	

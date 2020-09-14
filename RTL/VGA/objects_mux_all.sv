@@ -40,8 +40,11 @@ module	objects_mux_all	(
 					input		logic	[7:0] lifeCounterRGB,
 							
 		//button
+					input		logic	diedTextDrawingRequest,
+					input		logic	[7:0] diedTextRGB,
+		// died text
 					input		logic	buttonDrawingRequest,
-					input		logic	[7:0] buttonRGB,			
+					input		logic	[7:0] buttonRGB,
 		// background 
 					input		logic	[7:0] backGroundRGB,
 					
@@ -68,10 +71,12 @@ begin
 	else begin
 		if(buttonDrawingRequest == 1'b1)
 			tmpRGB <= buttonRGB;
+		else if(diedTextDrawingRequest == 1'b1)
+			tmpRGB <= diedTextRGB;
 		else if(winDrawingRequest == 1'b1 )
 			tmpRGB <= backGroundRGB;
 		else if(dieDrawingRequest == 1'b1 )
-			tmpRGB <= dieRGB;
+			tmpRGB <= backGroundRGB;
 		else if(bumpyDrawingRequest == 1'b1 )
 			tmpRGB <= bumpyRGB;
 		else if(prizeCounterDrawingRequest == 1'b1 )
