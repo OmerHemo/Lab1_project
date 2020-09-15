@@ -1549,7 +1549,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -1592 312 -1368 456)
+	(rect -1584 312 -1360 456)
 	(text "prize_counter" (rect 5 0 69 12)(font "Arial" ))
 	(text "inst76" (rect 8 128 36 145)(font "Intel Clear" ))
 	(port
@@ -1654,7 +1654,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 208 128))
 	)
-	(annotation_block (parameter)(rect -1624 472 -1368 552))
+	(annotation_block (parameter)(rect -1616 472 -1360 552))
 )
 (symbol
 	(rect -1032 1944 -792 2120)
@@ -2002,7 +2002,7 @@ agreement for further details.
 	(annotation_block (parameter)(rect -2440 1920 -2168 2072))
 )
 (symbol
-	(rect -1928 792 -1688 968)
+	(rect -1928 776 -1688 952)
 	(text "regular_step" (rect 5 0 65 12)(font "Arial" ))
 	(text "inst13" (rect 8 160 36 177)(font "Intel Clear" ))
 	(port
@@ -2120,7 +2120,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 160))
 	)
-	(annotation_block (parameter)(rect -1920 976 -1648 1128))
+	(annotation_block (parameter)(rect -1920 960 -1648 1112))
 )
 (symbol
 	(rect -1880 1512 -1624 1720)
@@ -3698,7 +3698,7 @@ agreement for further details.
 (symbol
 	(rect -944 1000 -672 1240)
 	(text "prize_controller" (rect 5 0 78 12)(font "Arial" ))
-	(text "inst46" (rect 8 224 36 241)(font "Intel Clear" ))
+	(text "inst47" (rect 8 224 36 241)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -4806,69 +4806,6 @@ agreement for further details.
 	(pt -2160 416)
 )
 (connector
-	(text "clk" (rect -1632 328 -1618 345)(font "Intel Clear" ))
-	(pt -1592 344)
-	(pt -1640 344)
-)
-(connector
-	(text "prize_collision" (rect -1653 360 -1586 377)(font "Intel Clear" ))
-	(pt -1592 376)
-	(pt -1632 376)
-)
-(connector
-	(pt -1672 416)
-	(pt -1672 392)
-)
-(connector
-	(pt -1672 392)
-	(pt -1592 392)
-)
-(connector
-	(text "open_gate" (rect -1338 344 -1288 361)(font "Intel Clear" ))
-	(pt -1368 360)
-	(pt -1328 360)
-)
-(connector
-	(text "prize_digit[3..0]" (rect -1360 328 -1289 345)(font "Intel Clear" ))
-	(pt -1368 344)
-	(pt -1320 344)
-	(bus)
-)
-(connector
-	(text "PrizeDigitTopLeftX[10..0]" (rect -1368 360 -1250 377)(font "Intel Clear" ))
-	(pt -1368 376)
-	(pt -1288 376)
-	(bus)
-)
-(connector
-	(text "PrizeDigitTopLeftY[10..0]" (rect -1400 376 -1282 393)(font "Intel Clear" ))
-	(pt -1368 392)
-	(pt -1306 392)
-	(bus)
-)
-(connector
-	(text "pixelX[10..0]" (rect -1632 392 -1573 409)(font "Intel Clear" ))
-	(pt -1592 408)
-	(pt -1640 408)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect -1632 408 -1573 425)(font "Intel Clear" ))
-	(pt -1592 424)
-	(pt -1640 424)
-	(bus)
-)
-(connector
-	(text "reset_lvl_N" (rect -1624 344 -1569 361)(font "Intel Clear" ))
-	(pt -1632 360)
-	(pt -1592 360)
-)
-(connector
-	(text "PrizedigitDrawingRequest" (rect -1344 392 -1223 409)(font "Intel Clear" ))
-	(pt -1368 408)
-	(pt -1225 408)
-)
-(connector
 	(text "clk" (rect -983 312 -969 329)(font "Intel Clear" ))
 	(pt -991 328)
 	(pt -944 328)
@@ -5130,63 +5067,6 @@ agreement for further details.
 	(text "switch[1]" (rect -2046 2344 -2004 2361)(font "Intel Clear" ))
 	(pt -2056 2360)
 	(pt -2040 2360)
-)
-(connector
-	(text "clk" (rect -1960 808 -1946 825)(font "Intel Clear" ))
-	(pt -1928 824)
-	(pt -1968 824)
-)
-(connector
-	(text "resetN" (rect -1960 824 -1930 841)(font "Intel Clear" ))
-	(pt -1928 840)
-	(pt -1968 840)
-)
-(connector
-	(text "pixelX[10..0]" (rect -1960 840 -1901 857)(font "Intel Clear" ))
-	(pt -1928 856)
-	(pt -1968 856)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect -1960 856 -1901 873)(font "Intel Clear" ))
-	(pt -1928 872)
-	(pt -1968 872)
-	(bus)
-)
-(connector
-	(text "step_type[2..0]" (rect -2002 920 -1932 937)(font "Intel Clear" ))
-	(pt -1928 920)
-	(pt -1968 920)
-	(bus)
-)
-(connector
-	(text "tileTopLeftX[10..0]" (rect -2004 872 -1916 889)(font "Intel Clear" ))
-	(pt -1928 888)
-	(pt -1976 888)
-	(bus)
-)
-(connector
-	(text "tileTopLeftY[10..0]" (rect -2004 888 -1916 905)(font "Intel Clear" ))
-	(pt -1928 904)
-	(pt -1968 904)
-	(bus)
-)
-(connector
-	(text "step_req" (rect -1673 840 -1632 857)(font "Intel Clear" ))
-	(pt -1688 856)
-	(pt -1664 856)
-)
-(connector
-	(text "R_Step_Off_X[10..0]" (rect -1680 808 -1583 825)(font "Intel Clear" ))
-	(pt -1688 824)
-	(pt -1640 824)
-	(bus)
-)
-(connector
-	(text "R_Step_Off_Y[10..0]" (rect -1680 824 -1583 841)(font "Intel Clear" ))
-	(pt -1688 840)
-	(pt -1632 840)
-	(bus)
 )
 (connector
 	(text "clk" (rect -1916 1528 -1902 1545)(font "Intel Clear" ))
@@ -5897,6 +5777,126 @@ agreement for further details.
 	(text "switch[1]" (rect -1496 1144 -1454 1161)(font "Intel Clear" ))
 	(pt -1464 1160)
 	(pt -1512 1160)
+)
+(connector
+	(pt -1672 416)
+	(pt -1672 392)
+)
+(connector
+	(text "open_gate" (rect -1330 344 -1280 361)(font "Intel Clear" ))
+	(pt -1360 360)
+	(pt -1320 360)
+)
+(connector
+	(text "prize_digit[3..0]" (rect -1352 328 -1281 345)(font "Intel Clear" ))
+	(pt -1360 344)
+	(pt -1312 344)
+	(bus)
+)
+(connector
+	(text "PrizeDigitTopLeftX[10..0]" (rect -1360 360 -1242 377)(font "Intel Clear" ))
+	(pt -1360 376)
+	(pt -1280 376)
+	(bus)
+)
+(connector
+	(text "PrizeDigitTopLeftY[10..0]" (rect -1392 376 -1274 393)(font "Intel Clear" ))
+	(pt -1360 392)
+	(pt -1298 392)
+	(bus)
+)
+(connector
+	(text "PrizedigitDrawingRequest" (rect -1336 392 -1215 409)(font "Intel Clear" ))
+	(pt -1360 408)
+	(pt -1217 408)
+)
+(connector
+	(text "clk" (rect -1624 328 -1610 345)(font "Intel Clear" ))
+	(pt -1632 344)
+	(pt -1584 344)
+)
+(connector
+	(text "reset_lvl_N" (rect -1616 344 -1561 361)(font "Intel Clear" ))
+	(pt -1624 360)
+	(pt -1584 360)
+)
+(connector
+	(text "prize_collision" (rect -1645 360 -1578 377)(font "Intel Clear" ))
+	(pt -1624 376)
+	(pt -1584 376)
+)
+(connector
+	(pt -1672 392)
+	(pt -1584 392)
+)
+(connector
+	(text "pixelX[10..0]" (rect -1624 392 -1565 409)(font "Intel Clear" ))
+	(pt -1632 408)
+	(pt -1584 408)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect -1624 408 -1565 425)(font "Intel Clear" ))
+	(pt -1632 424)
+	(pt -1584 424)
+	(bus)
+)
+(connector
+	(text "clk" (rect -1960 792 -1946 809)(font "Intel Clear" ))
+	(pt -1928 808)
+	(pt -1968 808)
+)
+(connector
+	(text "resetN" (rect -1960 808 -1930 825)(font "Intel Clear" ))
+	(pt -1928 824)
+	(pt -1968 824)
+)
+(connector
+	(text "pixelX[10..0]" (rect -1960 824 -1901 841)(font "Intel Clear" ))
+	(pt -1928 840)
+	(pt -1968 840)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect -1960 840 -1901 857)(font "Intel Clear" ))
+	(pt -1928 856)
+	(pt -1968 856)
+	(bus)
+)
+(connector
+	(text "step_type[2..0]" (rect -2002 904 -1932 921)(font "Intel Clear" ))
+	(pt -1928 904)
+	(pt -1968 904)
+	(bus)
+)
+(connector
+	(text "tileTopLeftX[10..0]" (rect -2004 856 -1916 873)(font "Intel Clear" ))
+	(pt -1928 872)
+	(pt -1976 872)
+	(bus)
+)
+(connector
+	(text "tileTopLeftY[10..0]" (rect -2004 872 -1916 889)(font "Intel Clear" ))
+	(pt -1928 888)
+	(pt -1968 888)
+	(bus)
+)
+(connector
+	(text "step_req" (rect -1673 824 -1632 841)(font "Intel Clear" ))
+	(pt -1688 840)
+	(pt -1664 840)
+)
+(connector
+	(text "R_Step_Off_X[10..0]" (rect -1680 792 -1583 809)(font "Intel Clear" ))
+	(pt -1688 808)
+	(pt -1640 808)
+	(bus)
+)
+(connector
+	(text "R_Step_Off_Y[10..0]" (rect -1680 808 -1583 825)(font "Intel Clear" ))
+	(pt -1688 824)
+	(pt -1632 824)
+	(bus)
 )
 (rectangle (rect -2208 272 -552 728)(color 0 0 0)(line_width 3))
 (rectangle (rect -1568 728 -552 1336)(color 0 0 0)(line_width 3))
